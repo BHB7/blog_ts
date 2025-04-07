@@ -1,0 +1,77 @@
+@theme {
+   /* 黑色系列 */
+   --color-black-100: rgb(0 0 0 / 10%);
+   --color-black-200: rgb(0 0 0 / 20%);
+   --color-black-300: rgb(0 0 0 / 30%);
+   --color-black-400: rgb(0 0 0 / 40%);
+   --color-black-500: rgb(0 0 0 / 50%);
+   --color-black-600: rgb(0 0 0 / 60%);
+   --color-black-700: rgb(0 0 0 / 70%);
+   --color-black-800: rgb(0 0 0 / 80%);
+   --color-black-900: rgb(0 0 0 / 90%);
+
+   /* 红色系列 */
+   --color-red-50: rgb(255 245 245 / 10%);
+   --color-red-100: rgb(255 235 235 / 20%);
+   --color-red-200: rgb(255 220 220 / 30%);
+   --color-red-300: rgb(255 200 200 / 40%);
+   --color-red-400: rgb(255 160 160 / 50%);
+   --color-red-500: rgb(255 120 120 / 60%);
+   --color-red-600: rgb(255 80 80 / 70%);
+   --color-red-700: rgb(255 40 40 / 80%);
+   --color-red-800: rgb(255 0 0 / 90%);
+   --color-red-900: rgb(200 0 0 / 100%);
+
+   /* 蓝色系列 */
+   --color-blue-50: rgb(230 245 255 / 10%);
+   --color-blue-100: rgb(200 235 255 / 20%);
+   --color-blue-200: rgb(170 220 255 / 30%);
+   --color-blue-300: rgb(130 200 255 / 40%);
+   --color-blue-400: rgb(90 160 255 / 50%);
+   --color-blue-500: rgb(60 120 255 / 60%);
+   --color-blue-600: rgb(40 80 255 / 70%);
+   --color-blue-700: rgb(20 40 255 / 80%);
+   --color-blue-800: rgb(0 0 255 / 90%);
+   --color-blue-900: rgb(0 0 200 / 100%);
+
+   /* 白色系列 */
+  --color-white-50: rgb(255 255 255 / 10%);
+  --color-white-100: rgb(255 255 255 / 20%);
+  --color-white-200: rgb(255 255 255 / 30%);
+  --color-white-300: rgb(255 255 255 / 40%);
+  --color-white-400: rgb(255 255 255 / 50%);
+  --color-white-500: rgb(255 255 255 / 60%);
+  --color-white-600: rgb(255 255 255 / 70%);
+  --color-white-700: rgb(255 255 255 / 80%);
+  --color-white-800: rgb(255 255 255 / 90%);
+  --color-white-900: rgb(255 255 255 / 100%);
+
+  /* 文本白色系列 */
+  --text-white-50: rgb(255 255 255 / 10%);
+  --text-white-100: rgb(255 255 255 / 20%);
+  --text-white-200: rgb(255 255 255 / 30%);
+  --text-white-300: rgb(255 255 255 / 40%);
+  --text-white-400: rgb(255 255 255 / 50%);
+  --text-white-500: rgb(255 255 255 / 60%);
+  --text-white-600: rgb(255 255 255 / 70%);
+  --text-white-700: rgb(255 255 255 / 80%);
+  --text-white-800: rgb(255 255 255 / 90%);
+  --text-white-900: rgb(255 255 255 / 100%);
+
+
+    /* 文本黑色系列 */
+  --text-black-50: rgb(0 0 0 / 5%);
+  --text-black-100: rgb(0 0 0 / 10%);
+  --text-black-200: rgb(0 0 0 / 20%);
+  --text-black-300: rgb(0 0 0 / 30%);
+  --text-black-400: rgb(0 0 0 / 40%);
+  --text-black-500: rgb(0 0 0 / 50%);
+  --text-black-600: rgb(0 0 0 / 60%);
+  --text-black-700: rgb(0 0 0 / 70%);
+  --text-black-800: rgb(0 0 0 / 80%);
+  --text-black-900: rgb(0 0 0 / 90%);
+  --text-black-1000: rgb(0 0 0 / 100%);
+
+  --color-white: #fff;
+}
+
