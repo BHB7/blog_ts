@@ -16,7 +16,7 @@ import LineMdGithubLoop from '~icons/line-md/github-loop';
     <!-- 昵称 | 用户信息 -->
     <div class="nickname w-full space-y-2 flex flex-col items-center mt-18 py-4">
       <div class="text-balance">7z</div>
-      <p class=" text-center">你站在桥上看风景，看风景人在楼上看你。</p class=" text-center">
+      <p class=" text-center">你站在桥上看风景，看风景人在楼上看你。</p>
       <div class="cc space-x-2"> <button class="btn btn-dash">原创</button><span>文章分类</span></div>
       <!-- 联系 -->
       <div>

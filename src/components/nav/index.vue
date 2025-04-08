@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MyBtn from '@/components/btn/index.vue'
 import Theme from '@/components/btn/theme/index.vue'
+import { useRouteStore } from '@/store'
 
 const scrollWork = (): string | number => {
   const pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight
@@ -11,8 +12,15 @@ const scrollWork = (): string | number => {
   return (scrollTop / scrollHeight) * 100
 }
 
-console.log(scrollWork());
 
+const isRouterLoading = useRouteStore().getRouterLoadingSt()
+
+console.log(isRouterLoading);
+
+console.log(scrollWork());
+window.addEventListener('load', () => {
+  console.log('页面所有资源加载完成');
+});
 </script>
 <template>
   <div class="nbox  top-0.5 left-0 relative lg:px-40 lg:p-0 p-4 w-full ">
@@ -32,5 +40,7 @@ console.log(scrollWork());
         <Theme />
       </div>
     </section>
+    <span v-if="isRouterLoading"
+      class="loading absolute loading-spinner text-primary right-2 top-1/2  translate-y-[-50%]"></span>
   </div>
 </template>

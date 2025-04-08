@@ -6,3 +6,4 @@ const pinia = createPinia()
 export default pinia.use(createPersistedState())
 
 export * from './modules/theme'
+export * from './modules/route'

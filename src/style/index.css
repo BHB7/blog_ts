@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: winter --default, night --prefersdark;
-}
 @custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
 @plugin "daisyui";
 @import "./theme.css" layer(theme);
@@ -9,12 +6,7 @@
   themes: light --default, dark --prefersdark;
 }
 
-
-
-body{}
-
-
-
+/* light 白 */
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
@@ -50,6 +42,7 @@ body{}
   --noise: 1;
 }
 
+/* dark 黑*/
 @plugin "daisyui/theme" {
   name: "dark";
   default: false;
@@ -85,6 +78,7 @@ body{}
   --noise: 1;
 }
 
+/* 自定义 | 冬 */
 @plugin "daisyui/theme" {
   name: "nord";
   default: false;

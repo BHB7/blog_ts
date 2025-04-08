@@ -1,8 +1,10 @@
 import { http } from '@/apis/instances/instances'
 
 
-export interface UserInfoType { name: string, code: string }
-export const createUser = async ({ name, code }: UserInfoType) => {
+export interface UserInfoTypeDTO { name: string, code: string }
+
+
+export const createUser = async ({ name, code }: UserInfoTypeDTO) => {
   return await http.post('/user/create', {
     code,
     name

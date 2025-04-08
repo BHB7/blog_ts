@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import SolarHashtagCircleBoldDuotone from '~icons/solar/hashtag-circle-bold-duotone';
 
-// 定义 Props 类型
-export interface ArticlePropsType {
+// 定义文章 Props 类型
+export interface ArticlePropsTypeVO {
   title: string; // 标题
   cover: string; // 封面图片 URL
   tags: string[]; // 标签数组
@@ -11,7 +11,7 @@ export interface ArticlePropsType {
 }
 
 // 设置默认值
-const props = withDefaults(defineProps<ArticlePropsType>(), {
+const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
   title: '标题',
   cover: () => new URL('@/assets/03.webp', import.meta.url).href,
   tags: () => [],

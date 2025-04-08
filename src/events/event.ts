@@ -1,15 +1,13 @@
 abstract class Even {
-  public evens: Array<{ key: string; callbacks: Function[] }>;
+  public evens: Array<{ key: string; callbacks: ((...args: unknown[]) => void)[] }>;
 
   constructor(public name: string) {
     this.evens = []; // 初始化为空数组
   }
 
-  // 监听事件 | 添加事件
-  abstract on(eventName: string, fn: Function): void;
+  abstract on<T extends unknown[]>(eventName: string, fn: (...args: T) => void): void;
 
-  // 触发事件
-  abstract emit(eventName: string, ...args: any[]): void;
+  abstract emit<T extends unknown[]>(eventName: string, ...args: T): void;
 }
 
 class Music extends Even {
@@ -17,26 +15,21 @@ class Music extends Even {
     super(name); // 调用父类构造函数
   }
 
-  // 监听事件 | 添加事件
-  on(eventName: string, fn: Function): void {
+  on<T extends unknown[]>(eventName: string, fn: (...args: T) => void): void {
     const event = this.evens.find((item) => item.key === eventName);
 
     if (event) {
-      // 如果事件已存在，将回调函数添加到 callbacks 数组中
-      event.callbacks.push(fn);
+      event.callbacks.push(fn as (...args: unknown[]) => void);
     } else {
-      // 如果事件不存在，创建一个新的事件对象
-      this.evens.push({ key: eventName, callbacks: [fn] });
+      this.evens.push({ key: eventName, callbacks: [fn as (...args: unknown[]) => void] });
     }
   }
 
-  // 触发事件
-  emit(eventName: string, ...args: any[]): void {
+  emit<T extends unknown[]>(eventName: string, ...args: T): void {
     const event = this.evens.find((item) => item.key === eventName);
 
     if (event) {
-      // 遍历并执行所有回调函数
-      event.callbacks.forEach((callback) => callback(...args));
+      event.callbacks.forEach((callback) => callback(...(args as unknown as T)));
     } else {
       console.warn(`事件 "${eventName}" 未找到`);
     }
