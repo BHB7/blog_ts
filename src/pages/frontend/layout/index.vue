@@ -7,8 +7,11 @@ import { useRoute } from 'vue-router'
 import { ref, watch } from 'vue'
 import { music } from '@/events/event'
 import Music from '@/components/music/index.vue'
+import MusicBox from '@/components/music/box/index.vue'
+
 const route = useRoute()
 const pageHeaderIsShow = ref<Boolean>(false)
+
 
 music.emit('test', '我是布局组件')
 watch(route, (newRoute) => {
@@ -30,15 +33,18 @@ watch(route, (newRoute) => {
       <div class="flex flex-col items-center space-y-4">
         <slot name="cont">
           <RouterView></RouterView>
+
         </slot>
       </div>
     </div>
     <!-- 右侧菜单 -->
     <div class="r hidden lg:grid w-1/3 grid grid-cols-1 gap-4 h-full">
       <slot name="menus">
+        <MusicBox></MusicBox>
         <User></User>
         <hr>
         <Music></Music>
+
       </slot>
     </div>
   </div>

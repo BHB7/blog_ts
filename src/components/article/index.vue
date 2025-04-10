@@ -12,10 +12,10 @@ export interface ArticlePropsTypeVO {
 
 // 设置默认值
 const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
-  title: '标题',
+  title: '标题  条测试 标题 内容 ||',
   cover: () => new URL('@/assets/03.webp', import.meta.url).href,
   tags: () => [],
-  desc: '描述...',
+  desc: '描述...| 这里是描述信息嘻嘻嘻嘻嘻嘻嘻',
   index: 0
 });
 
@@ -28,14 +28,14 @@ const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
       <!-- 封面 -->
       <div class="relative lg:w-2/5">
         <!-- 标题 -->
-        <div
+        <!-- <div
           class="absolute group-hover:opacity-0 text-4xl z-10 top-1/2 left-1/2 translate-[-50%] text-white font-semibold tracking-wide card-title uppercase">
           {{ props.title }}
-        </div>
+        </div> -->
         <!-- 勋章 -->
         <img
           class="h-48 w-full absolute -z-0 inset-0 blur-sm object-cover md:h-full  w-full dark:brightness-50 transition-transform duration-300 ease-in-out group-hover:blur-2xl"
-          :src="props.cover" alt="Modern building architecture" />
+          src="../../../public/favicon.ico" alt="Modern building architecture" />
         <img
           class="h-48 w-full  object-cover md:h-full  w-full dark:brightness-50 transition-transform duration-300 ease-in-out group-hover:scale-105"
           :src="props.cover" alt="Modern building architecture" />
@@ -44,11 +44,11 @@ const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
       <div class="p-8 w-full card-body">
 
         <!-- 描述标题 -->
-        <a href="#" class="mt-1 block text-lg leading-tight font-medium dark:text-sky-300">
+        <a href="#" class="mt-1 block text-xl leading-tight font-medium text-pretty">
           {{ props.title }}
         </a>
         <!-- 描述信息 -->
-        <p class="mt-2 text-gray-500">
+        <p class="mt-2 text-info-content">
           {{ props.desc }}
         </p>
         <!-- 标签 -->

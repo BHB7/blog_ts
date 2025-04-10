@@ -2,35 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
 import { useLoadingBar } from '@/components/hooks/loadingBar';
 import { useRouteStore } from '@/store';
+import AdminRoutes from './modules/admin'
+import FrontendRoutes from './modules/frontend'
 
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    name: 'layout',
-    component: () => import('@/pages/layout/index.vue'),
-    redirect: 'home',
-    children: [
-      {
-        path: 'home',
-        component: () => import('@/pages/home/index.vue')
-      },
-      {
-        path: 'article',
-        component: () => import('@/pages/article/index.vue')
-      }
-    ]
-  },
-  {
-    path: '/login',
-    component: () => import('@/pages/login/index.vue')
-  }
-];
+const routes: RouteRecordRaw[] = [...AdminRoutes, ...FrontendRoutes]
+
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-});
-
+})
 // 路由前置守卫
 router.beforeEach((to, from) => {
   // 启动加载条
@@ -54,4 +35,4 @@ router.afterEach((to, from) => {
   }
 });
 
-export default router;
+export default router
