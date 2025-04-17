@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import curve from '@/components/chart/index.vue';
+import { useRouter } from 'vue-router';
+import { showModal } from '@/utils/showModal';
 
 import type { EChartsOption } from 'echarts';
-
+const router = useRouter()
 const option: EChartsOption = {
   xAxis: {
     type: 'category' as const, // 👈 加上 `as const` 保证是字面量

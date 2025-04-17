@@ -7,6 +7,7 @@ const routes: RouteRecordRaw[] = [
     path: '/admin',
     component: () => import('@/pages/admin/layout/index.vue'),
     redirect: '/admin/home',
+    meta: { requiresAuth: true },
     children: [
       {
         path: 'home',

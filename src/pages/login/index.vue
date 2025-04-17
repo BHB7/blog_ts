@@ -10,6 +10,10 @@ const tokenStore = useTokenStore()
 // 切换登录和注册状态
 const isLogin = ref(true)
 
+
+console.log(tokenStore.setToken('1111111'), tokenStore.getToken());
+
+
 // 登录表单数据
 const loginData = ref<LoginType>({
   name: '',
@@ -30,7 +34,7 @@ const login = async () => {
   // console.log('登录数据:', loginData.value)
   try {
     const res = await loginService(loginData.value.name, loginData.value.password)
-    showMsg(res.data.message, 'success')
+    showMsg(res.message, 'success')
     tokenStore.setToken(res.data.token)
     router.replace('/')
   } catch (err) {
@@ -54,18 +58,18 @@ const register = () => {
 <template>
 
   <div class="min-h-screen bg-gradient-to-r from-primary to-accent flex items-center justify-center p-4">
-    <div class="w-full max-w-md">
+    <div class="w-full max-w-xl">
       <div class="card bg-base-100 shadow-2xl overflow-hidden">
         <div class="card-body p-8">
           <Theme></Theme>
           <!-- 选项卡切换 -->
-          <div class="tabs justify-center mb-8">
+          <div class="tabs tabs-box justify-center mb-8">
             <button @click="isLogin = true"
-              :class="['tab tab-bordered transition-all duration-300', isLogin ? 'tab-active bg-blue-500 text-white' : '']">
+              :class="['tab tab-bordered transition-all duration-300', isLogin ? 'tab-active bg-blue-500 ' : '']">
               登录
             </button>
             <button @click="isLogin = false"
-              :class="['tab tab-bordered transition-all duration-300', !isLogin ? 'tab-active bg-purple-500 text-white' : '']">
+              :class="['tab tab-bordered transition-all duration-300', !isLogin ? 'tab-active bg-purple-500' : '']">
               注册
             </button>
           </div>

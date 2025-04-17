@@ -35,9 +35,6 @@ export const useThemeStore = defineStore(
     } as const
   },
   {
-    persist: {
-      key: 'theme', // 自定义存储键名
-      storage: localStorage, // 使用 localStorage 存储
-    },
+    persist: true
   }
 )

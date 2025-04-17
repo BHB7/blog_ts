@@ -16,12 +16,10 @@ export const useTokenStore = defineStore('token', () => {
 
 
   return {
+    token,
     setToken,
     getToken
-  }
+  } as const
 }, {
-  persist: {
-    key: 'use_token',
-    storage: localStorage
-  }
+  persist: true
 })

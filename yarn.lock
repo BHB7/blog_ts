@@ -762,6 +762,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@iconify-json/material-symbols@npm:^1.2.20":
+  version: 1.2.20
+  resolution: "@iconify-json/material-symbols@npm:1.2.20"
+  dependencies:
+    "@iconify/types": "npm:*"
+  checksum: 10c0/566d26a3b75c9fa766f7dbd96f405e33cfaa81777d513989c862cac87cfbfcbca2694ae2697959691e3e3dabbeb5901c9b646a50253d8d1f4f6acb629464b3ac
+  languageName: node
+  linkType: hard
+
+"@iconify-json/mingcute@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@iconify-json/mingcute@npm:1.2.3"
+  dependencies:
+    "@iconify/types": "npm:*"
+  checksum: 10c0/63b5abd433e49fed040032bc801b38077ea9f231b048c9fc9f1af1a346481581323d8608ed13e45a93e79fc1218d833c47adb8fa9fd91cf8a2a92524cc162703
+  languageName: node
+  linkType: hard
+
 "@iconify-json/solar@npm:^1.2.2":
   version: 1.2.2
   resolution: "@iconify-json/solar@npm:1.2.2"
@@ -2158,6 +2176,8 @@ __metadata:
     "@iconify-json/iconoir": "npm:^1.2.4"
     "@iconify-json/line-md": "npm:^1.2.5"
     "@iconify-json/logos": "npm:^1.2.4"
+    "@iconify-json/material-symbols": "npm:^1.2.20"
+    "@iconify-json/mingcute": "npm:^1.2.3"
     "@iconify-json/solar": "npm:^1.2.2"
     "@iconify-json/stash": "npm:^1.2.1"
     "@iconify-json/svg-spinners": "npm:^1.2.2"
