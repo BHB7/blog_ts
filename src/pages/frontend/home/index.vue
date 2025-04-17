@@ -12,7 +12,7 @@ music.on('test', (e: unknown) => {
 
 const pageList = ref<Array<ArticleTypeVo>>()
 
-const init = async () => {
+async function init() {
   const res = await getArticles()
   console.log(res.data);
 
