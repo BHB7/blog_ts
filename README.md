@@ -1,39 +1,25 @@
-# blog_ts
+# Blog TS
 
-## 采用 vue3 + pinia + daisyUi
+一个现代化的博客系统，使用 **Vue 3 + TypeScript + Vite** 构建，集成 **Pinia、ECharts、Tailwind CSS** 和多种前端插件，支持模块化开发、类型检查、ESLint 检查与自动格式化，适合构建个性化博客平台。
 
-## Recommended IDE Setup
+## 🚀 技术栈
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- ⚡️ **Vite** - 极速构建工具
+- 🧩 **Vue 3** - 现代响应式前端框架
+- 🔐 **TypeScript** - 强类型支持
+- 💅 **Tailwind CSS** + DaisyUI - 实用优雅的 UI 工具集
+- 📊 **ECharts** - 数据可视化图表
+- 🎮 **PixiJS** - 高性能 Web 图形渲染库
+- 🌍 **Vue Router** - 路由管理
+- 🧠 **Pinia** - 现代状态管理工具
+- 🔧 **ESLint + Prettier** - 代码风格统一与自动修复
+- 📦 **Yarn 4 (via Corepack)** - 包管理器
 
-## Type Support for `.vue` Imports in TS
+## 📦 安装
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+首先确保你本地安装了 Node.js 16.9+，并启用了 Corepack：
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+```bash
+corepack enable
+corepack prepare yarn@4.5.0 --activate
 ```
