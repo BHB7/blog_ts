@@ -1,5 +1,0 @@
-name = "dist"
-compatibility_date = "2025-04-17"
-
-[site]
-bucket = "./dist"
