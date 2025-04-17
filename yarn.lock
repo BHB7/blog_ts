@@ -531,6 +531,20 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify-json/hugeicons@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@iconify-json/hugeicons/-/hugeicons-1.2.4.tgz#7cc5e3ffb6bf00e123e5c7e7e07ae32400aca59d"
+  integrity sha512-Rx1I42/wwqNiWx7rdQxtFWWOF1/DT1IMPrNReBVJiZe7NIdGT6Zv6Jw5gayqUtv7lDmE8eRmgd6MYRoVJrbuoA==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/iconoir@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@iconify-json/iconoir/-/iconoir-1.2.4.tgz#44e687376168db24aa3cc93711327290aae856fc"
+  integrity sha512-PILwyd8to0DFnMdT0s1RogIT+PRbh0THfvFxi94zobIRpsx/It/slFJHH6bslzXZLPRMSBebNwjqwQt5FvWlSQ==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/line-md@^1.2.5":
   version "1.2.5"
   resolved "https://registry.npmmirror.com/@iconify-json/line-md/-/line-md-1.2.5.tgz"
@@ -549,6 +563,20 @@
   version "1.2.2"
   resolved "https://registry.npmmirror.com/@iconify-json/solar/-/solar-1.2.2.tgz"
   integrity sha512-lcTb6DWL4HZObiY1W3fHfuxxuQHUc6CFHFeywKEx7Ry0k+dU6POZCMC7oVLr0F8vuf+KgaQ3oOoGO/yFzOwrNg==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/stash@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@iconify-json/stash/-/stash-1.2.1.tgz#716b231697f8b173b5a83729bca7f6d567baea6f"
+  integrity sha512-2oXOyjehLQ5Y/7bC4TwX7ZGDDVyYefwZRZQuUwExMtsSFdMTvZj5XlXYD6QwAZcXkq9w2BLwhLuLgfjdhRQGOw==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/svg-spinners@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/svg-spinners/-/svg-spinners-1.2.2.tgz#457b1762a8c8e388d1d1b6d3dcfabd5b0d264afa"
+  integrity sha512-DIErwfBWWzLfmAG2oQnbUOSqZhDxlXvr8941itMCrxQoMB0Hiv8Ww6Bln/zIgxwjDvSem2dKJtap+yKKwsB/2A==
   dependencies:
     "@iconify/types" "*"
 
@@ -1388,6 +1416,11 @@ alien-signals@^1.0.3:
   resolved "https://registry.npmmirror.com/alien-signals/-/alien-signals-1.0.13.tgz"
   integrity sha512-OGj9yyTnJEttvzhTUWuscOvtqxq5vrhF7vL9oS0xJ2mK0ItPYP1/y+vCFebfxoEyAz0++1AIwJ5CMr+Fk3nDmg==
 
+animate.css@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npmmirror.com/animate.css/-/animate.css-4.1.1.tgz#614ec5a81131d7e4dc362a58143f7406abd68075"
+  integrity sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==
+
 ansi-styles@^4.1.0:
   version "4.3.0"
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-4.3.0.tgz"
@@ -1755,6 +1788,14 @@ earcut@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npmmirror.com/earcut/-/earcut-2.2.4.tgz#6d02fd4d68160c114825d06890a92ecaae60343a"
   integrity sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==
+
+echarts@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.npmmirror.com/echarts/-/echarts-5.6.0.tgz#2377874dca9fb50f104051c3553544752da3c9d6"
+  integrity sha512-oTbVTsXfKuEhxftHqL5xprgLoc0k7uScAwtryCgWF6hPYFLRwOUHiFmHGCBKP5NPFNkDVopOieyUqYGH8Fa3kA==
+  dependencies:
+    tslib "2.3.0"
+    zrender "5.6.1"
 
 electron-to-chromium@^1.5.73:
   version "1.5.129"
@@ -3609,6 +3650,11 @@ ts-api-utils@^2.0.1:
   resolved "https://registry.npmmirror.com/ts-api-utils/-/ts-api-utils-2.1.0.tgz"
   integrity sha512-CUgTZL1irw8u29bzrOD/nH85jqyc74D6SshFgujOIA7osm2Rz7dYH77agkx7H4FBNxDq7Cjf+IjaX/8zwFW+ZQ==
 
+tslib@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 tslib@^2.1.0, tslib@^2.8.1:
   version "2.8.1"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-2.8.1.tgz"
@@ -3857,6 +3903,19 @@ vue-eslint-parser@^10.1.1:
     lodash "^4.17.21"
     semver "^7.6.3"
 
+vue-eslint-parser@^10.1.3:
+  version "10.1.3"
+  resolved "https://registry.npmmirror.com/vue-eslint-parser/-/vue-eslint-parser-10.1.3.tgz#96457823a5915a62001798cfd9cc15a89067bf81"
+  integrity sha512-dbCBnd2e02dYWsXoqX5yKUZlOt+ExIpq7hmHKPb5ZqKcjf++Eo0hMseFTZMLKThrUk61m+Uv6A2YSBve6ZvuDQ==
+  dependencies:
+    debug "^4.4.0"
+    eslint-scope "^8.2.0"
+    eslint-visitor-keys "^4.2.0"
+    espree "^10.3.0"
+    esquery "^1.6.0"
+    lodash "^4.17.21"
+    semver "^7.6.3"
+
 vue-router@^4.0.13:
   version "4.5.0"
   resolved "https://registry.npmmirror.com/vue-router/-/vue-router-4.5.0.tgz"
@@ -3926,3 +3985,10 @@ yoctocolors@^2.0.0:
   version "2.1.1"
   resolved "https://registry.npmmirror.com/yoctocolors/-/yoctocolors-2.1.1.tgz"
   integrity sha512-GQHQqAopRhwU8Kt1DDM8NjibDXHC8eoh1erhGAJPEyveY9qqVeXvVikNKrDz69sHowPMorbPUrH/mx8c50eiBQ==
+
+zrender@5.6.1:
+  version "5.6.1"
+  resolved "https://registry.npmmirror.com/zrender/-/zrender-5.6.1.tgz#e08d57ecf4acac708c4fcb7481eb201df7f10a6b"
+  integrity sha512-OFXkDJKcrlx5su2XbzJvj/34Q3m6PvyCZkVPHGYpcCJ52ek4U/ymZyfuV1nKE23AyBJ51E/6Yr0mhZ7xGTO4ag==
+  dependencies:
+    tslib "2.3.0"

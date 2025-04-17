@@ -9,7 +9,11 @@ import LoadingBar from '@/components/loading/bar.vue'
 
 
   <!-- 内容 -->
-  <RouterView :key="$route.fullPath" />
+  <RouterView v-slot="{ Component, route }" :key="$route.fullPath">
+    <transition name="animate__animated animate__fadeInUp">
+      <component :is="Component" :key="route.path"></component>
+    </transition>
+  </RouterView>
 
 
 </template>

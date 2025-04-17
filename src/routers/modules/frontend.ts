@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/login',
-    component: () => import('@/pages/frontend/login/index.vue')
+    component: () => import('@/pages/login/index.vue')
   }
   , {
     path: '/:pathMatch(.*)*',

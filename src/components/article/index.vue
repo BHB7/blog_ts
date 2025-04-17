@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import SolarHashtagCircleBoldDuotone from '~icons/solar/hashtag-circle-bold-duotone';
-
+import IconoirClock from '~icons/iconoir/clock';
+import ViewIcon from '~icons/hugeicons/view';
+import LikeIcon from '~icons/stash/thumb-up-light';
 // 定义文章 Props 类型
 export interface ArticlePropsTypeVO {
   title: string; // 标题
   cover: string; // 封面图片 URL
   tags: string[]; // 标签数组
-  desc: string;
+  desc: string; // 描述
+  updateTime: string | Date // 更新时间
+  like: number | string // 点赞
+  view: number | string // 浏览量
   index?: number | string
 }
 
@@ -16,9 +21,11 @@ const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
   cover: () => new URL('@/assets/03.webp', import.meta.url).href,
   tags: () => [],
   desc: '描述...| 这里是描述信息嘻嘻嘻嘻嘻嘻嘻',
+  like: 0,
+  updateTime: '2025/03/02',
+  view: 888,
   index: 0
 });
-
 
 </script>
 <template>
@@ -44,17 +51,40 @@ const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
       <div class="p-8 w-full card-body">
 
         <!-- 描述标题 -->
-        <a href="#" class="mt-1 block text-xl leading-tight font-medium text-pretty">
+        <a href="#" class="mt-1 block text-2xl leading-tight font-medium text-pretty">
           {{ props.title }}
         </a>
         <!-- 描述信息 -->
-        <p class="mt-2 text-info-content">
+        <p class="mt-2 text-info-content text-xl">
           {{ props.desc }}
         </p>
-        <!-- 标签 -->
-        <div class="flex items-center mt-4" v-if="props.tags.length > 0">
-          <SolarHashtagCircleBoldDuotone class="dark:text-sky-200 mr-2" />
-          <span>{{ props.tags.join(' ') }}</span>
+        <div class="flex text-sm items-center w-full justify-between" v-if="props.tags.length > 0">
+          <div class="flex space-x-3 items-center">
+            <!-- 标签 -->
+            <div class="flex  items-center">
+              <SolarHashtagCircleBoldDuotone class=" text-accent-content mr-2" />
+              <span>{{ props.tags.join(' ') }}</span>
+            </div>
+            <!-- 更新时间 -->
+            <div class="flex items-center text-info-content">
+              <IconoirClock class=" text-accent-content mr-2"></IconoirClock>
+              <span>{{ props.updateTime }}</span>
+            </div>
+          </div>
+
+          <!-- 点赞 | 浏览量 -->
+          <div class="flex space-x-3 text-info-content">
+            <!-- 浏览量 -->
+            <div class="flex items-center ">
+              <ViewIcon class="text-accent-content mr-2"></ViewIcon>
+              <span>{{ props.view }}</span>
+            </div>
+            <!-- 点赞 -->
+            <div class="flex items-center">
+              <LikeIcon class="text-accent-content mr-2"></LikeIcon>
+              <span>{{ props.like }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

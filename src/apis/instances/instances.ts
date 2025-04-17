@@ -1,31 +1,52 @@
 import axios from "axios";
 import { useLoadingBar } from '@/components/hooks/loadingBar'
-
+import { showMsg } from "@/utils/showMsg"
+import { useTokenStore } from '@/store'
+const tokenStore = useTokenStore()
+// 创建 Axios 实例
 export const http = axios.create({
-  baseURL: 'http://127.0.0.1:3000',
+  baseURL: 'http://localhost:8000',
   timeout: 3000,
-  withCredentials: true
-})
-
+  headers: {
+    "Content-Type": "application/json"
+  },
+  // withCredentials: true // 携带凭证
+});
 
 // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
-  // 在发送请求之前做些什么
-  useLoadingBar().startSpeed()
-  return config;
-}, function (error) {
-  // 对请求错误做些什么
-  return Promise.reject(error);
-});
+http.interceptors.request.use(
+  function (config) {
+    // 在发送请求之前做些什么
+    useLoadingBar().startSpeed(); // 启动加载动画
+    // 添加认证信息
+    const token = tokenStore.getToken()
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  function (error) {
+    // 对请求错误做些什么
+    useLoadingBar().endSpeed(); // 结束加载动画
+    showMsg('请求发送失败', 'error', 1000)
+    return Promise.reject(error)
+  }
+);
 
 // 添加响应拦截器
-axios.interceptors.response.use(function (response) {
-  useLoadingBar().endSpeed()
-  // 2xx 范围内的状态码都会触发该函数。
-  // 对响应数据做点什么
-  return response;
-}, function (error) {
-  // 超出 2xx 范围的状态码都会触发该函数。
-  // 对响应错误做点什么
-  return Promise.reject(error);
-});
+http.interceptors.response.use(
+  function (response) {
+    const data = response.data
+    if (data.code !== 200) {
+      showMsg(data.message, 'error', 1000)
+      return Promise.reject(data.message)
+    }
+    useLoadingBar().endSpeed(); // 结束加载动画
+    return response.data;
+  },
+  function (error) {
+    useLoadingBar().endSpeed()// 结束加载动画
+    showMsg(error.message, 'error', 1000)
+    return Promise.reject(error)
+  }
+);

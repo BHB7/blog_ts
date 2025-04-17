@@ -6,11 +6,14 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/admin',
     component: () => import('@/pages/admin/layout/index.vue'),
-    redirect: '/admin/article',
+    redirect: '/admin/home',
     children: [
       {
-        path: 'article',
-        component: () => import('@/pages/admin/article/index.vue')
+        path: 'home',
+        component: () => import('@/pages/admin/home/index.vue')
+      }, {
+        path: 'articles',
+        component: () => import('@/pages/admin/articles/index.vue')
       }
     ]
   }

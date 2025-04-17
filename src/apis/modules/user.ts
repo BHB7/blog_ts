@@ -1,17 +1,16 @@
 import { http } from '@/apis/instances/instances'
 
 
-export interface UserInfoTypeDTO { name: string, code: string }
-
-
-export const createUser = async ({ name, code }: UserInfoTypeDTO) => {
-  return await http.post('/user/create', {
-    code,
-    name
-  })
+export interface LoginType {
+  name: string,
+  password: string
 }
 
 
-export const getCode = async () => {
-  return await http.get('/user/code')
+export const login = async (name: string, password: string) => {
+  return await http.post('user/login', {
+    name,
+    password
+  })
+
 }
