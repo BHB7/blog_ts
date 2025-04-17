@@ -27,6 +27,12 @@ export default defineConfig({
       dts: true, // 自动生成类型声明文件
     }),
   ],
+  build: {
+    target: 'esnext'  // 支持最新的 JavaScript 特性，包括 top-level await
+  },
+  esbuild: {
+    target: ['chrome90', 'firefox90', 'safari15'] // 目标浏览器版本
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
