@@ -2,7 +2,6 @@
 import curve from '@/components/chart/index.vue';
 import { useRouter } from 'vue-router';
 import { showModal } from '@/utils/showModal';
-
 import type { EChartsOption } from 'echarts';
 const router = useRouter()
 const option: EChartsOption = {
@@ -138,6 +137,9 @@ const optionPie: EChartsOption = {
     </div>
   </div>
 
+  <Layout>
+
+  </Layout>
   <!-- 内容 -->
   <div class="flex flex-col xl:flex-row gap-4">
     <div class="w-full xl:w-2/3 space-y-4">

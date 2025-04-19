@@ -5,7 +5,7 @@ import { useTokenStore } from '@/store'
 const tokenStore = useTokenStore()
 // 创建 Axios 实例
 export const http = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'http://localhost:8000/api',
   timeout: 3000,
   headers: {
     "Content-Type": "application/json"

@@ -13,13 +13,11 @@
 - 🌍 **Vue Router** - 路由管理
 - 🧠 **Pinia** - 现代状态管理工具
 - 🔧 **ESLint + Prettier** - 代码风格统一与自动修复
-- 📦 **Yarn 4 (via Corepack)** - 包管理器
 
 ## 📦 安装
 
-首先确保你本地安装了 Node.js 16.9+，并启用了 Corepack：
+PNPM：
 
 ```bash
-corepack enable
-corepack prepare yarn@4.5.0 --activate
+pnpm i
 ```
