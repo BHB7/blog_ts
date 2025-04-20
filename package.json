@@ -15,15 +15,6 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@applemusic-like-lyrics/lyric": "^0.2.4",
-    "@applemusic-like-lyrics/vue": "^0.1.5",
-    "@pixi/app": "^7.4.3",
-    "@pixi/core": "^7.4.3",
-    "@pixi/display": "^7.4.3",
-    "@pixi/filter-blur": "^7.4.3",
-    "@pixi/filter-bulge-pinch": "^5.1.1",
-    "@pixi/filter-color-matrix": "^7.4.3",
-    "@pixi/sprite": "^7.4.3",
     "@tailwindcss/vite": "^4.0.17",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "^5.1.12",
@@ -36,7 +27,6 @@
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
     "simplebar-vue": "^2.4.0",
-    "vite-plugin-wasm": "^3.4.1",
     "vue": "^3.5.13",
     "vue-router": "^4.0.13"
   },

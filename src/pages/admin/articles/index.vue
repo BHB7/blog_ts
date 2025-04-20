@@ -7,12 +7,29 @@ import LineMdChat from '~icons/line-md/chat';
 import EditIcon from '~icons/line-md/edit-full-twotone';
 import LineMdTrash from '~icons/line-md/trash';
 import LineMdTelegram from '~icons/line-md/telegram';
-
 </script>
 
 <template>
   <!-- name of each tab group should be unique -->
-  <div class="tabs tabs-box justify-between">
+  <div class=" space-x-2 my-2">
+    <label class="input">
+      <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </g>
+      </svg>
+      <input type="search" class="grow" placeholder="Search" />
+      <kbd class="kbd kbd-sm">⌘</kbd>
+      <kbd class="kbd kbd-sm">K</kbd>
+    </label>
+    <div class="tooltip" data-tip="创建文章">
+      <button class="btn btn-md btn-ghost hover:text-warning">
+        <LineMdPlus />
+      </button>
+    </div>
+  </div>
+  <div class="tabs tabs-box justify-between p-3">
     <div>
       <input type="radio" name="my_tabs_1" class="tab" aria-label="Tab 1" />
       <input type="radio" name="my_tabs_1" class="tab" aria-label="Tab 2" checked />
@@ -20,7 +37,7 @@ import LineMdTelegram from '~icons/line-md/telegram';
     </div>
 
 
-    <div class=" mx-6">
+    <div class=" space-x-2">
 
       <button class="btn btn-primary">
         <LineMdPlus />
@@ -81,9 +98,11 @@ import LineMdTelegram from '~icons/line-md/telegram';
 
             <!-- 操作按钮 -->
             <div class="ml-auto flex gap-2 text-gray-400">
-              <button class="btn btn-md btn-ghost hover:text-warning">
-                <LineMdTelegram />
-              </button>
+              <div class="tooltip" data-tip="发布文章">
+                <button class="btn btn-md btn-ghost hover:text-warning">
+                  <LineMdTelegram />
+                </button>
+              </div>
               <button class="btn btn-md btn-ghost hover:text-info">
                 <EditIcon />
               </button>

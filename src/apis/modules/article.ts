@@ -15,8 +15,8 @@ export interface ArticleTypeVo {
   view: string | number,
   updatedAt: Date | string
 }
-export const getArticles = async (pageSize: string | number = 10, pageOffset: string | number = 0) => {
-  return await http.post('article', {
+export const getArticles = (pageSize: string | number = 10, pageOffset: string | number = 0) => {
+  return http.post('article', {
     pageOffset,
     pageSize
   })

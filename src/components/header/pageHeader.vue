@@ -11,11 +11,11 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
           <!-- 分类 -->
           <div class="w-full flex lg:justify-start justify-center">
             <div class="space-x-2 flex-wrap">
-              <button class="btn bg-white-200 text-base-300">VUE</button>
-              <button class="btn bg-white-200 text-base-300">PYTHON</button>
+              <button class="btn bg-white-200 text-neutral">VUE</button>
+              <button class="btn bg-white-200 text-neutral">PYTHON</button>
             </div>
             <!-- 标签 -->
-            <div class="ml-3 text-base-300 flex items-center">
+            <div class="ml-3 text-neutral flex items-center">
               <SolarHashtagCircleBoldDuotone />Vue
             </div>
           </div>
@@ -25,10 +25,10 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
           </div>
           <!-- 文章信息 -->
           <div class="w-full flex space-x-4 justify-center lg:justify-start flex-wrap items-center">
-            <span class="text-base-200 flex">发表于2024-07-16</span>
-            <span class="text-base-200 flex">更新于2024-07-16</span>
+            <span class="text-info-content flex">发表于2024-07-16</span>
+            <span class="text-info-content flex">更新于2024-07-16</span>
           </div>
-          <div class="flex items-center text-base-100 lg:justify-start justify-center">
+          <div class="flex text-info-content items-center text-base-100 lg:justify-start justify-center">
             <IpIcon />贵州
           </div>
         </div>

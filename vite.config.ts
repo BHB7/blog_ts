@@ -5,7 +5,6 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
-import wasm from 'vite-plugin-wasm';
 // 导入icon 自动插件
 import Icons from 'unplugin-icons/vite'
 // https://vite.dev/config/
@@ -13,7 +12,6 @@ export default defineConfig({
   plugins: [
     // vueDevTools(),
     vue(),
-    wasm(),
     tailwindcss(),
     // 导入icon自动下载icon
     Icons({ autoInstall: true, compiler: 'vue3' }),

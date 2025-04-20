@@ -25,7 +25,7 @@ import LineMdGithubLoop from '~icons/line-md/github-loop';
         </a>
       </div>
       <!-- 声明 -->
-      <div class=" text-sm">本博客所有文章除特别声明外，均采用 <a class="link-hover"
+      <div class="text-info-content text-sm">本博客所有文章除特别声明外，均采用 <a class="link-hover"
           href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA
           4.0</a> 许可协议。转载请注明来自 7z</div>
     </div>

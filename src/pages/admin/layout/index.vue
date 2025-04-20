@@ -16,7 +16,7 @@ const menuList = [
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content flex flex-col">
       <!-- Navbar -->
-      <div class="navbar bg-base-300 w-full">
+      <div class="navbar bg-base-300 w-full z-50">
         <div class="flex-none lg:hidden">
           <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -27,7 +27,14 @@ const menuList = [
         </div>
         <div class="mx-2 flex-1 px-2">文章后台管理</div>
         <div class="hidden flex-none lg:block">
-          <ul class="menu menu-horizontal">
+
+          <ul class="menu menu-horizontal space-x-4 items-center">
+            <div class="avatar avatar-online">
+              <div class="w-10 rounded-full">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              </div>
+            </div>
+
             <Theme></Theme>
           </ul>
         </div>

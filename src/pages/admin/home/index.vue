@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import curve from '@/components/chart/index.vue';
 import { useRouter } from 'vue-router';
-import { showModal } from '@/utils/showModal';
+// import { showModal } from '@/utils/showModal';
 import type { EChartsOption } from 'echarts';
+import { reactive } from 'vue';
 const router = useRouter()
 const option: EChartsOption = {
   xAxis: {
@@ -95,43 +96,62 @@ const optionPie: EChartsOption = {
       option: {
         title: [
           {
-            left: '50%',
-            top: '25%',
+            left: '20%',
+            top: '1%',
             textAlign: 'center',
           },
           {
-            left: '50%',
-            top: '75%',
+            left: '80%',
+            top: '1%',
             textAlign: 'center',
           },
         ],
         series: [
           {
-            radius: ['50%', '65%'],
-            center: ['50%', '25%'], // 👈 第一个圆移动到上方
+            radius: ['20%', '40%'],
+            center: ['30%', '60%'], // 👈 第一个圆移动到上方
           },
           {
-            radius: ['50%', '65%'],
-            center: ['50%', '75%'], // 👈 第二个圆移动到下方
+            radius: ['20%', '40%'],
+            center: ['70%', '60%'], // 👈 第二个圆移动到下方
           },
         ],
       },
+
     },
   ],
 };
 
-
+const overallList = reactive([
+  {
+    name: '本地文件',
+    total: 14,
+  }, {
+    name: '文章',
+    total: 3,
+    add: {
+      path: '/admin/articles'
+    }
+  }, {
+    name: '标签',
+    total: 12,
+    add: {
+      path: '/admin/articles'
+    }
+  }
+])
 </script>
 
 <template>
-  <div class="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  <div class="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
     <!-- item 列 -->
-    <div v-for="item in 4" :key="item" class=" bg-base-200 space-y-3 p-5 rounded-2xl flex items-center justify-between">
+    <div v-for="(item) in overallList" :key="item.name"
+      class=" bg-base-200 space-y-3 p-5 rounded-2xl flex items-center justify-between">
       <div class=" space-y-2">
-        <p class=" text-base-content min-w-18">本地文件</p>
-        <div class=" text-nowrap text-2xl font-bold">{{ item }}M</div>
+        <p class=" text-base-content min-w-18">{{ item.name }}</p>
+        <div class=" text-nowrap text-2xl font-bold">{{ item.total }}M</div>
       </div>
-      <div class="mx-2" v-if="item > 1">
+      <div class="mx-2" v-if="item.add" @click="router.push(item.add?.path || '')">
         <button class="btn">+</button>
       </div>
     </div>
@@ -142,7 +162,7 @@ const optionPie: EChartsOption = {
   </Layout>
   <!-- 内容 -->
   <div class="flex flex-col xl:flex-row gap-4">
-    <div class="w-full xl:w-2/3 space-y-4">
+    <div class="w-full xl:w-2/3 space-y-4 pb-20">
       <div class="w-full max-w-full min-h-[280px] md:min-h-[340px] bg-base-100 rounded-xl shadow p-4">
         <curve show-tabs title="访问量" :option="option" />
       </div>
