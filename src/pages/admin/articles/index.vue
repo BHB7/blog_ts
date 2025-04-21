@@ -11,7 +11,7 @@ import LineMdTelegram from '~icons/line-md/telegram';
 
 <template>
   <!-- name of each tab group should be unique -->
-  <div class=" space-x-2 my-2">
+  <div class=" space-x-2 my-2 flex">
     <label class="input">
       <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
@@ -23,7 +23,7 @@ import LineMdTelegram from '~icons/line-md/telegram';
       <kbd class="kbd kbd-sm">⌘</kbd>
       <kbd class="kbd kbd-sm">K</kbd>
     </label>
-    <div class="tooltip" data-tip="创建文章">
+    <div class="tooltip tooltip-bottom" data-tip="创建文章">
       <button class="btn btn-md btn-ghost hover:text-warning">
         <LineMdPlus />
       </button>
@@ -37,7 +37,7 @@ import LineMdTelegram from '~icons/line-md/telegram';
     </div>
 
 
-    <div class=" space-x-2">
+    <div class="lg:block hidden space-x-2">
 
       <button class="btn btn-primary">
         <LineMdPlus />

@@ -25,7 +25,8 @@ const registerData = ref({
   name: '',
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  code: ''
 })
 
 // 登录处理函数（示例）
@@ -63,7 +64,7 @@ const register = () => {
         <div class="card-body p-8">
           <Theme></Theme>
           <!-- 选项卡切换 -->
-          <div class="tabs tabs-box justify-center mb-8">
+          <div class="tabs tabs-box justify-center">
             <button @click="isLogin = true"
               :class="['tab tab-bordered transition-all duration-300', isLogin ? 'tab-active bg-blue-500 ' : '']">
               登录
@@ -75,63 +76,75 @@ const register = () => {
           </div>
 
           <!-- 登录表单 -->
-          <div v-if="isLogin">
-            <div class="form-control mb-6">
-              <label class="label">
-                <span class="label-text font-medium">用户名</span>
-              </label>
-              <input v-model="loginData.name" type="text" placeholder="请输入用户名"
-                class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-blue-400" />
-            </div>
-            <div class="form-control mb-8">
-              <label class="label">
-                <span class="label-text font-medium">密码</span>
-              </label>
-              <input v-model="loginData.password" type="password" placeholder="请输入密码"
-                class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-blue-400" />
-            </div>
-            <div class="form-control">
-              <button @click="login" class="btn btn-primary w-full text-lg py-3">
-                登录
-              </button>
-            </div>
+          <div v-if="isLogin" class=" space-y-3">
+            <section class="w-full ">
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">用户名</legend>
+                <input v-model="loginData.name" type="text" class="input w-full" placeholder="请输入用户名" />
+                <!-- <p class="label">输入用户名称</p> -->
+              </fieldset>
+            </section>
+
+            <section class="w-full ">
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">密码</legend>
+                <input v-model="loginData.password" type="text" class="input w-full" placeholder="请输入用户名" />
+                <!-- <p class="label">输入密码</p> -->
+              </fieldset>
+            </section>
+
+            <section class="w-full mt-3">
+              <button @click="login" class="btn btn-primary w-full">登录</button>
+              <div class="divider">OR</div>
+              <div class="card bg-base-300 rounded-box grid h-20 place-items-center">content</div>
+            </section>
           </div>
 
           <!-- 注册表单 -->
           <div v-else>
-            <div class="form-control mb-5">
-              <label class="label">
-                <span class="label-text font-medium">用户名</span>
-              </label>
-              <input v-model="registerData.name" type="text" placeholder="请输入用户名"
-                class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-purple-400" />
-            </div>
-            <div class="form-control mb-5">
-              <label class="label">
-                <span class="label-text font-medium">邮箱</span>
-              </label>
-              <input v-model="registerData.email" type="email" placeholder="请输入邮箱"
-                class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-purple-400" />
-            </div>
-            <div class="form-control mb-5">
-              <label class="label">
-                <span class="label-text font-medium">密码</span>
-              </label>
-              <input v-model="registerData.password" type="password" placeholder="请输入密码"
-                class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-purple-400" />
-            </div>
-            <div class="form-control mb-8">
-              <label class="label">
-                <span class="label-text font-medium">确认密码</span>
-              </label>
-              <input v-model="registerData.confirmPassword" type="password" placeholder="请确认密码"
-                class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-purple-400" />
-            </div>
-            <div class="form-control">
-              <button @click="register" class="btn btn-secondary w-full text-lg py-3">
-                注册
-              </button>
-            </div>
+            <section class="w-full ">
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">用户名</legend>
+                <input v-model="loginData.name" type="text" class="input w-full" placeholder="请输入用户名" />
+                <p class="label">输入用户名称</p>
+              </fieldset>
+            </section>
+
+            <section class="w-full ">
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">密码</legend>
+                <input v-model="registerData.password" type="text" class="input w-full" placeholder="请输入密码" />
+                <p class="label">输入密码</p>
+              </fieldset>
+            </section>
+            <section class="w-full ">
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">密码</legend>
+                <input v-model="registerData.confirmPassword" type="text" class="input w-full" placeholder="请输入邮箱" />
+                <p class="label">确认密码</p>
+              </fieldset>
+            </section>
+
+            <section class="w-full ">
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">邮箱</legend>
+                <div class="join">
+                  <input v-model="registerData.email" type="text" class="input join-item" placeholder="请输入邮箱" />
+                  <button class="btn join-item">发送验证码</button>
+                </div>
+              </fieldset>
+            </section>
+
+            <section class="w-full ">
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">验证码</legend>
+                <input v-model="registerData.code" type="text" class="input" placeholder="请输入验证码">
+              </fieldset>
+            </section>
+
+            <section class="w-full mt-3">
+              <button @click="register" class="btn btn-primary w-full">注册</button>
+            </section>
           </div>
         </div>
       </div>
