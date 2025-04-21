@@ -24,7 +24,7 @@ import LineMdTelegram from '~icons/line-md/telegram';
       <kbd class="kbd kbd-sm">K</kbd>
     </label>
     <div class="tooltip tooltip-bottom" data-tip="创建文章">
-      <button class="btn btn-md btn-ghost hover:text-warning">
+      <button @click="$router.push('/admin/posts')" class="btn btn-md btn-ghost hover:text-warning">
         <LineMdPlus />
       </button>
     </div>
