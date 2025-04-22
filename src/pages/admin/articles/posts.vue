@@ -35,33 +35,38 @@ onMounted(() => {
         return `${Date.now()}${ext}`
       },
       handler(files) {
-        for (const file of files) {
-          const formData = new FormData()
-          formData.append('file', file)
+        return new Promise<string>((resolve, reject) => {
+          const file = files[0]; // 假设只处理一个文件
+          const formData = new FormData();
+          formData.append('file', file);
 
           interface UploadResponse {
-            code: number
-            message: string
+            code: number;
+            message: string;
             data: {
-              url: string  // 这里嵌套的 `url` 字段
-            }
+              url: string; // 上传后的 URL
+            };
           }
 
           http.post<unknown, UploadResponse>('/file/put', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
-          }).then(res => {
-            // ✅ 这里的 res 就是 UploadResponse 类型
-            if (res.code === 200) {
-              showMsg(res.message)
-              vditorRef.insertValue(`![${file.name}](${res.data.url})`)
-            }
-          }).catch(err => {
-            return Promise.reject(err)
           })
-
-        }
+            .then(res => {
+              if (res.code === 200) {
+                showMsg(res.message); // 展示成功消息
+                // 插入图片 URL 到编辑器
+                vditorRef.insertValue(`![${file.name}](${res.data.url})`);
+                resolve(res.data.url); // 返回图片的 URL
+              } else {
+                reject(new Error(res.message)); // 错误时 reject
+              }
+            })
+            .catch(err => {
+              reject(err); // 捕获异常并 reject
+            });
+        });
       }
 
     }
