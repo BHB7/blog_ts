@@ -132,3 +132,8 @@ import LineMdTelegram from '~icons/line-md/telegram';
   </div>
 
 </template>
+<style scoped lang="scss">
+.bg-blur {
+  backdrop-filter: blur(60px);
+}
+</style>

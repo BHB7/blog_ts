@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
         </div> -->
         <!-- 勋章 -->
         <img
-          class="h-48 w-full absolute -z-0 inset-0 blur-sm object-cover md:h-full  w-full dark:brightness-50 transition-transform duration-300 ease-in-out group-hover:blur-2xl"
+          class="h-48 w-full absolute -z-0 inset-0 blur blur-sm object-cover md:h-full  w-full dark:brightness-50 transition-transform duration-300 ease-in-out group-hover:blur-2xl"
           src="../../../public/favicon.ico" alt="Modern building architecture" />
         <img
           class="h-48 w-full  object-cover md:h-full  w-full dark:brightness-50 transition-transform duration-300 ease-in-out group-hover:scale-105"
@@ -90,3 +90,8 @@ const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
     </div>
   </div>
 </template>
+<style scoped lang="scss">
+.blur {
+  filter: blur(8px);
+}
+</style>

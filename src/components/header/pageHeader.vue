@@ -4,7 +4,6 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
 </script>
 
 <template>
-  <div class=" w-5xl h-40  bg-blur bg-black">asdasdasd</div>
   <section class="card card-border shadow-xl w-full overflow-hidden">
     <div class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
       <div class="p-4 z-1 container lg:px-28 absolute inset-0 ">
@@ -37,7 +36,7 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
       <!-- 封面 -->
       <div
         class="absolute will-change-transform inset-0 transition-all duration-300 ease-in-out  scale-200 overflow-hidden">
-        <div class="absolute inset-0 backdrop-blur-2xl bg-white/1 z-10"></div>
+        <div class="absolute inset-0 bg-blur backdrop-blur-2xl bg-white/1 z-10"></div>
         <img class="w-full h-full object-cover"
           src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
       </div>
@@ -48,6 +47,6 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
 
 <style scoped lang="scss">
 .bg-blur {
-  filter: blur(20px);
+  backdrop-filter: blur(60px);
 }
 </style>
