@@ -35,7 +35,7 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
       </div>
       <!-- 封面 -->
       <div class="absolute inset-0 transition-all duration-300 ease-in-out  scale-200 overflow-hidden">
-        <img class="w-full blur-[60px] h-full object-cover"
+        <img class="w-full blur-[60px] h-full object-cover blur-[60px] will-change-transform"
           src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
       </div>
     </div>
