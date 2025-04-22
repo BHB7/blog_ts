@@ -6,7 +6,7 @@ const tokenStore = useTokenStore()
 // 创建 Axios 实例
 export const http = axios.create({
   baseURL: 'http://localhost:8000/api',
-  timeout: 3000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json"
   },
@@ -20,6 +20,8 @@ http.interceptors.request.use(
     useLoadingBar().startSpeed(); // 启动加载动画
     // 添加认证信息
     const token = tokenStore.getToken()
+    console.log(token);
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

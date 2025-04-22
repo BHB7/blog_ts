@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 
-export type ThemeType = 'dark' | 'light'
+export type ThemeType = 'dark' | 'light' | 'classic'
 
 export const useThemeStore = defineStore(
   'theme',

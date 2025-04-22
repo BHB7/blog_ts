@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import Theme from '@/components/btn/theme/index.vue'
-import { login as loginService, type LoginType } from '@/apis/index'
+import { loginApi, sendCodeApi, regApi, type LoginType } from '@/apis/index'
 import { showMsg } from '@/utils/showMsg'
 import { useTokenStore } from '@/store'
 import { useRouter } from 'vue-router'
@@ -15,13 +15,13 @@ console.log(tokenStore.setToken('1111111'), tokenStore.getToken());
 
 
 // 登录表单数据
-const loginData = ref<LoginType>({
+const loginData = reactive<LoginType>({
   name: '',
   password: ''
 })
 
 // 注册表单数据
-const registerData = ref({
+const registerData = reactive({
   name: '',
   email: '',
   password: '',
@@ -34,7 +34,7 @@ const login = async () => {
   // 在这里调用登录 API
   // console.log('登录数据:', loginData.value)
   try {
-    const res = await loginService(loginData.value.name, loginData.value.password)
+    const res = await loginApi(loginData.name, loginData.password)
     showMsg(res.message, 'success')
     tokenStore.setToken(res.data.token)
     router.replace('/')
@@ -45,14 +45,33 @@ const login = async () => {
 }
 
 // 注册处理函数（示例）
-const register = () => {
-  if (registerData.value.password !== registerData.value.confirmPassword) {
+const register = async () => {
+  if (registerData.password !== registerData.confirmPassword) {
     alert('两次输入的密码不一致')
     return
   }
   // 在这里调用注册 API
-  console.log('注册数据:', registerData.value)
-  alert(`注册成功: ${registerData.value.name}`)
+  const res = await regApi(registerData)
+  console.log(res.data)
+
+}
+const count = ref(60 * 5)
+const timer = ref(0)
+const isSend = ref(false)
+const timeBtn = () => {
+  if (!isSend.value) isSend.value = true
+  count.value -= 1
+  if (count.value <= 0) {
+    isSend.value = false
+  }
+}
+
+
+const sendMail = async () => {
+  await sendCodeApi(registerData.email)
+  timer.value = setInterval(timeBtn, 1000)
+
+
 }
 </script>
 
@@ -105,7 +124,7 @@ const register = () => {
             <section class="w-full ">
               <fieldset class="fieldset">
                 <legend class="fieldset-legend">用户名</legend>
-                <input v-model="loginData.name" type="text" class="input w-full" placeholder="请输入用户名" />
+                <input v-model="registerData.name" type="text" class="input w-full" placeholder="请输入用户名" />
                 <p class="label">输入用户名称</p>
               </fieldset>
             </section>
@@ -130,7 +149,7 @@ const register = () => {
                 <legend class="fieldset-legend">邮箱</legend>
                 <div class="join">
                   <input v-model="registerData.email" type="text" class="input join-item" placeholder="请输入邮箱" />
-                  <button class="btn join-item">发送验证码</button>
+                  <button class="btn join-item" @click="sendMail">{{ isSend ? count : '发送验证码' }}</button>
                 </div>
               </fieldset>
             </section>

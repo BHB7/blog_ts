@@ -14,10 +14,31 @@ export interface LoginTypeVo {
   token: string
   data: Data
 }
-export const login = async (name: string, password: string): Promise<LoginTypeVo> => {
-  return await http.post('user/login', {
+export const loginApi = async (name: string, password: string): Promise<LoginTypeVo> => {
+  return http.post('user/login', {
     name,
     password
   })
 
+}
+
+
+export const sendCodeApi = (email: string) => {
+  return http.get('user/sendCode', {
+    params: {
+      email
+    }
+  })
+}
+
+export interface regType {
+  name: string
+  password: string
+  code: string
+  email: string
+}
+export const regApi = (info: regType) => {
+  return http.post('user/signup', {
+    ...info
+  })
 }
