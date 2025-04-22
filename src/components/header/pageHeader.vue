@@ -4,7 +4,7 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
 </script>
 
 <template>
-  <div class=" w-5xl h-40 blur-2xl .bg-blur bg-black">asdasdasd</div>
+  <div class=" w-5xl h-40  bg-blur bg-black">asdasdasd</div>
   <section class="card card-border shadow-xl w-full overflow-hidden">
     <div class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
       <div class="p-4 z-1 container lg:px-28 absolute inset-0 ">
