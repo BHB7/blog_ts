@@ -55,17 +55,17 @@ onMounted(() => {
           })
             .then(res => {
               if (res.code === 200) {
-                showMsg(res.message); // 展示成功消息
+                showMsg(res.message)// 展示成功消息
                 // 插入图片 URL 到编辑器
                 vditorRef.insertValue(`![${file.name}](${res.data.url})`);
-                resolve(res.data.url); // 返回图片的 URL
+                resolve(res.data.url) // 返回图片的 URL
               } else {
-                reject(new Error(res.message)); // 错误时 reject
+                reject(new Error(res.message)) // 错误时 reject
               }
             })
             .catch(err => {
               reject(err); // 捕获异常并 reject
-            });
+            })
         });
       }
 
