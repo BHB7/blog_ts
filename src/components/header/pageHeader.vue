@@ -4,6 +4,7 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
 </script>
 
 <template>
+  <div class=" w-5xl h-40 blur-2xl bg-black">asdasdasd</div>
   <section class="card card-border shadow-xl w-full overflow-hidden">
     <div class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
       <div class="p-4 z-1 container lg:px-28 absolute inset-0 ">
@@ -11,7 +12,7 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop';
           <!-- 分类 -->
           <div class="w-full flex lg:justify-start justify-center text-primary-content">
             <div class="space-x-2 flex-wrap">
-              <button class="btn ">VUE</button>
+              <button class="btn ">VU</button>
               <button class="btn ">PYTHON</button>
             </div>
             <!-- 标签 -->
