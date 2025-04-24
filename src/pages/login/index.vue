@@ -30,13 +30,13 @@ type Data = { [key: string]: Field };
 const loginData = reactive<Data>({
   name: {
     val: '',
-    exp: [/^[\w-]{3,16}$/],
+    exp: [],
     info: '用户名 3到16位（字母，数字，下划线，减号）',
     errorInfo: '' // 校验通过，没有错误信息
   },
   password: {
     val: '',
-    exp: [/^[\w!@#$%^&*()_+\-=$${};':"\\|,.<>\/?]{6,16}$/],
+    exp: [],
     info: '密码 6到16位（字母，数字，特殊字符）',
     errorInfo: '' // 校验通过，没有错误信息
   },

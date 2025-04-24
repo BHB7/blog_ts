@@ -3,7 +3,7 @@ import Article from '@/components/article/index.vue'
 import Tabs from '@/components/tabs/index.vue'
 import router from '@/routers';
 import { music } from '@/events/event'
-import { getArticles, type ArticleTypeVo } from '@/apis/index'
+import { getArticlesApi, type ArticleTypeVo } from '@/apis/index'
 import { ref } from 'vue';
 
 music.on('test', (e: unknown) => {
@@ -13,7 +13,7 @@ music.on('test', (e: unknown) => {
 const pageList = ref<Array<ArticleTypeVo>>()
 
 async function init() {
-  const res = await getArticles()
+  const res = await getArticlesApi()
   console.log(res.data);
 
   pageList.value = res.data.list
@@ -24,7 +24,7 @@ init()
 </script>
 
 <template>
-  <Tabs :tabs="[{ path: '/l', name: '测试' }, { path: '/s', name: '测试我' }]"></Tabs>
+  <Tabs :tabs="[{ path: '/l', name: '热门' }, { path: '/s', name: '最新' }]"></Tabs>
   <Article v-for="(item, index) in pageList" :cover="'https://i.imgur.com/NHdDTyv.jpeg'" :like="0" :tags="['vue']"
     :update-time="item.updatedAt" :view="item.view" :key="item.id" :desc="item.desc" :index="index" :title="item.title">
   </Article>

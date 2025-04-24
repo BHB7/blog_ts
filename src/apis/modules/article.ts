@@ -5,21 +5,53 @@ import { http } from '@/apis/instances/instances'
 //   name: string,
 //   password: string
 // }
+// 接口定义
+interface Article {
+  title: string;
+  content: string;
+  desc: string;
+  cover: string;
+}
 
-export interface ArticleTypeVo {
-  title: string,
-  content: string,
-  desc: string,
-  cover: string,
-  id: string | number,
-  view: string | number,
-  updatedAt: Date | string
+export interface ArticleTypeVo extends Article {
+  id: number;
+  view: number;
+  updatedAt: Date;
 }
-export const getArticles = (pageSize: string | number = 10, pageOffset: string | number = 0) => {
-  return http.get('article', {
-    params: {
-      pageOffset,
-      pageSize
-    }
-  })
+
+export interface ArticlePostTypeVo extends Article {
+  user_id: number | string;
+  tagIds: Array<{ id: number }>;
 }
+
+// 获取文章列表
+export const getArticlesApi = async (pageSize: number = 10, pageOffset: number = 0) => {
+  try {
+    const response = await http.get('article/list', {
+      params: { pageOffset, pageSize }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('获取文章列表失败:', error);
+    throw new Error('获取文章列表失败');
+  }
+};
+
+// 发布文章
+export const postArticleApi = async (article: ArticlePostTypeVo) => {
+  try {
+    const formattedArticle = {
+      title: article.title,
+      content: article.content,
+      desc: article.desc,
+      cover: article.cover,
+      user_id: article.user_id,
+      tagIds: article.tagIds.map(tag => tag.id)
+    };
+    const response = await http.post('article/post', formattedArticle);
+    return response.data;
+  } catch (error) {
+    console.error('发布文章失败:', error);
+    throw new Error('发布文章失败');
+  }
+};
