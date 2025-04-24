@@ -12,57 +12,64 @@ import {
 
 export type MsgPromptType = 'error' | 'success' | 'warning' | 'info'
 
-// 全局索引让每个消息有微妙的错位效果
+// 全局消息索引（用于错位动画）
 let msgIndex = 0
 
-export const showMsg = (msg: string, type: MsgPromptType = 'info', duration = 3000) => {
+// 样式映射
+const typeClassMap: Record<MsgPromptType, string> = {
+  error: 'alert alert-error alert-soft',
+  success: 'alert alert-success alert-soft',
+  warning: 'alert alert-warning alert-soft',
+  info: 'alert alert-info alert-soft'
+}
+
+// 创建全局容器
+const ensureContainer = () => {
   let container = document.querySelector('#global-msg-container')
   if (!container) {
     container = document.createElement('div')
     container.id = 'global-msg-container'
-    container.className = 'fixed lg:top-4 top-15 right-4 z-[9999] w-auto flex flex-col gap-2 items-end pointer-events-none'
+    container.className = 'fixed top-4 right-4 z-[9999] flex flex-col gap-2 items-end pointer-events-none'
     document.body.appendChild(container)
   }
+  return container
+}
 
+export const showMsg = (msg: string, type: MsgPromptType = 'info', duration = 3000) => {
+  const container = ensureContainer()
   const wrapper = document.createElement('div')
   container.appendChild(wrapper)
 
   const localIndex = msgIndex++
+
   const MsgComponent = defineComponent({
-    props: {
-      msg: String,
-      type: String,
-      duration: Number,
-      onClose: Function
-    },
-    setup(props) {
+    setup() {
       const visible = ref(false)
+      const hovered = ref(false)
 
-      const typeClass = computed(() => {
-        switch (props.type) {
-          case 'error': return 'alert-error'
-          case 'success': return 'alert-success'
-          case 'warning': return 'alert-warning'
-          default: return 'alert-info'
-        }
-      })
+      let timer: number
 
-      // 开始动画
-      onMounted(async () => {
-        await nextTick()
-        requestAnimationFrame(() => {
-          visible.value = true
-        })
-        setTimeout(() => {
+      const startTimer = () => {
+        timer = window.setTimeout(() => {
           visible.value = false
-        }, props.duration || 3000)
+        }, duration)
+      }
+
+      const clearTimer = () => clearTimeout(timer)
+
+      onMounted(() => {
+        nextTick(() => {
+          visible.value = true
+          startTimer()
+        })
       })
 
-      watch(visible, (val) => {
-        if (!val) {
+      watch(visible, (v) => {
+        if (!v) {
           setTimeout(() => {
-            props.onClose?.()
-          }, 400) // 离开动画时间
+            render(null, wrapper)
+            wrapper.remove()
+          }, 500) // 匹配动画时间
         }
       })
 
@@ -71,31 +78,28 @@ export const showMsg = (msg: string, type: MsgPromptType = 'info', duration = 30
           'div',
           {
             class: `
-              pointer-events-auto rounded-md px-5 py-3 alert flex items-center gap-3
-              transform transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-              ${visible.value ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 -translate-y-3 scale-95'}
-              ${typeClass.value}
-              `,
+              pointer-events-auto px-4 py-2 rounded-lg shadow-xl transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1.25)]
+              transform w-max max-w-sm
+              ${visible.value ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 -translate-y-5 scale-90'}
+              ${typeClassMap[type]}
+            `,
             style: {
-              transitionDelay: `${localIndex * 50}ms` // 多条消息微妙错位
+              transitionDelay: `${localIndex * 50}ms`
+            },
+            onMouseenter: () => {
+              hovered.value = true
+              clearTimer()
+            },
+            onMouseleave: () => {
+              hovered.value = false
+              startTimer()
             }
           },
-          [
-            h('span', { class: 'text-sm font-medium base-300' }, props.msg)
-          ]
+          msg
         )
     }
   })
 
-  const vnode: VNode = h(MsgComponent, {
-    msg,
-    type,
-    duration,
-    onClose: () => {
-      render(null, wrapper)
-      wrapper.remove()
-    }
-  })
-
+  const vnode = h(MsgComponent)
   render(vnode, wrapper)
 }

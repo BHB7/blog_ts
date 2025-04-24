@@ -5,7 +5,7 @@ import { useTokenStore } from '@/store'
 const tokenStore = useTokenStore()
 // 创建 Axios 实例
 export const http = axios.create({
-  baseURL: 'http://156.238.233.140:8000/api',
+  baseURL: 'https://api.vocucd.cn/api',
   timeout: 10000,
   headers: {
     "Content-Type": "application/json"

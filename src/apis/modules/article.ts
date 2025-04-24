@@ -16,8 +16,10 @@ export interface ArticleTypeVo {
   updatedAt: Date | string
 }
 export const getArticles = (pageSize: string | number = 10, pageOffset: string | number = 0) => {
-  return http.post('article', {
-    pageOffset,
-    pageSize
+  return http.get('article', {
+    params: {
+      pageOffset,
+      pageSize
+    }
   })
 }
