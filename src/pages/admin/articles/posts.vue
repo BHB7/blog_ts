@@ -1,13 +1,16 @@
-<script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue'
+<script setup lang="tsx">
+import { h, onMounted, reactive, watch } from 'vue'
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 import { useThemeStore } from '@/store'
 import { http } from '@/apis/instances/instances'
-import { showMsg } from '@/utils/showMsg'
+import Msg from '@/utils/showMsg'
 import { postArticleApi, type ArticlePostTypeVo } from '@/apis'
-import { showModal } from '@/utils/showModal'
+import Modal from '@/utils/showModal'
+// import { showModal } from '@/utils/showModal'
 const themeStore = useThemeStore()
+// 登录表单数据
+
 const articleCont = reactive<ArticlePostTypeVo>({
   user_id: '',
   content: '',
@@ -18,6 +21,7 @@ const articleCont = reactive<ArticlePostTypeVo>({
 })
 // 用 ref 保存 Vditor 实例
 let vditorRef: Vditor
+
 onMounted(() => {
   // 初始化 Vditor
   vditorRef = new Vditor('vditor', {
@@ -43,6 +47,27 @@ onMounted(() => {
           articleCont.content = vditorRef.getHTML()
           console.log(articleCont.content);
 
+          Modal.show({
+            title: '警告',
+            type: 'info',
+            cont: () => {
+              return <>
+                <section class="w-full">
+                  <fieldset class="fieldset">
+                    <legend class="fieldset-legend">文章标题</legend>
+                    <input value={articleCont.title} onInput={(e: Event) => {
+                      const target = e.target as HTMLInputElement
+                      articleCont.title = target.value
+                    }} type="text" class="input w-full" placeholder="请输入用户名" />
+                    <p class="label" ></p>
+                  </fieldset>
+                </section>
+              </>
+            },
+            close: () => {
+              console.log('自定义内容模态框已关闭')
+            }
+          })
           // postArticleApi(articleCont)
         },
       }
@@ -75,7 +100,7 @@ onMounted(() => {
           })
             .then(res => {
               if (res.code === 200) {
-                showMsg(res.message)// 展示成功消息
+                Msg.success(res.message)// 展示成功消息
                 // 插入图片 URL 到编辑器
                 vditorRef.insertValue(`![${file.name}](${res.data.url})`);
                 resolve(res.data.url) // 返回图片的 URL
@@ -112,7 +137,7 @@ watch(
 
 <template>
   <section class="card">
-
+    <!-- <ModalCom></ModalCom> -->
   </section>
   <section id="vditor"></section>
 </template>

@@ -14,9 +14,9 @@ const pageList = ref<Array<ArticleTypeVo>>()
 
 async function init() {
   const res = await getArticlesApi()
-  console.log(res.data);
+  console.log(res);
 
-  pageList.value = res.data.list
+  pageList.value = res.list
   console.log(pageList.value);
 
 }

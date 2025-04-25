@@ -7,8 +7,8 @@ import pinia from '@/store/index'
 import elUpmove from './pages/frontend/directives/elUpmove'
 import Log from '@/utils/log'
 const app = createApp(App)
-app.directive('up', elUpmove)
-app.use(pinia)
 app.use(router)
+app.use(pinia)
+app.directive('up', elUpmove)
 app.mount('#app')
 Log.welcome()

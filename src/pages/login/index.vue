@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { ref, reactive, watch, onUnmounted } from 'vue'
+import { ref, reactive, onUnmounted } from 'vue'
 import Theme from '@/components/btn/theme/index.vue'
-import { loginApi, sendCodeApi, regApi, type LoginType, type regType } from '@/apis/index'
-import { showMsg } from '@/utils/showMsg'
-import { useTokenStore } from '@/store'
+import { loginApi, sendCodeApi, regApi, type regType } from '@/apis/index'
+import Msg from '@/utils/showMsg'
+import { useTokenStore, useUserInfoStore } from '@/store'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const tokenStore = useTokenStore()
+const userInfo = useUserInfoStore()
 
 // 切换登录和注册状态
 const isLogin = ref(true)
@@ -30,14 +31,14 @@ type Data = { [key: string]: Field };
 const loginData = reactive<Data>({
   name: {
     val: '',
-    exp: [],
-    info: '用户名 3到16位（字母，数字，下划线，减号）',
+    exp: [/.+/],
+    info: '该字段不为空',
     errorInfo: '' // 校验通过，没有错误信息
   },
   password: {
     val: '',
-    exp: [],
-    info: '密码 6到16位（字母，数字，特殊字符）',
+    exp: [/.+/],
+    info: '该字段不为空',
     errorInfo: '' // 校验通过，没有错误信息
   },
 })
@@ -93,8 +94,9 @@ function vo(data: Data): regType {
 const login = async () => {
   try {
     const res = await loginApi(loginData.name.val, loginData.password.val)
-    showMsg(res.message, 'success')
+    Msg.success(res.message)
     tokenStore.setToken(res.data.token)
+    userInfo.setUserInfo(res)
     router.replace('/')
   } catch (err) {
     console.error(err);
@@ -104,16 +106,21 @@ const login = async () => {
 
 const register = async () => {
   if (registerData.password.val !== registerData.confirmPassword.val) {
-    showMsg('两次密码不一致', 'error');
+    Msg.error('两次密码不一致')
     return
   }
   try {
     const res = await regApi(vo(registerData))
     console.log(res.data)
-    showMsg('注册成功', 'success')
+    Msg.success('注册成功')
+    isLogin.value = true
+    for (const key in registerData) {
+      registerData[key].val = ''
+      registerData[key].errorInfo = ''
+    }
   } catch (err) {
     console.error(err);
-    showMsg('注册失败，请稍后再试', 'error');
+    Msg.error('注册失败，请稍后再试')
   }
 }
 
@@ -134,11 +141,11 @@ const startCountdown = () => {
 const sendMail = async () => {
   isSend.value = true
   try {
-    await sendCodeApi(registerData.email.val);
+    await sendCodeApi(registerData.email.val)
     startCountdown();
   } catch (err) {
-    console.error('验证码发送失败:', err);
-    showMsg('验证码发送失败，请稍后重试', 'error');
+    console.error('验证码发送失败:', err)
+    Msg.error('验证码发送失败，请稍后重试')
   }
 };
 
@@ -171,27 +178,30 @@ function testExp(data: Data): Promise<boolean> {
 
   return new Promise((resolve, reject) => {
     Object.keys(data).forEach(key => {
-      const field = data[key];
+      const field = data[key]
       if (field.exp) {
         const isValid = Array.isArray(field.exp)
           ? field.exp.some(regex => regex.test(field.val))
-          : field.exp.test(field.val);
-
+          : field.exp.test(field.val)
         if (!isValid) {
           errors[key] = `${key} 格式不正确`;
           data[key].errorInfo = getErrorHtml(key, field.info);
         } else {
-          data[key].errorInfo = '';
+          data[key].errorInfo = ''
         }
       }
     });
 
+
+    console.log(errors);
+
+
     if (Object.keys(errors).length === 0) {
-      resolve(true);
+      resolve(true)
     } else {
-      reject(false);
+      reject(false)
     }
-  });
+  })
 }
 
 function getErrorHtml(key: string, info?: string): string {

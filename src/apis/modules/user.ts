@@ -8,7 +8,7 @@ export interface LoginType {
 export type Data = {
   token: string
 }
-export interface LoginTypeVo {
+export interface LoginTypeVo extends LoginType {
   message: string
   code: number | string
   token: string

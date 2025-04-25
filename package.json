@@ -26,6 +26,7 @@
     "pinia-plugin-persistedstate": "^4.2.0",
     "simplebar-vue": "^2.4.0",
     "vditor": "^3.11.0",
+    "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
     "vue-router": "^4.0.13"
   },
@@ -44,6 +45,7 @@
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.16",
     "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.2",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.5.0",
     "@vue/tsconfig": "^0.7.0",

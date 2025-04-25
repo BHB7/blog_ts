@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import autoprefixer from 'autoprefixer'
+import vueJsx from "@vitejs/plugin-vue-jsx";
 // 导入icon 自动插件
 import Icons from 'unplugin-icons/vite'
 // https://vite.dev/config/
@@ -16,6 +17,7 @@ export default defineConfig({
     tailwindcss(),
     // 导入icon自动下载icon
     Icons({ autoInstall: true, compiler: 'vue3' }),
+    vueJsx(),
     // 自动注册组件
     Components({
       resolvers: [

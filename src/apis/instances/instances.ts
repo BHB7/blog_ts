@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useLoadingBar } from '@/components/hooks/loadingBar'
-import { showMsg } from "@/utils/showMsg"
+import Msg from "@/utils/showMsg"
 import { useTokenStore } from '@/store'
-const tokenStore = useTokenStore()
+
 // 创建 Axios 实例
 export const http = axios.create({
   baseURL: 'https://api.vocucd.cn/api',
@@ -19,8 +19,9 @@ http.interceptors.request.use(
     // 在发送请求之前做些什么
     useLoadingBar().startSpeed(); // 启动加载动画
     // 添加认证信息
+    const tokenStore = useTokenStore()
     const token = tokenStore.getToken()
-    console.log(token);
+    // console.log(token);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -30,7 +31,7 @@ http.interceptors.request.use(
   function (error) {
     // 对请求错误做些什么
     useLoadingBar().endSpeed(); // 结束加载动画
-    showMsg('请求发送失败', 'error', 1000)
+    Msg.error('请求发送失败', 1000)
     return Promise.reject(error)
   }
 );
@@ -40,7 +41,7 @@ http.interceptors.response.use(
   function (response) {
     const data = response.data
     if (data.code !== 200) {
-      showMsg(data.message, 'error', 1000)
+      Msg.error(data.message, 1000)
       return Promise.reject(data.message)
     }
     useLoadingBar().endSpeed(); // 结束加载动画
@@ -48,7 +49,7 @@ http.interceptors.response.use(
   },
   function (error) {
     useLoadingBar().endSpeed()// 结束加载动画
-    showMsg(error.message, 'error', 1000)
+    Msg.error(error.message, 1000)
     return Promise.reject(error)
   }
 );

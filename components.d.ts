@@ -17,6 +17,7 @@ declare module 'vue' {
     Copyright: typeof import('./src/components/article/copyright.vue')['default']
     Footer: typeof import('./src/components/footer/index.vue')['default']
     LyricPlayer: typeof import('./src/components/music/lyricPlayer.vue')['default']
+    Modal: typeof import('./src/components/modalBox/modal.vue')['default']
     Music: typeof import('./src/components/music/index.vue')['default']
     Nav: typeof import('./src/components/nav/index.vue')['default']
     PageHeader: typeof import('./src/components/header/pageHeader.vue')['default']
