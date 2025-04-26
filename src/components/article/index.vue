@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
 </script>
 <template>
   <div :title="props.title"
-    class="group w-full card  max-w-md overflow-hidden bg-base-200 dark:bg-primary md:max-w-2xl  hover:shadow-lg transition-all">
+    class="group w-full card shadow-sm card-border max-w-md overflow-hidden bg-base-200 dark:bg-primary md:max-w-2xl  hover:shadow-lg transition-all">
     <div class="md:flex" :class="{ 'md:flex-row-reverse': +index % 2 !== 0 }">
       <!-- 封面 -->
       <div class="relative lg:w-2/5">
@@ -51,18 +51,18 @@ const props = withDefaults(defineProps<ArticlePropsTypeVO>(), {
       <div class="p-8 w-full card-body">
 
         <!-- 描述标题 -->
-        <a href="#" class="mt-1 block text-2xl leading-tight font-medium text-pretty">
+        <a href="#" class="mt-1 block text-xl leading-tight font-medium text-pretty">
           {{ props.title }}
         </a>
         <!-- 描述信息 -->
-        <p class="mt-2 text-info-content text-xl">
+        <p class="mt-2 text-info-content text-sm">
           {{ props.desc }}
         </p>
-        <div class="flex text-sm items-center w-full justify-between" v-if="props.tags.length > 0">
+        <div class="flex text-sm w-full justify-between flex-col space-y-2 " v-if="props.tags.length > 0">
           <div class="flex space-x-3 items-center">
             <!-- 标签 -->
             <div class="flex  items-center">
-              <SolarHashtagCircleBoldDuotone class=" text-accent-content mr-2" />
+              <SolarHashtagCircleBoldDuotone class=" mr-2" />
               <span>{{ props.tags.join(' ') }}</span>
             </div>
             <!-- 更新时间 -->

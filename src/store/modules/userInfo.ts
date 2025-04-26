@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import { type LoginTypeVo } from '@/apis/index'
+import { type Data, type LoginTypeVo } from '@/apis/index'
 
 
 export const useUserInfoStore = defineStore('userInfo', () => {
   let userInfo = reactive({})
 
 
-  const setUserInfo = (val: LoginTypeVo) => {
+  const setUserInfo = (val: Data) => {
     userInfo = val
   }
 
