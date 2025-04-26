@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { ref, reactive, onUnmounted } from 'vue';
-import Theme from '@/components/btn/theme/index.vue';
-import { loginApi, sendCodeApi, regApi, type regType } from '@/apis/index';
-import Msg from '@/utils/showMsg';
-import { useTokenStore, useUserInfoStore } from '@/store';
-import { useRouter } from 'vue-router';
-import * as yup from 'yup';
-import { Form, Field, ErrorMessage, type YupSchema } from 'vee-validate';
+import { ref, reactive, onUnmounted } from 'vue'
+import Theme from '@/components/btn/theme/index.vue'
+import { loginApi, sendCodeApi, regApi } from '@/apis/index'
+import Msg from '@/utils/showMsg'
+import { useTokenStore, useUserInfoStore } from '@/store'
+import { useRouter } from 'vue-router'
+import * as yup from 'yup'
+import { Form, Field, ErrorMessage, type YupSchema } from 'vee-validate'
 
-const router = useRouter();
-const tokenStore = useTokenStore();
-const userInfo = useUserInfoStore();
+const router = useRouter()
+const tokenStore = useTokenStore()
+const userInfo = useUserInfoStore()
 
 // 切换登录和注册状态
-const isLogin = ref(true);
-const isSend = ref(false);
-const count = ref(60 * 5);
+const isLogin = ref(true)
+const isSend = ref(false)
+const count = ref(60 * 5)
 const timer = ref(0)
 // 定义 FieldData 接口
 interface FieldData {
-  name?: string;
-  password?: string;
-  code?: string;
-  email?: string;
-  confirmP?: string;
-  validation?: YupSchema;
+  name?: string
+  password?: string
+  code?: string
+  email?: string
+  confirmP?: string
+  validation?: YupSchema
   [key: string]: any
 }
 
@@ -98,7 +98,7 @@ const onSubmit = async (values: any) => {
     // 切换到登录状态
   }
   isLogin.value = true
-};
+}
 </script>
 
 <template>
