@@ -30,7 +30,7 @@ interface FieldData {
 
 // 定义 Data 类型
 type Data = {
-  [key: string]: FieldData;
+  [key: string]: FieldData
 };
 
 // 创建响应式对象
@@ -57,10 +57,11 @@ const formData = reactive<Data>({
       confirmP: yup.string().oneOf([yup.ref('password')], '两次密码不一致').required('该项为必填'),
     }),
   },
-});
+})
 
 
 const sendMail = async () => {
+  if (!formData.register.email) return Msg.warning('请输入邮箱地址')
   const { message } = await sendCodeApi(formData.register.email || '')
   Msg.success(message)
   isSend.value = true
@@ -79,8 +80,10 @@ const onSubmit = async (values: any) => {
   if (isLogin.value) {
     // 登录逻辑
     const userData = await loginApi(name || '', password || '')
-    console.log(userData)
+    Msg.success(userData.message)
+    tokenStore.setToken(userData.data?.token || '')
     userInfo.setUserInfo(userData.data?.user)
+    router.replace('/')
   } else {
     // 注册逻辑
     const { message } = await regApi({ name, password, code, email })

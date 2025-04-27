@@ -1,3 +1,4 @@
+import type { Data } from '@/apis'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 

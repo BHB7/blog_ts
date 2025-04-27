@@ -28,7 +28,7 @@ function ensureContainer(): HTMLElement {
   if (!container) {
     container = document.createElement('div') as HTMLElement
     container.id = 'global-msg-container'
-    container.className = 'fixed top-4 right-4 z-[9999] flex flex-col gap-2 items-end pointer-events-none'
+    container.className = 'fixed top-4 lg:right-4 right-1/2 z-[9999] flex flex-col gap-2 items-end pointer-events-none'
     document.body.appendChild(container)
   }
   return container

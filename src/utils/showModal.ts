@@ -57,19 +57,25 @@ class ModalService {
             }
           } catch (err) {
             console.error('Error in confirm callback:', err)
-          } finally {
             // 卸载模态框实例
-            if (this.appInstance) {
-              this.appInstance.unmount()
-              this.appInstance = null
-            }
-            resolve() // 模态框关闭时 resolve Promise
+            // if (this.appInstance) {
+            //   this.appInstance.unmount()
+            //   this.appInstance = null
+            // }
+            // resolve() // 模态框关闭时 resolve Promise
           }
         }
       })
 
       this.appInstance.mount(this.modalContainer)
     })
+  }
+  close() {
+    // 卸载模态框实例
+    if (this.appInstance) {
+      this.appInstance.unmount()
+      this.appInstance = null
+    }
   }
 }
 

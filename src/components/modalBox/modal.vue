@@ -10,7 +10,6 @@ export interface Modal {
   closeText?: string
   confirmText?: string
 }
-
 const props = withDefaults(defineProps<Modal>(), {
   closeText: '取消',
   confirmText: '确定'

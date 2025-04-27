@@ -4,15 +4,15 @@ import { type Data } from '@/apis/index'
 
 
 export const useUserInfoStore = defineStore('userInfo', () => {
-  let userInfo = reactive({})
+  let userInfo = reactive<Data>({ user: '', token: '' })
 
 
   const setUserInfo = (val: Data) => {
-    userInfo = val
+    userInfo.user = val
   }
 
-  const getUserInfo = () => {
-    return userInfo
+  const getUserInfo = (): { id: string } => {
+    return userInfo?.user
   }
 
 

@@ -11,7 +11,7 @@ import LineMdTelegram from '~icons/line-md/telegram';
 
 <template>
   <!-- name of each tab group should be unique -->
-  <div class=" space-x-2 my-2 flex">
+  <div class="space-x-2 my-2 flex">
     <label class="input">
       <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">

@@ -45,7 +45,7 @@ const menuList = [
           <!-- pc 菜单 -->
           <SidebarMenu :list="menuList" class="hidden lg:flex w-50" />
           <!-- 内容 -->
-          <div class="w-full lg:p-10 p-4 overflow-auto py-1">
+          <div class="w-full overflow-auto py-1" :class="{ 'pl-4 pt-4': $route.fullPath !== '/admin/posts' }">
             <RouterView></RouterView>
           </div>
         </div>

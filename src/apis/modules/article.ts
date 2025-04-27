@@ -14,14 +14,14 @@ interface Article {
 }
 
 export interface ArticleTypeVo extends Article {
-  id: number;
-  view: number;
-  updatedAt: Date;
+  id?: number;
+  view?: number;
+  updatedAt?: Date;
 }
 
-export interface ArticlePostTypeVo extends Article {
-  user_id: number | string;
-  tagIds: Array<{ id: number }>;
+export interface ArticlePostTypeDo extends Article {
+  user_id?: number | string;
+  tagIds: Array<string | number>;
 }
 
 // 获取文章列表
@@ -38,7 +38,7 @@ export const getArticlesApi = async (pageSize: number = 10, pageOffset: number =
 };
 
 // 发布文章
-export const postArticleApi = async (article: ArticlePostTypeVo) => {
+export const postArticleApi = async (article: ArticlePostTypeDo) => {
   try {
     const formattedArticle = {
       title: article.title,
@@ -46,7 +46,7 @@ export const postArticleApi = async (article: ArticlePostTypeVo) => {
       desc: article.desc,
       cover: article.cover,
       user_id: article.user_id,
-      tagIds: article.tagIds.map(tag => tag.id)
+      tagIds: article.tagIds.map(tag => tag)
     };
     const response = await http.post('article/post', formattedArticle);
     return response.data;

@@ -3,7 +3,7 @@
 import * as echarts from 'echarts/core';
 import { BarChart, LineChart, PieChart } from 'echarts/charts';
 import type { EChartsOption } from 'echarts';
-
+import { TimelineComponent } from 'echarts/components'
 import {
   TitleComponent,
   TooltipComponent,
@@ -18,6 +18,7 @@ import { onMounted, onUnmounted, ref, watch } from 'vue';
 import debonce from '@/utils/debonce'
 
 echarts.use([
+  TimelineComponent,
   TitleComponent,
   TooltipComponent,
   GridComponent,
