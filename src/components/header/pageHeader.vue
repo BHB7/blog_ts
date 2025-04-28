@@ -16,7 +16,7 @@ pageData.on('data', (data: ArticleTypeVo) => {
 </script>
 
 <template>
-  <section class="card card-border shadow-sm group w-full max-h-86 overflow-hidden">
+  <section class="card card-border  group w-full max-h-86 overflow-hidden">
     <div v-if="true" class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
       <div class="p-4 z-1 container lg:px-28 absolute inset-0">
         <div class="lg:space-y-5 space-y-3 lg:text-xl">
@@ -53,7 +53,9 @@ pageData.on('data', (data: ArticleTypeVo) => {
         <div
           class="absolute inset-0 group-hover:h-0 duration-300 ease-in bg-blur  bg-gradient-to-b from-white-500/5 to-base-200 z-10">
         </div>
-        <img class="w-full h-full duration-300 ease-in-out group-hover:scale-125 object-center" :src="article?.cover" />
+        <img
+          class="w-full h-full duration-300 ease-in-out group-hover:scale-125 object-center bg-gradient-to-b from-blue-500 to-primary"
+          :src="article?.cover" />
       </div>
     </div>
     <!-- <img class="w-full h-full  object-center" :src="article?.cover" /> -->

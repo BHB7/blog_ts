@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import hljs from 'highlight.js/lib/core'
 import { getArticleByIdApi, type ArticleTypeVo } from '@/apis'
 import Copyright from '@/components/article/copyright.vue'
 import { pageData } from '@/events/event'
-import { useThemeStore, type ThemeType } from '@/store'
-const themeStore = useThemeStore()
 
 const route = useRoute()
 const article = ref<ArticleTypeVo | null>(null)
 const aid = ref<number | null>(null)
+
+// 存储提取后的内容
+const extractedContent = ref<
+  { type: 'text' | 'code'; content: string; language?: string }[]
+>([])
 
 // 解析 aid，只执行一次
 onMounted(() => {
@@ -30,42 +33,64 @@ async function fetchArticle(id: number) {
   try {
     const res = await getArticleByIdApi(id)
     article.value = res
-    console.log(extractAndClean(article.value?.content));
+    extractAndClean(res.content || '')
     pageData.emit('data', res)
   } catch (e) {
     console.error('获取文章失败:', e)
   }
 }
 
-// 提取代码块并清理正文
+// 提取代码块和普通文本
 function extractAndClean(content = '') {
-  // 正则表达式
-  const regex = /<pre>\s*<code\s+class="language-(.*?)">([\s\S]*?)<\/code>\s*<\/pre>/g;
-  // 提取内容
-  let match;
-  while ((match = regex.exec(content)) !== null) {
-    const language = match[1]; // 语言类型
-    const codeContent = match[2]; // 代码内容
-    console.log("语言类型:", language);
-    console.log("代码内容:\n", codeContent);
+  // 清空之前的内容
+  extractedContent.value = []
+
+  // 正则表达式匹配代码块
+  const codeBlockRegex = /<pre>\s*<code\s+class="language-(.*?)">([\s\S]*?)<\/code>\s*<\/pre>/g
+
+  // 匹配普通文本
+  const textRegex = /([^<]+)(?=<|$)/g
+
+  let lastIndex = 0
+
+  // 匹配代码块
+  let codeMatch
+  while ((codeMatch = codeBlockRegex.exec(content)) !== null) {
+    const [fullMatch, language, codeContent] = codeMatch
+
+    // 添加代码块前的普通文本
+    const precedingText = content.slice(lastIndex, codeMatch.index).trim()
+    if (precedingText) {
+      extractedContent.value.push({ type: 'text', content: precedingText })
+    }
+
+    // 添加代码块
+    extractedContent.value.push({
+      type: 'code',
+      language,
+      content: codeContent,
+    })
+
+    lastIndex = codeMatch.index + fullMatch.length
+  }
+
+  // 添加剩余的普通文本
+  const remainingText = content.slice(lastIndex).trim()
+  if (remainingText) {
+    extractedContent.value.push({ type: 'text', content: remainingText })
   }
 }
-
-
-const cleanedContent = ref('')
-const codeBlocks = ref<{ language: string; code: string }[]>([])
-
-
 </script>
 
 <template>
   <div class="container mx-auto p-4">
     <div class="card bg-base-100 shadow-xl overflow-hidden">
       <div class="card-body prose max-w-full">
-        <!-- 正文（已解码） -->
-        <div v-if="cleanedContent" class="prose max-w-full con" v-html="cleanedContent"></div>
-        <!-- 高亮代码块 -->
-        <highlightjs language='javascript' code="const s = new Date().toString()" />
+        <!-- 动态渲染提取后的内容 -->
+        <div v-for="(item, index) in extractedContent" :key="index">
+          <div v-if="item.type === 'text'" class="prose max-w-full con" v-html="item.content"></div>
+          <highlightjs v-else :language="item.language" :code="item.content" />
+        </div>
       </div>
     </div>
 

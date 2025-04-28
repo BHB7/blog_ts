@@ -121,13 +121,6 @@ onMounted(() => {
       hljs: {
         enable: true,
         style: 'github',
-      },
-      markdown: {
-        // 允许原始 HTML 标签通过（关闭清洗/转义）
-        sanitize: false,
-        // 其余可按需保留默认或自定义
-        gfmAutoLink: true,
-        toc: true,
       }
     },
     theme: themeStore.theme === 'dark' ? 'dark' : 'classic',
@@ -149,10 +142,11 @@ onMounted(() => {
             getTagList()
           })
 
-          article.content = vditorRef.getHTML().replace(
-            /<pre><code class="(\w*)"/g, // 匹配代码块的开始标签和语言类名
-            (_, lang) => {
-              return `
+          article.content = vditorRef.getHTML().replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>').replace(
+              /<pre><code class="(\w*)"/g, // 匹配代码块的开始标签和语言类名
+              (_, lang) => {
+                return `
                     <pre>
                       <code class="language-${lang}">
                         const a = 10;
@@ -160,8 +154,8 @@ onMounted(() => {
                         </code>
                     </pre>
                 `;
-            }
-          ).replace(/<p>/g, '<p class="text-base text-gray-700 mb-4">')
+              }
+            ).replace(/<p>/g, '<p class="text-base text-gray-700 mb-4">')
           console.log(article.content);
 
           Modal.show({
@@ -233,8 +227,12 @@ onMounted(() => {
             },
             confirm() {
               (async function () {
-                const imgData = await uploadImg(formData)
-                article.cover = imgData.data.url
+                if (previewUrl.value) {
+                  const imgData = await uploadImg(formData)
+                  article.cover = imgData.data.url
+                } else {
+                  article.cover = ''
+                }
                 await postArticleApi({
                   title: article.title,
                   desc: article.desc,

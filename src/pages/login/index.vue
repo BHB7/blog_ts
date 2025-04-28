@@ -6,6 +6,7 @@ import Msg from '@/utils/showMsg'
 import { useTokenStore, useUserInfoStore } from '@/store'
 import { useRouter } from 'vue-router'
 import * as yup from 'yup'
+import LineMdGithubLoop from '~icons/line-md/github-loop';
 import { Form, Field, ErrorMessage, type YupSchema } from 'vee-validate'
 
 const router = useRouter()
@@ -102,6 +103,11 @@ const onSubmit = async (values: any) => {
   }
   isLogin.value = true
 }
+
+
+const goGithubLogin = () => {
+  window.location.href = 'https://api.vocucd.cn/api/github/login'
+}
 </script>
 
 <template>
@@ -147,7 +153,9 @@ const onSubmit = async (values: any) => {
               <section class="w-full mt-3">
                 <button type="submit" class="btn btn-primary w-full">登录</button>
                 <div class="divider">OR</div>
-                <div class="card bg-base-300 rounded-box grid h-20 place-items-center">content</div>
+                <div class="card bg-base-300 rounded-box grid h-20 place-items-center">
+                  <LineMdGithubLoop @click="goGithubLogin" class="btn text-3xl hover:text-accent"></LineMdGithubLoop>
+                </div>
               </section>
             </div>
 
