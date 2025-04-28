@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Copyright from '@/components/article/copyright.vue'
+
 </script>
 <template>
   <div class="card overflow-y-auto p-10 card-border primary-content	">

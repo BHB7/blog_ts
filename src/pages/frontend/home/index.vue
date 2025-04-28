@@ -25,7 +25,8 @@ init()
 
 <template>
   <Tabs :tabs="[{ path: '/l', name: '热门' }, { path: '/s', name: '最新' }]"></Tabs>
-  <Article v-for="(item, index) in pageList" :cover="item.cover" :like="0" :tags="['vue']" :update-time="item.updatedAt"
-    :view="item.view" :key="item.id" :desc="item.desc" :index="index" :title="item.title">
+  <Article v-for="(item, index) in pageList" :cover="item.cover" :like="0" :tags="['vue']"
+    :update-time="item.updatedAt || ''" :view="item.view || ''" :key="item.id" :desc="item.desc" :index="index"
+    :title="item.title">
   </Article>
 </template>

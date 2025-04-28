@@ -15,8 +15,8 @@ interface Article {
 
 export interface ArticleTypeVo extends Article {
   id?: number;
-  view?: number;
-  updatedAt?: Date;
+  view?: number | string;
+  updatedAt?: Date | string;
 }
 
 export interface ArticlePostTypeDo extends Article {
