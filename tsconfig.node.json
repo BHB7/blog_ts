@@ -15,6 +15,8 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "types": ["node"],
-    "target": "ES2020" // 或更高版本
+    "target": "ES2020", // 或更高版本
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

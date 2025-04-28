@@ -43,7 +43,8 @@ const article = reactive<FieldData>({
     tagIds: yup.array(),
     title: yup.string().required('该字段不为空'),
     desc: yup.string().required('该字段不为空')
-  })
+  }),
+
 })
 // 用 ref 保存 Vditor 实例
 let vditorRef: Vditor
@@ -116,6 +117,20 @@ onMounted(() => {
     height: '100vh',
     width: '100%',
     lang: 'zh_CN',
+    mode: 'ir',
+    preview: {
+      hljs: {
+        enable: true,
+        style: 'github',
+      },
+      markdown: {
+        // 允许原始 HTML 标签通过（关闭清洗/转义）
+        sanitize: false,
+        // 其余可按需保留默认或自定义
+        gfmAutoLink: true,
+        toc: true,
+      }
+    },
     theme: themeStore.theme === 'dark' ? 'dark' : 'classic',
     toolbarConfig: {
       pin: true
@@ -134,7 +149,17 @@ onMounted(() => {
           nextTick(() => {
             getTagList()
           })
-          article.content = vditorRef.getHTML()
+
+          article.content = vditorRef.getHTML().replace(
+            /<pre><code class="(\w*)"/g, // 匹配代码块的开始标签和语言类名
+            (_, lang) => {
+              return `
+                    <pre class="mockup-code">
+                        <span class="badge badge-primary">${lang}</span>
+                        <code class="${lang}"
+                `;
+            }
+          ).replace(/<p>/g, '<p class="text-base text-gray-700 mb-4">').replace(/<pre><code/g, '<pre class="mockup-code"><code')
           console.log(article.content);
 
           Modal.show({

@@ -23,16 +23,18 @@ watch(route, (newRoute) => {
   immediate: true,
   deep: true
 })
+
 </script>
 <template>
   <Nav></Nav>
+
   <pageHeader v-if="pageHeaderIsShow"></pageHeader>
   <div class="lg:flex w-full p-4 lg:px-40 grid grid-cols-1 lg:grid-cols-[80%_20%] gap-4">
     <!-- 左侧内容 -->
     <div class="cont flex-1">
       <div class="flex flex-col items-center space-y-4">
         <slot name="cont">
-          <RouterView></RouterView>
+          <RouterView class=" lg:max-w-4xl "></RouterView>
 
         </slot>
       </div>

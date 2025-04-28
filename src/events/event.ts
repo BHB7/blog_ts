@@ -36,4 +36,5 @@ class Music extends Even {
   }
 }
 
-export const music = new Music('music');
+export const music = new Music('music')
+export const pageData = new Music('pageData')

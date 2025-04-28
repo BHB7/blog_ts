@@ -1,4 +1,5 @@
 import { http } from '@/apis/instances/instances'
+import router from '@/routers';
 
 
 // export interface ArticleType {
@@ -16,7 +17,9 @@ interface Article {
 export interface ArticleTypeVo extends Article {
   id?: number;
   view?: number | string;
-  updatedAt?: Date | string;
+  updatedAt: Date | string;
+  createdAt: Date | string;
+  tags: Array<{ id: string | number, name: string, des: string }>
 }
 
 export interface ArticlePostTypeDo extends Article {
@@ -36,7 +39,16 @@ export const getArticlesApi = async (pageSize: number = 10, pageOffset: number =
     throw new Error('获取文章列表失败');
   }
 };
-
+// 根据aid获取文章详情
+export const getArticleByIdApi = async (aid: number | string) => {
+  try {
+    const response = await http.get(`/article/${aid}`)
+    return response.data
+  } catch (error) {
+    console.error('获取文章详情失败:', error);
+    throw new Error('获取文章详情失败');
+  }
+}
 // 发布文章
 export const postArticleApi = async (article: ArticlePostTypeDo) => {
   try {

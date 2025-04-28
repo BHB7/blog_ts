@@ -15,12 +15,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@highlightjs/vue-plugin": "^2.1.0",
     "@tailwindcss/vite": "^4.0.17",
     "animate.css": "^4.1.1",
     "axios": "^1.8.4",
     "daisyui": "^5.0.12",
     "echarts": "^5.6.0",
     "filepond": "^4.32.7",
+    "highlight.js": "^11.11.1",
     "jss": "^10.10.0",
     "jss-preset-default": "^10.10.0",
     "pinia": "^3.0.1",
