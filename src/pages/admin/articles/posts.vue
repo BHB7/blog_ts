@@ -1,9 +1,8 @@
 <script setup lang="tsx">
-import { h, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { h, nextTick, onBeforeMount, onBeforeUnmount, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 import { useThemeStore, useUserInfoStore } from '@/store'
-import { http } from '@/apis/instances/instances'
 import Msg from '@/utils/showMsg'
 import { postArticleApi, type ArticlePostTypeDo } from '@/apis'
 import Modal from '@/utils/showModal'
@@ -154,12 +153,15 @@ onMounted(() => {
             /<pre><code class="(\w*)"/g, // 匹配代码块的开始标签和语言类名
             (_, lang) => {
               return `
-                    <pre class="mockup-code">
-                        <span class="badge badge-primary">${lang}</span>
-                        <code class="${lang}"
+                    <pre>
+                      <code class="language-${lang}">
+                        const a = 10;
+                        console.log(a);
+                        </code>
+                    </pre>
                 `;
             }
-          ).replace(/<p>/g, '<p class="text-base text-gray-700 mb-4">').replace(/<pre><code/g, '<pre class="mockup-code"><code')
+          ).replace(/<p>/g, '<p class="text-base text-gray-700 mb-4">')
           console.log(article.content);
 
           Modal.show({
@@ -282,7 +284,14 @@ onMounted(() => {
 
   })
 })
+// 组件销毁时，也及时销毁编辑器
+onBeforeUnmount(() => {
+  const editor = vditorRef
+  if (editor == null) return
+  editor.destroy()
+})
 onUnmounted(() => {
+
   URL.revokeObjectURL(previewUrl.value)
 })
 // 监听主题切换，动态更新 vditor 的 theme

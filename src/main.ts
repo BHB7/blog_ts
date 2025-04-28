@@ -4,7 +4,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './routers/index'
 import pinia from '@/store/index'
-import elUpmove from './pages/frontend/directives/elUpmove'
+import elUpmove from './directives/elUpmove'
+import higelight from './directives/higelight'
 import Log from '@/utils/log'
 //引入依赖和语言
 
@@ -30,5 +31,6 @@ app.use(hljsVuePlugin)
 app.use(pinia)
 app.use(router)
 app.directive('up', elUpmove)
+app.directive('higelight', higelight)
 app.mount('#app')
 Log.welcome()
