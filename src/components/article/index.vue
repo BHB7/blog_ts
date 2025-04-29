@@ -53,12 +53,12 @@ const props = withDefaults(defineProps<ArticlePropsListVO>(), {
 
   <template v-else>
     <div v-for="(item, index) in list" @click="$router.push(`/article?aid=${item?.id}`)" :title="item?.title"
-      class="group w-full card shadow-sm card-border min-h-40 lg:max-h-44 max-w-md overflow-hidden bg-base-200 dark:bg-primary md:max-w-2xl hover:border-2 hover:border-accent border-1 border-neutral  hover:shadow-lg transition-all">
+      class="group w-full card shadow-sm card-border max-w-md overflow-hidden bg-base-200 dark:bg-primary md:max-w-2xl hover:border-2 hover:border-accent border-1 border-neutral  hover:shadow-lg transition-all">
       <div class="md:flex" :class="{ 'md:flex-row-reverse': +index % 2 !== 0 }">
         <!-- 封面 -->
         <div class="relative lg:w-2/5">
           <img
-            class="h-48 w-full  object-cover md:h-full  w-full dark:brightness-50 transition-transform duration-300 ease-in-out group-hover:scale-105"
+            class="max-h-68 w-full  object-cover md:h-full  w-full dark:brightness-50 transition-transform duration-300 ease-in-out group-hover:scale-105"
             :src="item.cover" alt="Modern building architecture" />
         </div>
         <!-- 内容 -->
@@ -72,10 +72,10 @@ const props = withDefaults(defineProps<ArticlePropsListVO>(), {
           <p class="mt-2 text-accent-content text-sm">
             {{ item.desc }}
           </p>
-          <div class="flex text-sm w-full justify-between flex-col space-y-2 " v-if="item.tags.length > 0">
+          <div class="flex text-sm w-full flex-col space-y-2 ">
             <div class="flex space-x-3 items-center">
               <!-- 标签 -->
-              <div class="flex  items-center">
+              <div v-if="item.tags.length > 0" class="flex  items-center">
                 <SolarHashtagCircleBoldDuotone class=" mr-2" />
                 <span>{{ item.tags.join(' ') }}</span>
               </div>

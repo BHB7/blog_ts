@@ -55,7 +55,7 @@ pageData.on('data', async (data: ArticleTypeVo) => {
       <div
         class="absolute h-full w-full will-change-transform inset-0 transition-all duration-300 ease-in-out backdrop-blur-3xl bg-linear-to-b  overflow-hidden">
         <div
-          class="absolute inset-0 group-hover:h-0 duration-300 ease-in bg-blur  bg-gradient-to-b from-white-500/5 to-base-200 z-10">
+          class="absolute inset-0 group-hover:to-base-100  duration-300 ease-in bg-blur  bg-gradient-to-b from-white-500/5 to-base-200 z-10">
         </div>
         <img
           class="w-full h-full duration-300 ease group-hover:scale-102 object-center bg-gradient-to-b from-blue-500 to-primary"
