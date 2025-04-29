@@ -1,15 +1,39 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import hljs from 'highlight.js/lib/core'
 import { getArticleByIdApi, type ArticleTypeVo } from '@/apis'
 import Copyright from '@/components/article/copyright.vue'
 import { pageData } from '@/events/event'
+import { useThemeStore } from '@/store'
 
+const themeStore = useThemeStore()
 const route = useRoute()
 const article = ref<ArticleTypeVo | null>(null)
 const aid = ref<number | null>(null)
 
+
+// 缓存 link 元素
+let highlightStyle: any = null;
+
+watch(
+  () => themeStore.theme,
+  (newTheme) => {
+    const href =
+      newTheme === 'dark'
+        ? 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/vs2015.min.css'
+        : 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/a11y-light.min.css';
+
+    if (!highlightStyle) {
+      highlightStyle = document.createElement('link');
+      highlightStyle.rel = 'stylesheet';
+      document.head.appendChild(highlightStyle);
+    }
+
+    highlightStyle.href = href;
+  },
+  { immediate: true }
+);
 // 存储提取后的内容
 const extractedContent = ref<
   { type: 'text' | 'code'; content: string; language?: string }[]
@@ -84,12 +108,12 @@ function extractAndClean(content = '') {
 
 <template>
   <div class="container mx-auto p-4">
-    <div class="card bg-base-100 shadow-xl overflow-hidden">
+    <div class="card card-border bg-base-100 shadow-xl overflow-hidden">
       <div class="card-body prose max-w-full">
         <!-- 动态渲染提取后的内容 -->
         <div v-for="(item, index) in extractedContent" :key="index">
           <div v-if="item.type === 'text'" class="prose max-w-full con" v-html="item.content"></div>
-          <highlightjs v-else :language="item.language" :code="item.content" />
+          <highlightjs class="mockup-code bg-base-100" v-else :language="item.language" :code="item.content" />
         </div>
       </div>
     </div>

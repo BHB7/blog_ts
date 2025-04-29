@@ -12,8 +12,6 @@ import MusicBox from '@/components/music/box/index.vue'
 const route = useRoute()
 const pageHeaderIsShow = ref<Boolean>(false)
 
-
-music.emit('test', '我是布局组件')
 watch(route, (newRoute) => {
   console.log(newRoute.path);
   if (newRoute.path !== '/home') {
@@ -42,11 +40,8 @@ watch(route, (newRoute) => {
     <!-- 右侧菜单 -->
     <div class="r hidden lg:grid w-1/3 grid grid-cols-1 gap-4 h-full">
       <slot name="menus">
-        <MusicBox></MusicBox>
-        <User></User>
-        <hr>
-        <Music></Music>
-
+        <Music class="sticky top-20"></Music>
+        <User class="sticky top-20"></User>
       </slot>
     </div>
   </div>

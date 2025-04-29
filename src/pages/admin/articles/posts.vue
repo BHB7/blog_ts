@@ -12,6 +12,7 @@ import LineMdPlus from '~icons/line-md/plus'
 import LineMdMinus from '~icons/line-md/minus'
 import { getTagApi, type TagDo } from '@/apis/modules/tag'
 import { uploadImg } from '@/apis/modules/upload'
+import router from '@/routers'
 const themeStore = useThemeStore()
 const userInfoStore = useUserInfoStore()
 
@@ -108,6 +109,14 @@ const handleFileChange = () => {
   // 在组件卸载时释放 Blob URL
   // 可以在 onUnmounted 中调用 URL.revokeObjectURL(fileUrl)
 }
+
+function enhanceHTML(html: string) {
+  return html
+    // 解除 &lt; &gt; 转义
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/<p>/g, '<p class="text-base text-gray-700 mb-4">');
+}
 onMounted(() => {
   getTagList()
   // 初始化 Vditor
@@ -120,7 +129,7 @@ onMounted(() => {
     preview: {
       hljs: {
         enable: true,
-        style: 'github',
+        style: 'vs2015',
       }
     },
     theme: themeStore.theme === 'dark' ? 'dark' : 'classic',
@@ -142,20 +151,7 @@ onMounted(() => {
             getTagList()
           })
 
-          article.content = vditorRef.getHTML().replace(/&lt;/g, '<')
-            .replace(/&gt;/g, '>').replace(
-              /<pre><code class="(\w*)"/g, // 匹配代码块的开始标签和语言类名
-              (_, lang) => {
-                return `
-                    <pre>
-                      <code class="language-${lang}">
-                        const a = 10;
-                        console.log(a);
-                        </code>
-                    </pre>
-                `;
-              }
-            ).replace(/<p>/g, '<p class="text-base text-gray-700 mb-4">')
+          article.content = enhanceHTML(vditorRef.getHTML())
           console.log(article.content);
 
           Modal.show({
@@ -242,6 +238,7 @@ onMounted(() => {
                 })
                 vditorRef.setValue('')
                 Msg.success('文章发布成功')
+                router.push('admin/')
                 Modal.close()
               })()
             },

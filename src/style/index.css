@@ -2,6 +2,7 @@
 @custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
 @plugin "daisyui";
 @import "./theme.css" layer(theme);
+@import "./hljs.scss";
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
 }
