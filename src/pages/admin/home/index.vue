@@ -130,7 +130,11 @@ interface OverallItem {
   add?: { path: string }; // 仅允许对象或 undefined
 }
 const overallList = ref<OverallItem[]>()
+const isLoading = ref(true)
 const getOverallList = async () => {
+  isLoading.value = true
+  // 模拟网络请求延迟
+  await new Promise((resolve, reject) => setTimeout(() => resolve(''), 2000))
   try {
     const res = await getAdminHomeTotal();
     overallList.value = res.data.map((item) => ({
@@ -139,6 +143,8 @@ const getOverallList = async () => {
     }));
   } catch (error) {
     console.error('获取总览信息失败:', error);
+  } finally {
+    isLoading.value = false
   }
 }
 getOverallList()
@@ -148,17 +154,26 @@ getOverallList()
   <div class=" space-y-4">
 
     <div class="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-      <!-- item 列 -->
-      <div v-for="(item) in overallList" :key="item.name"
-        class=" bg-base-200 space-y-3 p-5 rounded-2xl flex items-center justify-between">
-        <div class=" space-y-2">
-          <p class=" text-base-content min-w-18">{{ item.zh }}</p>
-          <div class=" text-nowrap text-2xl font-bold">{{ item.total }}M</div>
+      <!-- loading... 骨架屏 -->
+      <template v-if="isLoading">
+        <div class="skeleton h-32 w-full"></div>
+        <div class="skeleton h-32 w-full"></div>
+        <div class="skeleton h-32 w-full"></div>
+      </template>
+      <!-- item 列 加载完毕 -->
+      <template v-else>
+        <div v-for="(item) in overallList"
+          :class="{ 'bg-accent border-2 border-accent bg-primary-b bg-from-amber ': item.add }" :key="item.name"
+          class=" bg-base-200 space-y-3 p-5 rounded-2xl flex items-center justify-between">
+          <div class=" space-y-2">
+            <p class=" text-base-content min-w-18">{{ item.zh }}</p>
+            <div class="text-nowrap text-2xl font-bold">{{ item.total }}</div>
+          </div>
+          <div class="mx-2" v-if="item.add?.path" @click="router.push(item.add?.path || '')">
+            <button class="btn">+</button>
+          </div>
         </div>
-        <div class="mx-2" v-if="item.add?.path" @click="router.push(item.add?.path || '')">
-          <button class="btn">+</button>
-        </div>
-      </div>
+      </template>
     </div>
     <!-- 内容 -->
     <div class="flex flex-col xl:flex-row gap-4">
