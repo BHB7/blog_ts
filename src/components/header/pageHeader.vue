@@ -4,13 +4,17 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop'
 
 import { ref, watch } from 'vue'
 import { pageData } from '@/events/event'
-import type { ArticleTypeVo } from '@/apis'
+import { getIpAddress, type ArticleTypeVo } from '@/apis'
 import formatDate from '@/utils/fromDate'
 
 const article = ref<ArticleTypeVo | null>(null)
-pageData.on('data', (data: ArticleTypeVo) => {
-  console.log('收到文章信息', data)
+const ipInfo = ref()
+pageData.on('data', async (data: ArticleTypeVo) => {
+  // console.log('收到文章信息', data)
   article.value = data
+  const ipInfoData = await getIpAddress(article.value.ip)
+  // console.log(ipInfoData.province);
+  ipInfo.value = ipInfoData.province
 })
 
 </script>
@@ -43,7 +47,7 @@ pageData.on('data', (data: ArticleTypeVo) => {
             <span class="text-primary-content flex">更新于{{ formatDate(article?.updatedAt || '') }}</span>
           </div>
           <div class="flex items-center text-primary-content lg:justify-start justify-center">
-            <IpIcon />贵州
+            <IpIcon />{{ ipInfo || '未知' }}
           </div>
         </div>
       </div>
@@ -54,11 +58,10 @@ pageData.on('data', (data: ArticleTypeVo) => {
           class="absolute inset-0 group-hover:h-0 duration-300 ease-in bg-blur  bg-gradient-to-b from-white-500/5 to-base-200 z-10">
         </div>
         <img
-          class="w-full h-full duration-300 ease-in-out group-hover:scale-125 object-center bg-gradient-to-b from-blue-500 to-primary"
+          class="w-full h-full duration-300 ease group-hover:scale-102 object-center bg-gradient-to-b from-blue-500 to-primary"
           :src="article?.cover" />
       </div>
     </div>
-    <!-- <img class="w-full h-full  object-center" :src="article?.cover" /> -->
   </section>
 </template>
 

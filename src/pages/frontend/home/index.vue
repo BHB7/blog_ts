@@ -1,32 +1,34 @@
 <script setup lang="ts">
 import Article from '@/components/article/index.vue'
 import Tabs from '@/components/tabs/index.vue'
-import router from '@/routers';
+import router from '@/routers'
+import Pagination from '@/components/pagination/index.vue'
 import { music } from '@/events/event'
-import { getArticlesApi, type ArticleTypeVo } from '@/apis/index'
+import { type ArticleTypeVo } from '@/apis/index'
 import { ref } from 'vue';
-
-music.on('test', (e: unknown) => {
-  console.log('测试', e);
-})
+import { getArticlesApi } from '@/apis';
 
 const pageList = ref<Array<ArticleTypeVo>>()
-
+const isLoading = ref(true)
 async function init() {
-  const res = await getArticlesApi()
-  console.log(res);
-
-  pageList.value = res.list
-  console.log(pageList.value);
-
+  isLoading.value = true;
+  try {
+    const res = await getArticlesApi();
+    pageList.value = res.list;
+  } catch (error) {
+    console.error('获取文章失败:', error);
+    pageList.value = [];
+  } finally {
+    isLoading.value = false;
+  }
 }
+
+
 init()
 </script>
 
 <template>
   <Tabs :tabs="[{ path: '/l', name: '热门' }, { path: '/s', name: '最新' }]"></Tabs>
-  <Article v-up @click="$router.push(`/article?aid=${item.id}`)" v-for="(item, index) in pageList" :cover="item.cover"
-    :like="0" :tags="['vue']" :update-time="item.updatedAt || ''" :view="item.view || ''" :key="item.id"
-    :desc="item.desc" :index="index" :title="item.title">
-  </Article>
+  <Article :isLoading="isLoading" :list="pageList" />
+  <Pagination></Pagination>
 </template>

@@ -1,5 +1,5 @@
 import { http } from '@/apis/instances/instances'
-import router from '@/routers';
+import router from '@/routers'
 
 
 // export interface ArticleType {
@@ -20,6 +20,8 @@ export interface ArticleTypeVo extends Article {
   updatedAt: Date | string;
   createdAt: Date | string;
   tags: Array<{ id: string | number, name: string, des: string }>
+  user_id?: string | number;
+  ip: string
 }
 
 export interface ArticlePostTypeDo extends Article {
@@ -28,7 +30,7 @@ export interface ArticlePostTypeDo extends Article {
 }
 
 // 获取文章列表
-export const getArticlesApi = async (pageSize: number = 10, pageOffset: number = 0) => {
+export const getArticlesApi = async (pageSize: number = 10, pageOffset: number = 0): Promise<{ list: Array<ArticleTypeVo> }> => {
   try {
     const response = await http.get('article/list', {
       params: { pageOffset, pageSize }

@@ -10,7 +10,7 @@ abstract class Even {
   abstract emit<T extends unknown[]>(eventName: string, ...args: T): void;
 }
 
-class Music extends Even {
+class BaseEvent extends Even {
   constructor(name: string) {
     super(name); // 调用父类构造函数
   }
@@ -36,5 +36,5 @@ class Music extends Even {
   }
 }
 
-export const music = new Music('music')
-export const pageData = new Music('pageData')
+export const music = new BaseEvent('music')
+export const pageData = new BaseEvent('pageData')

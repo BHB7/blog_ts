@@ -22,7 +22,7 @@ const updateScrollState = () => {
     clearTimeout(timer.value)
   }
   timer.value = setTimeout(() => {
-    isScrolled.value = calculateScrollPercentage() > 50;
+    isScrolled.value = calculateScrollPercentage() > 20;
   }, 50)
 };
 
