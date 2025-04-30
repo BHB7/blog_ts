@@ -20,7 +20,7 @@ http.interceptors.request.use(
   function (config) {
     loadingCount++;
     if (loadingCount === 1) {
-      useLoadingBar().startSpeed(); // 启动加载动画
+      useLoadingBar().startSpeed() // 启动加载动画
     }
     const token = useTokenStore().token
     if (token) {
@@ -30,7 +30,7 @@ http.interceptors.request.use(
   },
   function (error) {
     loadingCount = Math.max(0, loadingCount - 1)
-    useLoadingBar().endSpeed(); // 结束加载动画
+    useLoadingBar().endSpeed() // 结束加载动画
     Msg.error('请求发送失败', 1000)
     return Promise.reject(error)
   }
@@ -47,6 +47,10 @@ http.interceptors.response.use(
     const data = response.data
     if (data.code !== 200) {
       Msg.error(data.message, 1000)
+      if (data.code === 401 && window.location.pathname.slice(1, 6) === 'admin') {
+        window.history.pushState(null, '', '/login')
+        window.location.reload()
+      }
       return Promise.reject(new Error(data.message))
     }
 

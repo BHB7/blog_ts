@@ -3,11 +3,11 @@ import Theme from '@/components/btn/theme/index.vue'
 import SidebarMenu from '@/components/menu/sidebarMenu.vue'
 import LineMdHomeTwotone from '~icons/line-md/home-twotone'
 import MdiPost from '~icons/mdi/post-outline'
-import MdiInformation from '~icons/mdi/information-outline'
+import LineMdAccount from '~icons/line-md/account';
 const menuList = [
   { icon: LineMdHomeTwotone, path: '/', name: '总览' },
   { icon: MdiPost, path: '/admin/articles', name: '文章管理' },
-  { icon: MdiInformation, path: '/login', name: '关于' },
+  { icon: LineMdAccount, path: '/login', name: '用户管理' },
 ]
 </script>
 

@@ -8,7 +8,7 @@ import { ref, watch } from 'vue'
 import { music } from '@/events/event'
 import Music from '@/components/music/index.vue'
 import MusicBox from '@/components/music/box/index.vue'
-
+import directory from '@/components/menu/directory.vue'
 const route = useRoute()
 const pageHeaderIsShow = ref<Boolean>(false)
 
@@ -43,7 +43,7 @@ watch(route, (newRoute) => {
         <!-- <Music class="sticky top-20"></Music> -->
         <div class="sticky top-20">asd</div>
         <User></User>
-
+        <directory></directory>
       </slot>
     </div>
   </div>

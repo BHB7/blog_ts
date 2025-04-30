@@ -1,10 +1,21 @@
 import { ref } from "vue"
-import { getTagApi, createTagApi, type Tag } from '@/apis/index'
+import { getTagApi, createTagApi, type Tag, getArticlesApi, type ArticleTypeVo, delArticleApi } from '@/apis/index'
 import Msg from "@/utils/showMsg"
 import type { ArrayResponse } from "@/type/response"
 
 const useArticleHook = () => {
   const tagList = ref<Array<Tag>>()
+  const articleList = ref<Array<ArticleTypeVo>>()
+  // 获取文章列表
+  const getArticleList = async () => {
+    try {
+      const response = await getArticlesApi()
+      articleList.value = response.list
+    } catch (error) {
+      Msg.error('获取文章列表失败了')
+    }
+  }
+
   // 获取标签列表
   const getTagList = async () => {
     const response = await getTagApi()
@@ -22,14 +33,25 @@ const useArticleHook = () => {
     getTagList()
   }
 
-  // 创建标签处理事件
-  const clickHandelTag = (tag: Tag) => {
-    createTag(tag)
+  // 删除文章
+  const delArticle = async (aid: string | number) => {
+    try {
+      const response = await delArticleApi(aid)
+      if (!response) throw new Error('文章删除失败')
+      Msg.success('删除成功')
+    } catch (error: any) {
+      Msg.success(error.message || '文章删除失败qaq')
+    }
   }
+
+
   return {
     tagList,
     getTagList,
-    createTag
+    createTag,
+    getArticleList,
+    articleList,
+    delArticle
   }
 }
 

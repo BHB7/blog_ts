@@ -8,11 +8,28 @@ import EditIcon from '~icons/line-md/edit-full-twotone';
 import LineMdTrash from '~icons/line-md/trash';
 import LineMdTelegram from '~icons/line-md/telegram';
 import useArticleHook from './hooks/useAriclesHook';
+import type { Tag } from '@/apis';
 
-const { tagList, getTagList, createTag } = useArticleHook()
+const {
+  tagList,
+  getTagList,
+  createTag,
+  articleList,
+  getArticleList,
+  delArticle
+} = useArticleHook()
 
+const clickDel = async (aid: string | number) => {
+  await delArticle(aid)
+}
+/// TODO
+// 创建标签处理事件
+const clickHanelTag = (tag: Tag) => {
+  createTag(tag)
+}
 const init = () => {
   getTagList()
+  getArticleList()
 }
 init()
 
@@ -62,25 +79,26 @@ init()
   <!-- 内容 -->
   <div class="flex flex-col xl:flex-row gap-4 mt-2">
     <!-- 左侧 -->
-    <div class="w-full xl:w-2/3 space-y-4">
+    <div class="w-full xl:w-2/3 space-y-4 pb-20">
 
-      <div class="card card-side bg-base-100 shadow-sm hover:shadow-md transition-all my-4 flex-col lg:flex-row">
+      <!-- 文章item -->
+      <div v-for="(article) in articleList" :key="article.id"
+        class="card card-side bg-base-100 shadow-sm hover:shadow-md transition-all my-4 flex-col lg:flex-row">
         <!-- 左侧封面 -->
         <div
-          class="relative lg:w-32 border-2 border-accent-content w-full lg:rounded-l-xl overflow-hidden rounded-t-box">
-          <img class="object-cover w-full h-full" src="https://img.yzcdn.cn/vant/cat.jpeg" alt="封面" />
+          class="relative lg:w-50 min-w-40 border-2 border-accent-content w-full lg:rounded-l-xl overflow-hidden rounded-t-box">
+          <img class="object-cover  w-full h-full" :src="article.cover" alt="封面" />
           <div class="absolute bottom-0 h-10 w-full bg-blue-500 text-white text-center text-md font-light">
             未发布
           </div>
         </div>
-        <!-- 文章item -->
         <div class="card-body py-4 px-4 card-border">
           <!-- 标题 -->
-          <h2 class="card-title text-base sm:text-lg font-semibold">我所知道的你的事情</h2>
+          <h2 class="card-title text-base sm:text-lg font-semibold">{{ article.title }}</h2>
 
           <!-- 摘要 -->
           <p class="text-sm text-gray-500 leading-snug line-clamp-2">
-            很高心见到了你，你是那么的美丽动人！很高心见到了你，你是那么的美丽动人是，很高心到你。很高心见到了你，你是那么的美丽动人！
+            {{ article.desc }}
           </p>
 
           <!-- 分类 + 时间 + 统计 + 操作 -->
@@ -89,16 +107,16 @@ init()
             <div class="flex items-center gap-2">
               <span>所见/旅游 西北</span>
               <span class="text-gray-300">|</span>
-              <span>2023-01-15</span>
+              <span>{{ article.createdAt }}</span>
             </div>
 
             <!-- 阅读、点赞、评论 -->
             <div class="flex items-center gap-3">
               <span class="flex items-center gap-1">
-                <ViewIcon /> 2343
+                <ViewIcon /> {{ article.view }}
               </span>
               <span class="flex items-center gap-1">
-                <LikeIcon /> 243
+                <LikeIcon /> 0
               </span>
               <span class="flex items-center gap-1">
                 <LineMdChat /> 43
@@ -116,7 +134,7 @@ init()
                 <EditIcon />
               </button>
               <button class="btn btn-md btn-ghost hover:text-error">
-                <LineMdTrash />
+                <LineMdTrash @click="clickDel(article.id || '')" />
               </button>
             </div>
           </div>

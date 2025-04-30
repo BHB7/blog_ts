@@ -15,6 +15,7 @@ declare module 'vue' {
     Btn: typeof import('./src/components/btn/index.vue')['default']
     Chart: typeof import('./src/components/chart/index.vue')['default']
     Copyright: typeof import('./src/components/article/copyright.vue')['default']
+    Directory: typeof import('./src/components/menu/directory.vue')['default']
     Footer: typeof import('./src/components/footer/index.vue')['default']
     LyricPlayer: typeof import('./src/components/music/lyricPlayer.vue')['default']
     Modal: typeof import('./src/components/modalBox/modal.vue')['default']

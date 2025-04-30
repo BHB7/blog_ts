@@ -15,7 +15,7 @@ interface Article {
 }
 
 export interface ArticleTypeVo extends Article {
-  id?: number;
+  id?: number | string;
   view?: number | string;
   updatedAt: Date | string;
   createdAt: Date | string;
@@ -68,4 +68,14 @@ export const postArticleApi = async (article: ArticlePostTypeDo) => {
     console.error('发布文章失败:', error);
     throw new Error('发布文章失败');
   }
-};
+}
+
+// 删除文章
+export const delArticleApi = async (aid: string | number): Promise<boolean> => {
+  try {
+    const response = await http.delete(`/article/${aid}`)
+    return response.data
+  } catch (error) {
+    throw new Error("删除文章失败了")
+  }
+}

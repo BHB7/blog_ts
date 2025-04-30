@@ -84,7 +84,7 @@ const onSubmit = async (values: any) => {
     Msg.success(userData.message)
     tokenStore.setToken(userData.data?.token || '')
     userInfo.setUserInfo(userData.data?.user)
-    router.replace('/')
+    router.go(-1)
   } else {
     // 注册逻辑
     const { message } = await regApi({ name, password, code, email })
