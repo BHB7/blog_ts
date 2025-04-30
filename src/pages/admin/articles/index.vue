@@ -7,12 +7,21 @@ import LineMdChat from '~icons/line-md/chat';
 import EditIcon from '~icons/line-md/edit-full-twotone';
 import LineMdTrash from '~icons/line-md/trash';
 import LineMdTelegram from '~icons/line-md/telegram';
+import useArticleHook from './hooks/useAriclesHook';
+
+const { tagList, getTagList, createTag } = useArticleHook()
+
+const init = () => {
+  getTagList()
+}
+init()
+
 </script>
 
 <template>
   <!-- name of each tab group should be unique -->
   <div class="space-x-2 my-2 flex">
-    <label class="input">
+    <label class="input ">
       <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
           <circle cx="11" cy="11" r="8"></circle>
@@ -119,12 +128,12 @@ import LineMdTelegram from '~icons/line-md/telegram';
     <div class="w-full xl:w-1/3 space-y-4 hidden xl:block">
       <div class="card w-full card-border card-side bg-base-100 shadow-sm hover:shadow-md transition-all">
         <div class="card-body">
-          <h1 class="text-md font-bold">标签</h1>
+          <div class="flex justify-between items-center">
+            <h1 class="text-md font-bold">标签</h1>
+            <LineMdPlus class="btn" />
+          </div>
           <div class=" grid grid-cols-3 gap-3">
-            <button class="btn btn-sm">vue</button>
-            <button class="btn btn-sm">vue</button>
-            <button class="btn btn-sm">vue</button>
-            <button class="btn btn-sm">vue</button>
+            <button v-for="(item, index) in tagList" :key="item.id" class="btn btn-sm">{{ item.name }}</button>
           </div>
         </div>
       </div>

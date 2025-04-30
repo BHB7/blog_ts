@@ -7,3 +7,5 @@ export interface ResVoBase<T> {
 
 export * from '@/apis/modules/user.ts'
 export * from '@/apis/modules/article.ts'
+export * from '@/apis/modules/tag'
+export * from '@/apis/modules/admin'

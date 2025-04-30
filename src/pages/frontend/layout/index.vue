@@ -40,8 +40,10 @@ watch(route, (newRoute) => {
     <!-- 右侧菜单 -->
     <div class="r hidden lg:grid w-1/3 grid grid-cols-1 gap-4 h-full">
       <slot name="menus">
-        <Music class="sticky top-20"></Music>
-        <User class="sticky top-20"></User>
+        <!-- <Music class="sticky top-20"></Music> -->
+        <div class="sticky top-20">asd</div>
+        <User></User>
+
       </slot>
     </div>
   </div>

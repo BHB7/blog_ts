@@ -69,7 +69,7 @@ const props = withDefaults(defineProps<ArticlePropsListVO>(), {
             {{ item.title }}
           </a>
           <!-- 描述信息 -->
-          <p class="mt-2 text-accent-content text-sm">
+          <p class="mt-2 text-accent-content line-clamp-2 text-sm">
             {{ item.desc }}
           </p>
           <div class="flex text-sm w-full flex-col space-y-2 ">

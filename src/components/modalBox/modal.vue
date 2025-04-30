@@ -2,8 +2,8 @@
 import { computed, defineProps } from 'vue'
 
 export interface Modal {
-  cont: string | (() => void)
-  title: string
+  cont?: string | (() => void)
+  title?: string
   type?: 'info' | 'warning' | 'error'
   close?: () => void
   confirm?: () => void
@@ -24,12 +24,16 @@ const getContType = computed(() => typeof props.cont === 'function')
       <div class="py-4">
         <template v-if="!getContType">{{ props.cont }}</template>
         <Component :is="props.cont" v-else />
+        <slot v-if="!cont" name="body"></slot>
       </div>
       <div class="modal-action">
         <form method="dialog">
-          <div class=" space-x-5">
+          <div v-if="close" class=" space-x-5">
             <button class="btn" @click="props.close?.()">{{ closeText }}</button>
             <button class="btn btn-primary" @click="props.confirm?.()">{{ confirmText }}</button>
+          </div>
+          <div v-else>
+            <slot name="footer"></slot>
           </div>
         </form>
       </div>

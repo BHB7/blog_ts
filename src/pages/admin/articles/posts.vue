@@ -10,7 +10,7 @@ import { Form, Field, ErrorMessage, type YupSchema } from 'vee-validate'
 import * as yup from 'yup'
 import LineMdPlus from '~icons/line-md/plus'
 import LineMdMinus from '~icons/line-md/minus'
-import { getTagApi, type TagDo } from '@/apis/modules/tag'
+import { getTagApi, type Tag } from '@/apis/modules/tag'
 import { uploadImg } from '@/apis/modules/upload'
 import router from '@/routers'
 const themeStore = useThemeStore()
@@ -53,7 +53,7 @@ const inputFileRef = ref<HTMLInputElement>()
 const previewUrl = ref()
 
 // 服务器已存在的tag列表
-let tagList = reactive<Array<TagDo>>([])
+let tagList = reactive<Array<Tag>>([])
 const selectedTag = ref()
 const handleTag = (event: Event) => {
   const target = event.target as HTMLSelectElement
@@ -64,7 +64,7 @@ const handleTag = (event: Event) => {
 const getTagList = async () => {
   try {
     const res = await getTagApi()
-    tagList = res.data || []
+    tagList = res || []
   } catch (error) {
     Msg.error('获取tag失败')
   }
