@@ -38,7 +38,7 @@ const useArticleHook = () => {
     try {
       await delArticleApi(aid)
       // 刷新列表
-      getTagList()
+      getArticleList()
       Msg.success('删除成功')
     } catch (error: any) {
       Msg.error(error.message || '文章删除失败qaq')
