@@ -86,9 +86,10 @@ init()
         class="card card-side bg-base-100 shadow-sm hover:shadow-md transition-all my-4 flex-col lg:flex-row">
         <!-- 左侧封面 -->
         <div
-          class="relative lg:w-50 min-w-40 border-2 border-accent-content w-full lg:rounded-l-xl overflow-hidden rounded-t-box">
+          class="relative lg:w-50 h-38 min-w-40 border-2 border-accent-content w-full lg:rounded-l-xl overflow-hidden rounded-t-box">
           <img class="object-cover  w-full h-full" :src="article.cover" alt="封面" />
-          <div class="absolute bottom-0 h-10 w-full bg-blue-500 text-white text-center text-md font-light">
+          <div
+            class="absolute bottom-0 h-10 w-full bg-linear-20 from-primary to-error  text-white text-center text-md font-light">
             未发布
           </div>
         </div>
