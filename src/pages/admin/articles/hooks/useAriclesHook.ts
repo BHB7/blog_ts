@@ -36,11 +36,10 @@ const useArticleHook = () => {
   // 删除文章
   const delArticle = async (aid: string | number) => {
     try {
-      const response = await delArticleApi(aid)
-      if (!response) throw new Error('文章删除失败')
+      await delArticleApi(aid)
       Msg.success('删除成功')
     } catch (error: any) {
-      Msg.success(error.message || '文章删除失败qaq')
+      Msg.error(error.message || '文章删除失败qaq')
     }
   }
 
