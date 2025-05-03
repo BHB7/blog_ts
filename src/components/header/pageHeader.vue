@@ -5,7 +5,7 @@ import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop'
 import { ref, watch } from 'vue'
 import { pageData } from '@/events/event'
 import { getIpAddress, type ArticleTypeVo } from '@/apis'
-import formatDate from '@/utils/fromDate'
+import formatDate from '@/utils/formatDate'
 
 const article = ref<ArticleTypeVo | null>(null)
 const ipInfo = ref()

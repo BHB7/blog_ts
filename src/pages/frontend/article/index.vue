@@ -32,7 +32,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="flagRef" id="nav" class=" fixed z-2 left-20 top-30 w-40 bg-amber-300 transform-fill">000</div>
   <div ref="contRef" class="container mx-auto p-4">
     <div class="card card-border bg-base-100 shadow-xl overflow-hidden">
       <div ref="obsRef" class="card-body prose max-w-full">

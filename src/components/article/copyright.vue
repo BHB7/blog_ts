@@ -21,7 +21,7 @@ pageData.on('data', async (data: ArticleTypeVo) => {
     <!-- 头像 -->
     <div class="avatar absolute left-[50%] translate-x-[-50%] top-[-20px]">
       <div class="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
-        <img :src="userInfo?.imgurl" />
+        <img :src="userInfo?.imgurl || ''" />
       </div>
     </div>
     <!-- 昵称 | 用户信息 -->
