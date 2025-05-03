@@ -4,6 +4,8 @@ import Msg from "@/utils/showMsg"
 import type { ArrayResponse } from "@/type/response"
 
 const useArticleHook = () => {
+  // 页面级op按钮状态
+  const btnState = ref(false)
   const tagList = ref<Array<Tag>>()
   const articleList = ref<Array<ArticleTypeVo>>()
   // 获取文章列表
@@ -33,8 +35,10 @@ const useArticleHook = () => {
     getTagList()
   }
 
+
   // 删除文章
   const delArticle = async (aid: string | number) => {
+    btnState.value = true
     try {
       await delArticleApi(aid)
       // 刷新列表
@@ -42,6 +46,8 @@ const useArticleHook = () => {
       Msg.success('删除成功')
     } catch (error: any) {
       Msg.error(error.message || '文章删除失败qaq')
+    } finally {
+      btnState.value = false
     }
   }
 
@@ -52,7 +58,8 @@ const useArticleHook = () => {
     createTag,
     getArticleList,
     articleList,
-    delArticle
+    delArticle,
+    btnState
   }
 }
 

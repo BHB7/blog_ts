@@ -16,7 +16,8 @@ const {
   createTag,
   articleList,
   getArticleList,
-  delArticle
+  delArticle,
+  btnState
 } = useArticleHook()
 
 const clickDel = async (aid: string | number) => {
@@ -56,24 +57,11 @@ init()
     </div>
   </div>
   <div class="tabs tabs-box justify-between p-3">
-    <div>
-      <input type="radio" name="my_tabs_1" class="tab" aria-label="Tab 1" />
-      <input type="radio" name="my_tabs_1" class="tab" aria-label="Tab 2" checked />
-      <input type="radio" name="my_tabs_1" class="tab" aria-label="Tab 3" />
-    </div>
-
-
-    <div class="lg:block hidden space-x-2">
-
-      <button class="btn btn-primary">
-        <LineMdPlus />
-        新增
-      </button>
-
-      <button class="btn">
-        <LineMdCogFilled />管理分组
-      </button>
-    </div>
+    <form>
+      <input type="radio" name="my_tabs_1" class="tab" aria-label="待审核" checked />
+      <input type="radio" name="my_tabs_1" class="tab" aria-label="已发布" />
+      <input type="radio" name="my_tabs_1" class="tab" aria-label="草稿" />
+    </form>
   </div>
 
   <!-- 内容 -->
@@ -90,7 +78,7 @@ init()
           <img class="object-cover  w-full h-full" :src="article.cover" alt="封面" />
           <div
             class="absolute bottom-0 h-10 w-full bg-linear-20 from-primary to-error  text-white text-center text-md font-light">
-            未发布
+            未审核
           </div>
         </div>
         <div class="card-body py-4 px-4 card-border">
@@ -127,15 +115,15 @@ init()
             <!-- 操作按钮 -->
             <div class="ml-auto flex gap-2 text-gray-400">
               <div class="tooltip" data-tip="发布文章">
-                <button class="btn btn-md btn-ghost hover:text-warning">
+                <button :disabled="btnState" class="btn btn-md btn-ghost hover:text-warning">
                   <LineMdTelegram />
                 </button>
               </div>
-              <button class="btn btn-md btn-ghost hover:text-info">
+              <button :disabled="btnState" class="btn btn-md btn-ghost hover:text-info">
                 <EditIcon />
               </button>
-              <button class="btn btn-md btn-ghost hover:text-error">
-                <LineMdTrash @click="clickDel(article.id || '')" />
+              <button :disabled="btnState" class="btn btn-md btn-ghost hover:text-error">
+                <LineMdTrash @click="(e: Event) => clickDel(article.id || '')" />
               </button>
             </div>
           </div>

@@ -73,7 +73,7 @@ export const postArticleApi = async (article: ArticlePostTypeDo) => {
 // 删除文章
 export const delArticleApi = async (aid: string | number): Promise<boolean> => {
   try {
-    const response = await http.delete(`/article/${aid}`)
+    const response = await http.delete(`/article/del/${aid}`)
     return response.data
   } catch (error) {
     throw new Error("删除文章失败了")
