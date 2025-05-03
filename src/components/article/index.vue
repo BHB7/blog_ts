@@ -7,22 +7,21 @@ import { computed, ref } from 'vue';
 import formatTime from '@/utils/formatDate'
 // 定义文章 Props 类型
 interface ArticlePropsTypeVO {
-  id: string | number
+  id?: string | number;
+  view?: string | number;
+  updatedAt: string | Date;
+  createdAt: string | Date;
+  tags: { id: string | number; name: string; des: string }[];
   title: string; // 标题
   cover: string; // 封面图片 URL
-  tags: string[]; // 标签数组
   desc: string; // 描述
-  updatedAt: string | Date // 更新时间
-  createdAt: string | Date // 创建时间
-  like: number | string // 点赞
-  view: number | string // 浏览量
-  index?: number | string,
-  isLoading: boolean
+  like?: number | string; // 点赞
+  index?: number | string;
 }
 
 interface ArticlePropsListVO {
-  list: Array<ArticlePropsTypeVO>
-  isLoading: boolean
+  list: any
+  isLoading?: boolean
 }
 
 
@@ -43,9 +42,6 @@ const props = withDefaults(defineProps<ArticlePropsListVO>(), {
       <div class="skeleton h-48 lg:w-2/5 w-full lg:m-2"></div>
       <!-- 内容 -->
       <div class="p-8 w-full card-body">
-
-        <!-- 标题 -->
-        <!-- <div class="skeleton h-32 w-full"></div> -->
         <div class="skeleton h-4 w-28"></div>
         <div class="skeleton h-4 w-full"></div>
         <div class="skeleton h-4 w-full"></div>
@@ -54,18 +50,17 @@ const props = withDefaults(defineProps<ArticlePropsListVO>(), {
   </div>
 
   <template v-else>
-    <div v-for="(item, index) in list" @click="$router.push(`/article?aid=${item?.id}`)" :title="item?.title"
+    <div v-for="(item, index) in list" @click="$router.push(`/article?aid=${item.id}`)" :title="item.title"
       class="group w-full card shadow-sm card-border max-w-md overflow-hidden bg-base-200 md:max-w-2xl hover:border-2 hover:border-accent border-1 border-neutral  hover:shadow-lg transition-all">
       <div class="md:flex" :class="{ 'md:flex-row-reverse': +index % 2 !== 0 }">
         <!-- 封面 -->
         <div class="relative lg:w-2/4 w-full h-52 lg:h-58 overflow-hidden">
           <img
-            class="max-h-68 w-full  object-cover darkbg transition-transform duration-300 ease-in-out group-hover:scale-105"
+            class="max-h-68 w-full object-cover darkbg transition-transform duration-300 ease-in-out group-hover:scale-105"
             :src="item.cover" alt="Modern building architecture" />
         </div>
         <!-- 内容 -->
         <div class="p-8 w-full card-body">
-
           <!-- 标题 -->
           <a href="#" class="mt-1 group-hover:text-accent block text-xl leading-tight font-medium text-pretty">
             {{ item.title }}
@@ -77,21 +72,20 @@ const props = withDefaults(defineProps<ArticlePropsListVO>(), {
           <div class="flex text-sm w-full flex-col space-y-2 ">
             <div class="flex space-x-3 items-center">
               <!-- 标签 -->
-              <div v-if="item.tags.length > 0" class="flex  items-center">
-                <SolarHashtagCircleBoldDuotone class=" mr-2" />
+              <div v-if="item.tags.length > 0" class="flex items-center">
+                <SolarHashtagCircleBoldDuotone class="mr-2" />
                 <span>{{ item.tags.join(' ') }}</span>
               </div>
               <!-- 更新时间 -->
               <div class="flex items-center text-accent-content">
-                <IconoirClock class=" text-accent-content mr-2"></IconoirClock>
+                <IconoirClock class="text-accent-content mr-2"></IconoirClock>
                 <span>{{ formatTime(item.updatedAt || item.createdAt) }}</span>
               </div>
             </div>
-
             <!-- 点赞 | 浏览量 -->
             <div class="flex space-x-3 text-info-content">
               <!-- 浏览量 -->
-              <div class="flex items-center ">
+              <div class="flex items-center">
                 <ViewIcon class="text-accent-content mr-2"></ViewIcon>
                 <span>{{ item.view }}</span>
               </div>
@@ -104,18 +98,14 @@ const props = withDefaults(defineProps<ArticlePropsListVO>(), {
           </div>
         </div>
       </div>
-
     </div>
   </template>
-
-
 </template>
 <style scoped lang="scss">
 .blur {
   filter: blur(8px);
 }
 
-@import "tailwindcss";
 
 html[data-theme="dark"] .darkbg {
   --tw-brightness: brightness(50%);

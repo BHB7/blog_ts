@@ -11,15 +11,15 @@ import { getArticlesApi } from '@/apis';
 const pageList = ref<Array<ArticleTypeVo>>()
 const isLoading = ref(true)
 async function init() {
-  isLoading.value = true;
+  isLoading.value = true
   try {
-    const res = await getArticlesApi();
-    pageList.value = res.list;
+    const res = await getArticlesApi()
+    pageList.value = res.list
   } catch (error) {
-    console.error('获取文章失败:', error);
-    pageList.value = [];
+    console.error('获取文章失败:', error)
+    pageList.value = []
   } finally {
-    isLoading.value = false;
+    isLoading.value = false
   }
 }
 
