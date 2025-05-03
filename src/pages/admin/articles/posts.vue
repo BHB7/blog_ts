@@ -13,6 +13,7 @@ import LineMdMinus from '~icons/line-md/minus'
 import { getTagApi, type Tag } from '@/apis/modules/tag'
 import { uploadImg } from '@/apis/modules/upload'
 import router from '@/routers'
+import { menuData } from '@/events/event'
 const themeStore = useThemeStore()
 const userInfoStore = useUserInfoStore()
 
@@ -219,6 +220,7 @@ onMounted(() => {
             },
             confirmText: '发布',
             close: () => {
+              menuData.emit('menuData', { title: 'aaa' })
               console.log('自定义内容模态框已关闭')
             },
             confirm() {
@@ -229,6 +231,7 @@ onMounted(() => {
                 } else {
                   article.cover = ''
                 }
+
                 await postArticleApi({
                   title: article.title,
                   desc: article.desc,
@@ -238,7 +241,6 @@ onMounted(() => {
                 })
                 vditorRef.setValue('')
                 Msg.success('文章发布成功')
-                router.push('admin/')
                 Modal.close()
               })()
             },

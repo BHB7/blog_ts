@@ -3,7 +3,6 @@
 import { createApp, h } from 'vue'
 import ModalCom, { type Modal } from '@/components/modalBox/modal.vue'
 
-type Ty = 'error' | 'success' | 'w'
 class ModalService {
   private appInstance: ReturnType<typeof createApp> | null = null
   private modalContainer = document.createElement('div')

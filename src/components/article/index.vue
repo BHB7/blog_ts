@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<ArticlePropsListVO>(), {
         <!-- 封面 -->
         <div class="relative lg:w-2/4 w-full h-52 lg:h-58 overflow-hidden">
           <img
-            class="max-h-68 w-full object-cover darkbg transition-transform duration-300 ease-in-out group-hover:scale-105"
+            class="w-full h-full object-cover darkbg transition-transform duration-300 ease-in-out group-hover:scale-105"
             :src="item.cover" alt="Modern building architecture" />
         </div>
         <!-- 内容 -->

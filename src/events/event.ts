@@ -38,3 +38,4 @@ class BaseEvent extends Even {
 
 export const music = new BaseEvent('music')
 export const pageData = new BaseEvent('pageData')
+export const menuData = new BaseEvent('menu')

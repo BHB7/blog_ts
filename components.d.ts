@@ -11,6 +11,8 @@ declare module 'vue' {
     Article: typeof import('./src/components/article/index.vue')['default']
     Bar: typeof import('./src/components/loading/bar.vue')['default']
     BgRender: typeof import('./src/components/music/bgRender.vue')['default']
+    BottomDalog: typeof import('./src/components/menu/bottomDalog.vue')['default']
+    BottomDialog: typeof import('./src/components/menu/bottomDialog.vue')['default']
     Box: typeof import('./src/components/music/box/index.vue')['default']
     Btn: typeof import('./src/components/btn/index.vue')['default']
     Chart: typeof import('./src/components/chart/index.vue')['default']
