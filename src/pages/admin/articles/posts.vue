@@ -237,7 +237,8 @@ onMounted(() => {
                   desc: article.desc,
                   tagIds: [0],
                   content: article.content,
-                  cover: article.cover
+                  cover: article.cover,
+                  state: '010'
                 })
                 vditorRef.setValue('')
                 Msg.success('文章发布成功')

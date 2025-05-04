@@ -4,11 +4,18 @@ import SidebarMenu from '@/components/menu/sidebarMenu.vue'
 import LineMdHomeTwotone from '~icons/line-md/home-twotone'
 import MdiPost from '~icons/mdi/post-outline'
 import LineMdAccount from '~icons/line-md/account';
+import useLayoutHook from './hooks/useLayoutHook';
 const menuList = [
   { icon: LineMdHomeTwotone, path: '/', name: '总览' },
   { icon: MdiPost, path: '/admin/articles', name: '文章管理' },
   { icon: LineMdAccount, path: '/login', name: '用户管理' },
 ]
+
+const { userData } = useLayoutHook()
+
+
+console.log(userData);
+
 </script>
 
 <template>
@@ -29,13 +36,17 @@ const menuList = [
         <div class="hidden flex-none lg:block">
 
           <ul class="menu menu-horizontal space-x-4 items-center">
-            <div class="avatar avatar-online">
+            <div popovertarget="popover-1" style="anchor-name:--anchor-1" class="avatar avatar-online">
               <div class="w-10 rounded-full">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                <img :src="userData.imgurl" />
               </div>
             </div>
 
             <Theme></Theme>
+          </ul>
+          <ul class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm" popover id="popover-1">
+            <li><a>Item 1</a></li>
+            <li><a>Item 2</a></li>
           </ul>
         </div>
       </div>

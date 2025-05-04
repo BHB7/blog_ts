@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import LineMdGithubLoop from '~icons/line-md/github-loop'
 import { pageData } from '@/events/event'
-import { getUserInfoApi, type ArticleTypeVo, type UserVo } from '@/apis';
-import { ref } from 'vue';
+import { getUserInfoApi, type ArticleTypeVo, type UserVo } from '@/apis'
+import { ref } from 'vue'
 
 const userInfo = ref<UserVo>()
 pageData.on('data', async (data: ArticleTypeVo) => {
-  console.log(data, '版权页');
+  console.log(data, '版权页')
   if (data.user_id) {
     const userData = await getUserInfoApi(data.user_id)
-    console.log(userData)
     userInfo.value = userData
   }
 })

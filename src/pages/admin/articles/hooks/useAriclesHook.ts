@@ -1,17 +1,24 @@
 import { ref } from "vue"
-import { getTagApi, createTagApi, type Tag, getArticlesApi, type ArticleTypeVo, delArticleApi } from '@/apis/index'
+import { getTagApi, createTagApi, type Tag, getArticlesApi, type ArticleTypeVo, type ArticleDo, delArticleApi } from '@/apis/index'
 import Msg from "@/utils/showMsg"
-import type { ArrayResponse } from "@/type/response"
-
+import modalService from "@/utils/showModal"
 const useArticleHook = () => {
   // 页面级op按钮状态
   const btnState = ref(false)
   const tagList = ref<Array<Tag>>()
   const articleList = ref<Array<ArticleTypeVo>>()
+
+  const articleParams = ref<ArticleDo>()
+
   // 获取文章列表
   const getArticleList = async () => {
+    if (!articleParams.value) {
+      articleParams.value = {
+        state: '010'
+      }
+    }
     try {
-      const response = await getArticlesApi()
+      const response = await getArticlesApi(articleParams.value)
       articleList.value = response.list
     } catch (error) {
       Msg.error('获取文章列表失败了')
@@ -40,6 +47,9 @@ const useArticleHook = () => {
   const delArticle = async (aid: string | number) => {
     btnState.value = true
     try {
+      await modalService.show({
+        cont: '确定要删除该文章吗？'
+      })
       await delArticleApi(aid)
       // 刷新列表
       getArticleList()
@@ -59,7 +69,8 @@ const useArticleHook = () => {
     getArticleList,
     articleList,
     delArticle,
-    btnState
+    btnState,
+    articleParams
   }
 }
 

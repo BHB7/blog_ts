@@ -12,6 +12,16 @@ interface Article {
   content: string;
   desc: string;
   cover: string;
+  state: string;
+}
+export interface ArticleDo {
+  title?: string;
+  content?: string;
+  desc?: string;
+  cover?: string;
+  pageSize?: number;
+  pageOffset?: number;
+  state: string;
 }
 
 export interface ArticleTypeVo extends Article {
@@ -30,10 +40,10 @@ export interface ArticlePostTypeDo extends Article {
 }
 
 // 获取文章列表
-export const getArticlesApi = async (pageSize: number = 10, pageOffset: number = 0): Promise<{ list: Array<ArticleTypeVo> }> => {
+export const getArticlesApi = async ({ pageSize = 10, pageOffset = 0, ...args }: ArticleDo): Promise<{ list: Array<ArticleTypeVo> }> => {
   try {
     const response = await http.get('article/list', {
-      params: { pageOffset, pageSize }
+      params: { pageOffset, pageSize, ...args }
     });
     return response.data;
   } catch (error) {

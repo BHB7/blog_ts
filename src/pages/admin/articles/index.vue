@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import LineMdPlus from '~icons/line-md/plus';
-import LineMdCogFilled from '~icons/line-md/cog-filled';
-import ViewIcon from '~icons/hugeicons/view';
-import LikeIcon from '~icons/stash/thumb-up-light';
-import LineMdChat from '~icons/line-md/chat';
-import EditIcon from '~icons/line-md/edit-full-twotone';
-import LineMdTrash from '~icons/line-md/trash';
-import LineMdTelegram from '~icons/line-md/telegram';
-import useArticleHook from './hooks/useAriclesHook';
-import type { Tag } from '@/apis';
+import LineMdPlus from '~icons/line-md/plus'
+import LineMdCogFilled from '~icons/line-md/cog-filled'
+import ViewIcon from '~icons/hugeicons/view'
+import LikeIcon from '~icons/stash/thumb-up-light'
+import LineMdChat from '~icons/line-md/chat'
+import EditIcon from '~icons/line-md/edit-full-twotone'
+import LineMdTrash from '~icons/line-md/trash'
+import LineMdTelegram from '~icons/line-md/telegram'
+import useArticleHook from './hooks/useAriclesHook'
+import type { Tag } from '@/apis'
+import { ref } from 'vue'
 
 const {
   tagList,
@@ -17,9 +18,21 @@ const {
   articleList,
   getArticleList,
   delArticle,
-  btnState
+  btnState,
+  articleParams
 } = useArticleHook()
 
+
+
+
+const state = ref('010')
+const getState = (e: Event) => {
+  const input = e.target as HTMLInputElement
+  if (articleParams.value) {
+    articleParams.value.state = input.value
+  }
+  getArticleList()
+}
 const clickDel = async (aid: string | number) => {
   await delArticle(aid)
 }
@@ -37,6 +50,7 @@ init()
 </script>
 
 <template>
+
   <!-- name of each tab group should be unique -->
   <div class="space-x-2 my-2 flex">
     <label class="input ">
@@ -57,10 +71,10 @@ init()
     </div>
   </div>
   <div class="tabs tabs-box justify-between p-3">
-    <form>
-      <input type="radio" name="my_tabs_1" class="tab" aria-label="待审核" checked />
-      <input type="radio" name="my_tabs_1" class="tab" aria-label="已发布" />
-      <input type="radio" name="my_tabs_1" class="tab" aria-label="草稿" />
+    <form @change="getState">
+      <input type="radio" value="010" name="my_tabs_1" class="tab" aria-label="待审核" checked />
+      <input type="radio" value="000" name="my_tabs_1" class="tab" aria-label="已发布" />
+      <input type="radio" value="100" name="my_tabs_1" class="tab" aria-label="草稿" />
     </form>
   </div>
 
