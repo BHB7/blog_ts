@@ -5,9 +5,6 @@ import Footer from '@/components/footer/index.vue'
 import Nav from '@/components/nav/index.vue'
 import { useRoute } from 'vue-router'
 import { ref, watch } from 'vue'
-import { music } from '@/events/event'
-import Music from '@/components/music/index.vue'
-import MusicBox from '@/components/music/box/index.vue'
 import directory from '@/components/menu/directory.vue'
 const route = useRoute()
 const pageHeaderIsShow = ref<Boolean>(false)

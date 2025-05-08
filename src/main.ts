@@ -1,3 +1,4 @@
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import '@/style/index.css'
 import 'animate.css'
 import { createApp } from 'vue'

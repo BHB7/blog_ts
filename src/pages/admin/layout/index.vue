@@ -5,16 +5,15 @@ import LineMdHomeTwotone from '~icons/line-md/home-twotone'
 import MdiPost from '~icons/mdi/post-outline'
 import LineMdAccount from '~icons/line-md/account';
 import useLayoutHook from './hooks/useLayoutHook';
+import { ref } from 'vue';
 const menuList = [
   { icon: LineMdHomeTwotone, path: '/', name: '总览' },
   { icon: MdiPost, path: '/admin/articles', name: '文章管理' },
   { icon: LineMdAccount, path: '/login', name: '用户管理' },
 ]
 
-const { userData } = useLayoutHook()
-
-
-console.log(userData);
+const { getUserInfo, userData } = useLayoutHook()
+getUserInfo()
 
 </script>
 
@@ -36,11 +35,19 @@ console.log(userData);
         <div class="hidden flex-none lg:block">
 
           <ul class="menu menu-horizontal space-x-4 items-center">
-            <div popovertarget="popover-1" style="anchor-name:--anchor-1" class="avatar avatar-online">
-              <div class="w-10 rounded-full">
-                <img :src="userData.imgurl" />
-              </div>
-            </div>
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                <el-avatar :size="35" src="https://empty" @error="">
+                  <img :src="userData?.imgurl" />
+                </el-avatar>
+              </span>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item @click="$router.push('/admin/user')">个人信息</el-dropdown-item>
+                  <el-dropdown-item>退出登录</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
 
             <Theme></Theme>
           </ul>

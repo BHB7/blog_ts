@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Article from '@/components/article/index.vue'
-import Tabs from '@/components/tabs/index.vue'
 import router from '@/routers'
 import Pagination from '@/components/pagination/index.vue'
 import { music } from '@/events/event'
@@ -28,7 +27,5 @@ init()
 </script>
 
 <template>
-  <Tabs :tabs="[{ path: '/l', name: '热门' }, { path: '/s', name: '最新' }]"></Tabs>
   <Article :isLoading="isLoading" :list="pageList" />
-  <Pagination></Pagination>
 </template>
