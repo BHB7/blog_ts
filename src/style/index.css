@@ -2,23 +2,37 @@
 @custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
 @plugin "daisyui";
 @import "./theme.css" layer(theme);
-@import "./hljs.scss";
+
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
 }
+/* 设置 Element Plus 基础圆角和主按钮样式 */
+html,
+body,
+.el-button,
+.el-input__inner,
+.el-card,
+.el-tabs__item,
+.el-select-dropdown,
+.el-dialog,
+input,
+textarea,
+button {
+  border-radius: var(--radius-box) !important;
+}
 
-html[data-theme="dark"] {
-  --el-bg-color: #1e1e1e !important;
-  --el-text-color-primary: #ffffff !important;
-  --el-border-color: #333 !important;
-  --el-input-bg-color: #2d2d2d !important;
-  --el-tag-bg-color: #2d2d2d !important;
-  background: #000;
-  /* 添加更多你需要覆盖的颜色 */
-  .el-tag--primary,.el-card,.el-button,.el-input{
-    color: white;
-    background: #000;
-  }
+/* 主按钮样式 */
+.el-button--primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* 悬浮/点击效果可选覆盖 */
+.el-button--primary:hover,
+.el-button--primary:focus {
+  background-color: var(--color-primary);
+  opacity: 0.9;
+  border-color: var(--color-primary);
 }
 
 

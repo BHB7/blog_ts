@@ -1,5 +1,5 @@
 import { ref } from "vue"
-import { getUserInfoApi, type ResVo, type UserVo } from '@/apis'
+import { getUserInfoApi, type UserVo } from '@/apis'
 import { useUserInfoStore } from "@/store"
 import Msg from "@/utils/showMsg"
 const userStor = useUserInfoStore()

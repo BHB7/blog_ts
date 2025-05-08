@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, reactive, onUnmounted } from 'vue'
 import Theme from '@/components/btn/theme/index.vue'
-import { loginApi, sendCodeApi, regApi } from '@/apis/index'
+import { loginApi, sendCodeApi, regApi, type LoginType } from '@/apis/index'
 import Msg from '@/utils/showMsg'
 import { useTokenStore, useUserInfoStore } from '@/store'
 import { useRouter } from 'vue-router'
 import * as yup from 'yup'
 import LineMdGithubLoop from '~icons/line-md/github-loop';
 import { Form, Field, ErrorMessage, type YupSchema } from 'vee-validate'
+import type { ObjectResponse } from '@/type/response'
 
 const router = useRouter()
 const tokenStore = useTokenStore()
@@ -80,10 +81,10 @@ const onSubmit = async (values: any) => {
   const { name, password, code, email } = values
   if (isLogin.value) {
     // 登录逻辑
-    const userData = await loginApi(name || '', password || '')
+    const userData: any = await loginApi(name || '', password || '')
     Msg.success(userData.message)
-    tokenStore.setToken(userData.data?.token || '')
-    userInfo.setUserInfo(userData.data?.user)
+    tokenStore.setToken(userData.data.token || '')
+    userInfo.setUserInfo(userData.data.user)
     router.go(-1)
   } else {
     // 注册逻辑

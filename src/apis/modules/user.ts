@@ -10,20 +10,21 @@ export type Data = {
   token: string,
   user: any
 }
-export interface ResVo<T> {
-  message: string
-  code: number | string
-  data: ObjectResponse<T> | ArrayResponse<T>
-}
-export const loginApi = async (name: string, password: string): Promise<ResVo<{}>> => {
-  return http.post('user/login', {
-    name,
-    password
-  })
+
+export const loginApi = async (name: string, password: string) => {
+  try {
+    const response = await http.post<ObjectResponse<Data>>('user/login', {
+      name,
+      password
+    })
+    return response
+  } catch (error) {
+    throw new Error("登录失败")
+  }
 }
 
 
-export const sendCodeApi = (email: string): Promise<ResVo<{}>> => {
+export const sendCodeApi = (email: string): Promise<ObjectResponse<{}>> => {
   return http.get('user/sendCode', {
     params: {
       email
@@ -37,7 +38,7 @@ export interface regType {
   code: string
   email: string
 }
-export const regApi = (info: regType): Promise<ResVo<regType>> => {
+export const regApi = (info: regType): Promise<ObjectResponse<regType>> => {
   return http.post('user/signup', {
     ...info
   })
@@ -49,7 +50,7 @@ export interface UserVo {
   motto?: string;
   name: string;
   system: string;
-  permissionLevel: '200' | '020' | '002';
+  permissionLevel: '200' | '020' | '002' | '';
   githubId?: string;
   ip: string;
   token?: string;

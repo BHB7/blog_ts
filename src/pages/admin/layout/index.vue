@@ -4,7 +4,7 @@ import SidebarMenu from '@/components/menu/sidebarMenu.vue'
 import LineMdHomeTwotone from '~icons/line-md/home-twotone'
 import MdiPost from '~icons/mdi/post-outline'
 import LineMdAccount from '~icons/line-md/account';
-import useLayoutHook from './hooks/useLayoutHook';
+import useLayoutHook from './hooks/useLayoutHooks';
 import { ref } from 'vue';
 const menuList = [
   { icon: LineMdHomeTwotone, path: '/', name: '总览' },
