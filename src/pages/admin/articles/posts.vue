@@ -14,9 +14,11 @@ import { getTagApi, type Tag } from '@/apis/modules/tag'
 import { uploadImg } from '@/apis/modules/upload'
 import router from '@/routers'
 import { menuData } from '@/events/event'
+import usePostHooks from './hooks/usePostHooks'
 const themeStore = useThemeStore()
 const userInfoStore = useUserInfoStore()
 
+const { uploading } = usePostHooks()
 // 定义 FieldData 接口
 interface FieldData {
   usrr_id?: string,
@@ -257,25 +259,12 @@ onMounted(() => {
         return `${Date.now()}${ext}`
       },
       handler(files) {
-        return new Promise<string>((resolve, reject) => {
-          const file = files[0]
-          const formData = new FormData()
-          formData.append('file', file)
-          uploadImg(formData)
-            .then(res => {
-              if (res.code === 200) {
-                Msg.success(res.message)
-                // 插入图片 URL 到编辑器
-                vditorRef.insertValue(`![${file.name}](${res.data.url})`)
-                resolve(res.data.url) // 返回图片的 URL
-              } else {
-                reject(new Error(res.message)) // 错误时 reject
-              }
-            })
-            .catch(err => {
-              reject(err)// 捕获异常并 reject
-            })
+        const p = uploading(files[0])
+        p.then((url) => {
+          // 插入图片 URL 到编辑器
+          vditorRef.insertValue(`![${files[0].name}](${url})`)
         })
+        return p
       }
 
     }

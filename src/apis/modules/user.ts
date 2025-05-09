@@ -57,6 +57,13 @@ export interface UserVo {
   createdAt: Date;
   updatedAt: Date;
 }
+export interface UserDto {
+  imgurl: string;
+  gender: '0' | '1';
+  motto?: string;
+  name: string;
+  permissionLevel: '200' | '020' | '002' | '';
+}
 export const getUserInfoByIdApi = async (uid: string | number): Promise<UserVo> => {
   try {
     const response = await http.get(`user/info/${uid}`)
@@ -83,7 +90,6 @@ export interface IpVo {
 export const getIpAddress = async (ip: string): Promise<IpVo> => {
   try {
     const response = await http.get(`/user/getIpInfo?ip=${ip}&type=json`)
-    console.log(response.data)
     return response.data
   } catch (error) {
     throw new Error("获取ip信息失败")
@@ -91,3 +97,11 @@ export const getIpAddress = async (ip: string): Promise<IpVo> => {
 }
 
 
+export const putUserInfoApi = async (userInfo: UserDto) => {
+  try {
+    await http.put('/user/put', userInfo)
+  } catch (error) {
+    throw new Error("更新失败")
+
+  }
+}
