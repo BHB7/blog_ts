@@ -6,6 +6,7 @@ import { music } from '@/events/event'
 import { type ArticleTypeVo } from '@/apis/index'
 import { ref } from 'vue';
 import { getArticlesApi } from '@/apis';
+import HomeHeader from '@/components/header/homeHeader.vue'
 
 const pageList = ref<Array<ArticleTypeVo>>()
 const isLoading = ref(true)

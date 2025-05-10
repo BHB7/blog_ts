@@ -11,7 +11,7 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     userInfo.user = val
   }
 
-  const getUserInfo = (): { id: string } => {
+  const getUserInfo = (): UserVo => {
     return userInfo?.user
   }
 

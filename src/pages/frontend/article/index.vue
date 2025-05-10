@@ -37,7 +37,7 @@ onMounted(() => {
       <div ref="obsRef" class="card-body prose max-w-full">
         <!-- 动态渲染提取后的内容 -->
         <div v-for="(item, index) in extractedContent" :key="index">
-          <div v-if="item.type === 'text'" class="prose max-w-full con" v-html="item.content"></div>
+          <div v-if="item.type === 'text'" class="prose max-w-full text-wrap con" v-html="item.content"></div>
           <highlightjs class="mockup-code bg-base-100" v-else :language="item.language" :code="item.content" />
         </div>
       </div>

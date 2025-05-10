@@ -6,6 +6,7 @@ import Nav from '@/components/nav/index.vue'
 import { useRoute } from 'vue-router'
 import { ref, watch } from 'vue'
 import directory from '@/components/menu/directory.vue'
+import HomeHeader from '@/components/header/homeHeader.vue'
 const route = useRoute()
 const pageHeaderIsShow = ref<Boolean>(false)
 
@@ -13,6 +14,8 @@ watch(route, (newRoute) => {
   console.log(newRoute.path);
   if (newRoute.path !== '/home') {
     pageHeaderIsShow.value = true
+  } else {
+    pageHeaderIsShow.value = false
   }
 }, {
   immediate: true,
@@ -22,7 +25,8 @@ watch(route, (newRoute) => {
 </script>
 <template>
   <Nav></Nav>
-
+  <!-- 视差滚动效果 -->
+  <HomeHeader v-if="!pageHeaderIsShow"></HomeHeader>
   <pageHeader v-if="pageHeaderIsShow"></pageHeader>
   <div class="lg:flex w-full p-4 lg:px-40 grid grid-cols-1 lg:grid-cols-[80%_20%] gap-4">
     <!-- 左侧内容 -->
@@ -35,10 +39,9 @@ watch(route, (newRoute) => {
       </div>
     </div>
     <!-- 右侧菜单 -->
-    <div class="r hidden lg:grid w-1/3 grid grid-cols-1 gap-4 h-full">
+    <div class="r hidden lg:grid  w-1/3 grid grid-cols-1 gap-4 h-full">
       <slot name="menus">
         <!-- <Music class="sticky top-20"></Music> -->
-        <div class="sticky top-20">asd</div>
         <User></User>
         <directory></directory>
       </slot>

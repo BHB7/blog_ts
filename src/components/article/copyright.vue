@@ -24,10 +24,10 @@ pageData.on('data', async (data: ArticleTypeVo) => {
       </div>
     </div>
     <!-- 昵称 | 用户信息 -->
-    <div class="nickname w-full space-y-2 flex flex-col items-center mt-18 py-4">
+    <div class="nickname w-full space-y-4 flex flex-col items-center mt-18 py-4">
       <div class="text-balance text-primary font-bold">{{ userInfo?.name }}</div>
-      <p class=" text-center">你站在桥上看风景，看风景人在楼上看你。</p>
-      <div class="cc space-x-2"> <button class="btn btn-dash">原创</button><span>文章分类</span></div>
+      <p class="text-sm text-center">{{ userInfo?.motto || 'qaq' }}</p>
+      <div class="cc text-sm space-x-2"> <button class="btn text-sm btn-dash">原创</button><span>文章分类</span></div>
       <!-- 联系 -->
       <div>
         <a href="https://github.com/BHB7" target="_blank">
@@ -35,7 +35,7 @@ pageData.on('data', async (data: ArticleTypeVo) => {
         </a>
       </div>
       <!-- 声明 -->
-      <div class="text-info-content text-sm">本博客所有文章除特别声明外，均采用 <a class="link-hover"
+      <div class="text-info-content text-center text-sm">本博客所有文章除特别声明外，均采用 <a class="link-hover"
           href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA
           4.0</a> 许可协议。转载请注明来自 <span class=" font-bold text-primary">{{ userInfo?.name }}</span></div>
     </div>

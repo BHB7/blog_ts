@@ -21,7 +21,7 @@ pageData.on('data', async (data: ArticleTypeVo) => {
 
 <template>
   <section class="card card-border  group w-full max-h-86 overflow-hidden">
-    <div v-if="true" class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
+    <div class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
       <div class="p-4 z-1 container lg:px-28 absolute inset-0">
         <div class="lg:space-y-5 space-y-3 lg:text-xl">
           <!-- 分类 -->

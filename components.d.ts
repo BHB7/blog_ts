@@ -42,6 +42,7 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     Footer: typeof import('./src/components/footer/index.vue')['default']
+    HomeHeader: typeof import('./src/components/header/homeHeader.vue')['default']
     LyricPlayer: typeof import('./src/components/music/lyricPlayer.vue')['default']
     Modal: typeof import('./src/components/modalBox/modal.vue')['default']
     Music: typeof import('./src/components/music/index.vue')['default']

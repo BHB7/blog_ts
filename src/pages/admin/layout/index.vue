@@ -14,7 +14,6 @@ const menuList = [
 
 const { getUserInfo, userData } = useLayoutHook()
 getUserInfo()
-
 </script>
 
 <template>

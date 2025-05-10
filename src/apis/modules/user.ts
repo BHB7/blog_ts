@@ -72,14 +72,23 @@ export const getUserInfoByIdApi = async (uid: string | number): Promise<UserVo> 
     throw new Error("获取用户信息失败")
   }
 }
-export const getUserInfoApi = async (): Promise<UserVo> => {
+export const getUserInfoApi = async (uid?: string | number): Promise<UserVo> => {
   try {
-    const response = await http.get('user')
+    const response = await http.get('user/info/'.concat(String(uid)))
     return response.data
   } catch (error) {
     throw new Error("获取用户信息失败")
   }
 }
+export const getAdminInfoApi = async (): Promise<UserVo> => {
+  try {
+    const response = await http.get('user/admin/info')
+    return response.data
+  } catch (error) {
+    throw new Error("获取用户信息失败")
+  }
+}
+
 
 
 

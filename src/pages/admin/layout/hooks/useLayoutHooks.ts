@@ -6,9 +6,9 @@ const userStor = useUserInfoStore()
 
 const useLayoutHook = () => {
   const userData = ref<UserVo>()
-  const getUserInfo = async () => {
+  const getUserInfo = async (uid?: string | number) => {
     try {
-      userData.value = await getUserInfoApi()
+      userData.value = await getUserInfoApi(uid)
       userStor.setUserInfo(userData.value)
     } catch (error) {
       Msg.error('获取用户信息失败')
