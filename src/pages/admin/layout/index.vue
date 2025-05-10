@@ -61,10 +61,13 @@ getUserInfo()
         <div class="w-full h-full flex">
           <!-- pc 菜单 -->
           <SidebarMenu :list="menuList" class="hidden lg:flex w-50" />
+
           <!-- 内容 -->
           <div class="w-full overflow-auto py-1"
             :class="{ 'px-4 pt-4': $route.fullPath === '/admin/home' || $route.fullPath === '/admin/articles' }">
-            <RouterView></RouterView>
+            <el-scrollbar height="100vh">
+              <RouterView></RouterView>
+            </el-scrollbar>
           </div>
         </div>
       </div>

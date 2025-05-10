@@ -4,7 +4,7 @@ import router from '@/routers'
 import Pagination from '@/components/pagination/index.vue'
 import { music } from '@/events/event'
 import { type ArticleTypeVo } from '@/apis/index'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { getArticlesApi } from '@/apis';
 import HomeHeader from '@/components/header/homeHeader.vue'
 
@@ -24,9 +24,15 @@ async function init() {
 }
 
 
-init()
+onMounted(() => {
+  console.log('111');
+
+  init()
+})
 </script>
 
 <template>
-  <Article :isLoading="isLoading" :list="pageList" />
+
+  <Article :isLoading="isLoading" :list="pageList" class="mx-auto w-full space-y-5" />
+
 </template>

@@ -37,7 +37,7 @@ onMounted(() => {
       <div ref="obsRef" class="card-body prose max-w-full">
         <!-- 动态渲染提取后的内容 -->
         <div v-for="(item, index) in extractedContent" :key="index">
-          <div v-if="item.type === 'text'" class="prose max-w-full text-wrap con" v-html="item.content"></div>
+          <div v-if="item.type === 'text'" class="prose max-w-full text-wrap con " v-html="item.content"></div>
           <highlightjs class="mockup-code bg-base-100" v-else :language="item.language" :code="item.content" />
         </div>
       </div>
@@ -48,10 +48,88 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.con {
+::v-deep .con {
   word-break: break-word;
   overflow-wrap: anywhere;
   white-space: normal;
   max-width: 100%;
+
+  // 基础样式定义
+  $h1-size: 2rem;
+  $h2-size: 1.75rem;
+  $h3-size: 1.5rem;
+  $h4-size: 1.25rem;
+  $h5-size: 1rem;
+  $h6-size: 0.875rem;
+
+  $base-line-height: 1.2; // 标题的行高比例
+  $margin-bottom: 1em; // 标题底部的默认间距
+
+  @mixin heading-base {
+    margin-top: 0;
+    margin-bottom: $margin-bottom;
+    font-weight: bold;
+    line-height: $base-line-height;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @include heading-base;
+  }
+
+  h1 {
+    font-size: $h1-size;
+  }
+
+  h2 {
+    font-size: $h2-size;
+  }
+
+  h3 {
+    font-size: $h3-size;
+  }
+
+  h4 {
+    font-size: $h4-size;
+  }
+
+  h5 {
+    font-size: $h5-size;
+  }
+
+  h6 {
+    font-size: $h6-size;
+  }
+
+  // 响应式调整
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    h4 {
+      font-size: 1.125rem;
+    }
+
+    h5 {
+      font-size: 1rem;
+    }
+
+    h6 {
+      font-size: 0.875rem;
+    }
+  }
 }
 </style>

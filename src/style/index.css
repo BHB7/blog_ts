@@ -20,7 +20,10 @@ textarea,
 button {
   border-radius: var(--radius-box) !important;
 }
-
+html{
+  transition: all .5s ease-in-out;
+  overflow: hidden;
+}
 /* 主按钮样式 */
 .el-button--primary {
   background-color: var(--color-primary) !important;

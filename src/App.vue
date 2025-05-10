@@ -6,8 +6,10 @@ import LoadingBar from '@/components/loading/bar.vue'
 <template>
   <LoadingBar></LoadingBar>
   <!-- 内容 -->
-  <RouterView :key="$route.fullPath" />
+  <RouterView :key="$route.fullPath" v-slot="{ Component }">
+    <KeepAlive>
+      <component :is="Component"></component>
+    </KeepAlive>
 
-
-
+  </RouterView>
 </template>
