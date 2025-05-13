@@ -1,61 +1,75 @@
 <script setup lang="ts">
-import MyBtn from '@/components/btn/index.vue'
+import LineMdMenu from '~icons/line-md/menu'
 import Theme from '@/components/btn/theme/index.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
+import { pageData } from '@/events/event'
+
 // 定义响应式变量存储滚动状态
-const isScrolled = ref(false);
+const isScrolled = ref(false)
+const drawer = ref(false)
+
+// 监听el scrollbar 事件
+pageData.on('scrollbar', (event: any) => {
+  updateScrollState(event.scrollTop, event.scrollHeight)
+})
 
 // 计算滚动百分比的函数
-const calculateScrollPercentage = (): number => {
-  const pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
-  const screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
-  const scrollHeight = pageHeight - screenHeight;
-  const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+const calculateScrollPercentage = (scrollTop: number, scrollHeight: number): number => {
+  return scrollTop / (scrollHeight - window.innerHeight) * 100;
+}
 
-  return (scrollTop / scrollHeight) * 100;
-};
-
-const timer = ref(0)
 // 更新滚动状态的函数
-const updateScrollState = () => {
-  if (timer.value) {
-    clearTimeout(timer.value)
-  }
-  timer.value = setTimeout(() => {
-    isScrolled.value = calculateScrollPercentage() > 20;
-  }, 50)
-};
+const updateScrollState = (scrollTop: number, scrollHeight: number) => {
+  isScrolled.value = calculateScrollPercentage(scrollTop, scrollHeight) > 10;
+}
 
-// 监听滚动事件
-onMounted(() => {
-  updateScrollState(); // 初始化滚动状态
-  window.addEventListener('scroll', updateScrollState);
-});
-
-// 移除滚动事件监听器
-onUnmounted(() => {
-  window.removeEventListener('scroll', updateScrollState);
-});
+const openDrawer = () => {
+  console.log('Drawer toggle triggered');
+  drawer.value = !drawer.value
+}
 </script>
-<template>
-  <div class="fixed z-50 lg:px-40 transition-all duration-300 ease-in-out lg:p-0 p-4 w-full"
-    :class="{ ' glass': isScrolled }">
-    <section class="nav  overflow-hidden py-2 flex container justify-between items-center">
-      <!-- 左侧 -->
-      <div class="lname leading-10">
-        <MyBtn title="回到首页" @click="$router.replace('/')">7z'is HOME</MyBtn>
-      </div>
 
-      <!-- 中间部分 -->
-      <div class="midi flex h-full flex-wrap ">
-        <div class="title lg:flex w-full h-full justify-center items-center  hidden text-pretty">标题
+<template>
+  <div class="navbar bg-base-100 overflow-hidden  max-h-[4.1rem] shadow-sm">
+    <div class="navbar-start">
+      <div>
+        <!-- 直接在 div 上绑定 click 事件 -->
+        <div tabindex="0" role="button" class="lg:hidden btn btn-ghost btn-circle" @click="openDrawer">
+          <LineMdMenu />
         </div>
       </div>
-      <!-- 右侧 -->
-      <div class="r flex">
-        <Theme />
+    </div>
+    <div class="navbar-center flex flex-col items-center ">
+      <div :class="{ 'dw': isScrolled, 'up': !isScrolled }" class="h-[4rem]">
+        <div class=" h-full flex items-center">
+          <span class="lg:hidden text-center w-full">7z</span>
+          <ul class="menu menu-horizontal space-x-4 px-1 lg:flex hidden">
+            <li><a>文章</a></li>
+            <li><a>我的</a></li>
+            <li><a>本站</a></li>
+          </ul>
+        </div>
+        <div class=" h-full flex justify-center items-center">文章信息 | 个性签名...</div>
       </div>
-    </section>
+    </div>
+    <div class="navbar-end">
+      <Theme></Theme>
+    </div>
   </div>
-  <div class="py-10"></div>
+
+  <el-drawer direction="ltr" v-model="drawer" title="I am the title" :with-header="false">
+    <span>Hi there!</span>
+  </el-drawer>
 </template>
+
+<style scoped lang="scss">
+.up {
+  transition: all .3s ease-in-out;
+  transform: translateY(0);
+}
+
+.dw {
+  transition: all .3s ease-in-out;
+  transform: translateY(-4rem);
+}
+</style>

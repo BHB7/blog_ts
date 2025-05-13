@@ -28,17 +28,17 @@ onMounted(() => {
   // })
 
 })
-
 </script>
 
 <template>
   <div ref="contRef" class="container mx-auto p-4">
-    <div class="card card-border bg-base-100 shadow-xl overflow-hidden">
+    <div class="card bg-blur bg-base-300/70 card-border bg-base-100 shadow-xl overflow-hidden">
       <div ref="obsRef" class="card-body prose max-w-full">
         <!-- 动态渲染提取后的内容 -->
         <div v-for="(item, index) in extractedContent" :key="index">
           <div v-if="item.type === 'text'" class="prose max-w-full text-wrap con " v-html="item.content"></div>
-          <highlightjs class="mockup-code bg-base-100" v-else :language="item.language" :code="item.content" />
+          <highlightjs class="mockup-code bg-base-200" v-else :language="item.language" :code="item.content"
+            :data-language="item.language" />
         </div>
       </div>
     </div>
@@ -48,11 +48,25 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+::v-deep .mockup-code {
+  position: relative;
+
+  &::after {
+    color: var(--color-primary);
+    position: absolute;
+    left: 80%;
+    top: 1rem;
+    font-weight: 700;
+    content: attr(data-language);
+  }
+}
+
 ::v-deep .con {
   word-break: break-word;
   overflow-wrap: anywhere;
   white-space: normal;
   max-width: 100%;
+
 
   // 基础样式定义
   $h1-size: 2rem;
@@ -64,6 +78,9 @@ onMounted(() => {
 
   $base-line-height: 1.2; // 标题的行高比例
   $margin-bottom: 1em; // 标题底部的默认间距
+
+
+
 
   @mixin heading-base {
     margin-top: 0;

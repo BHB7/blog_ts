@@ -40,7 +40,7 @@ const attrs = useAttrs()
   <div>
     <!-- 骨架屏 -->
     <div v-bind="attrs" v-if="props.isLoading" v-for="index in 5"
-      class="group w-full card shadow-sm card-border max-w-md overflow-hidden bg-base-200 md:max-w-2xl hover:border-2 hover:border-accent border-1 border-neutral hover:shadow-lg transition-all">
+      class="group w-full card shadow-sm card-border max-w-md overflow-hidden  bg-base-300/70 md:max-w-2xl hover:border-2 hover:border-accent border-1 border-neutral hover:shadow-lg transition-all">
       <div class="md:flex" :class="{ 'md:flex-row-reverse': +index % 2 !== 0 }">
         <div class="skeleton h-48 lg:w-2/5 w-full lg:m-2"></div>
         <!-- 内容 -->
@@ -55,7 +55,7 @@ const attrs = useAttrs()
     <template v-else>
       <div v-bind="attrs" v-for="(item, index) in props.list" @click="$router.push(`/article?aid=${item.id}`)"
         :title="item.title"
-        class="group w-full card shadow-sm card-border max-w-md overflow-hidden bg-base-200 md:max-w-2xl hover:border-2 hover:border-accent border-1 border-neutral hover:shadow-lg transition-all">
+        class="group w-full card shadow-sm card-border max-w-md overflow-hidden bg-base-300/80 md:max-w-2xl hover:border-2 hover:border-accent border-1 border-neutral hover:shadow-lg transition-all">
         <div class="md:flex" :class="{ 'md:flex-row-reverse': +index % 2 !== 0 }">
           <!-- 封面 -->
           <div class="relative lg:w-2/4 w-full h-52 lg:h-58 overflow-hidden">

@@ -20,12 +20,10 @@ pageData.on('data', (data: ArticleTypeVo) => {
 
 })
 
-
-
 </script>
 
 <template>
-  <ul ref="ulRef" class="list bg-base-100 rounded-box relative shadow-md">
+  <ul ref="ulRef" class="list bg-blur bg-base-300/70 rounded-box relative shadow-md">
     <li class="p-4 pb-2 text-md font-bold opacity-60 tracking-wide text-primary">{{ title }}</li>
     <li v-for="(item, index) in h1Cont" :key="item" class="list-row ">
       <span class="mx-2">

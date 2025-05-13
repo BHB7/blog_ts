@@ -13,3 +13,6 @@ import LoadingBar from '@/components/loading/bar.vue'
 
   </RouterView>
 </template>
+
+
+<style scoped lang="scss"></style>

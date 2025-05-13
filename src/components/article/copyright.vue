@@ -16,7 +16,7 @@ pageData.on('data', async (data: ArticleTypeVo) => {
 
 <template>
   <!-- 底部版权组件 -->
-  <div class="card relative card-border base-200 border-2 mt-20 lg:p-4 p-2 min-h-40 h-full">
+  <div class="card relative card-border bg-blur bg-base-300/70 border-2 mt-20 lg:p-4 p-2 min-h-40 h-full">
     <!-- 头像 -->
     <div class="avatar absolute left-[50%] translate-x-[-50%] top-[-20px]">
       <div class="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">

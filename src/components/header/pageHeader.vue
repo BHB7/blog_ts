@@ -20,7 +20,7 @@ pageData.on('data', async (data: ArticleTypeVo) => {
 </script>
 
 <template>
-  <section class="card card-border  group w-full max-h-86 overflow-hidden">
+  <section class="card card-border rounded-b-none group w-full max-h-86 overflow-hidden">
     <div class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
       <div class="p-4 z-1 container lg:px-28 absolute inset-0">
         <div class="lg:space-y-5 space-y-3 lg:text-xl">
@@ -66,8 +66,4 @@ pageData.on('data', async (data: ArticleTypeVo) => {
 </template>
 
 
-<style scoped lang="scss">
-.bg-blur {
-  backdrop-filter: blur(20px);
-}
-</style>
+<style scoped lang="scss"></style>
