@@ -36,8 +36,9 @@ const handleScroll = (event: any) => {
   <el-scrollbar ref="scrollbarRef" @scroll="handleScroll" height="100vh">
     <!-- 视差滚动效果 -->
     <HomeHeader v-if="!pageHeaderIsShow"></HomeHeader>
-    <pageHeader v-if="pageHeaderIsShow"></pageHeader>
-    <section class="lg:flex w-full darkbg bg-transparent p-4 lg:px-40 grid grid-cols-1 lg:grid-cols-[80%_20%] gap-4">
+    <pageHeader class="mt-20" v-if="pageHeaderIsShow"></pageHeader>
+
+    <section class="lg:flex w-full p-4 bg-base-100/50 lg:px-40 grid grid-cols-1 lg:grid-cols-[80%_20%] gap-4">
       <!-- 左侧内容 -->
       <div class="cont flex-1">
         <div class="flex flex-col items-center space-y-4">
@@ -55,13 +56,20 @@ const handleScroll = (event: any) => {
         </slot>
       </div>
     </section>
+    <div class="bg"></div>
     <Footer></Footer>
   </el-scrollbar>
 </template>
 
 
 <style scoped lang="scss">
-section {
+.bg {
+  top: 0;
+  left: 0;
+  z-index: -10;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
   background-image: url('../../../assets/02.webp');
   background-attachment: fixed;
   background-position: center;

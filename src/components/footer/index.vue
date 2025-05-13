@@ -6,7 +6,7 @@ import LogosDaisyui from '~icons/logos/daisyui';
 import DeviconTailwindcss from '~icons/devicon/tailwindcss';
 </script>
 <template>
-  <footer class="footer sm:footer-horizontal bg-transparent text-neutral-content p-10">
+  <footer class="footer sm:footer-horizontal bg-base-100/70 bg-blur text-neutral-content p-10">
     <aside>
       <img class="w-20" src="/public/favicon.ico" alt="">
       7z' HOME BLOG @2024

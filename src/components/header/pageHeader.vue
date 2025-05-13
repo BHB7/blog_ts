@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import SolarHashtagCircleBoldDuotone from '~icons/solar/hashtag-circle-bold-duotone'
 import IpIcon from '~icons/line-md/map-marker-alt-twotone-loop'
-
+import LineMdTelegram from '~icons/line-md/telegram'
+import LineMdUploadLoop from '~icons/line-md/upload-loop'
 import { ref, watch } from 'vue'
 import { pageData } from '@/events/event'
 import { getIpAddress, type ArticleTypeVo } from '@/apis'
@@ -20,7 +21,7 @@ pageData.on('data', async (data: ArticleTypeVo) => {
 </script>
 
 <template>
-  <section class="card card-border rounded-b-none group w-full max-h-86 overflow-hidden">
+  <section class="card rounded-b-none group w-full max-h-86 overflow-hidden">
     <div class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
       <div class="p-4 z-1 container lg:px-28 absolute inset-0">
         <div class="lg:space-y-5 space-y-3 lg:text-xl">
@@ -42,12 +43,17 @@ pageData.on('data', async (data: ArticleTypeVo) => {
             {{ article?.title }}
           </div>
           <!-- 文章信息 -->
-          <div class="w-full flex space-x-4 justify-center lg:justify-start flex-wrap items-center">
-            <span class="text-primary-content flex">发表于{{ formatDate(article?.createdAt || '') }}</span>
-            <span class="text-primary-content flex">更新于{{ formatDate(article?.updatedAt || '') }}</span>
+          <div
+            class="w-full text-white-800 text-md flex space-x-4 justify-center lg:justify-start flex-wrap items-center">
+            <span class="flex">
+              <LineMdTelegram class="mx-2" />发表于 {{ formatDate(article?.createdAt || '') }}
+            </span>
+            <span class="flex">
+              <LineMdUploadLoop class="mx-2" />更新于 {{ formatDate(article?.updatedAt || '') }}
+            </span>
           </div>
-          <div class="flex items-center text-primary-content lg:justify-start justify-center">
-            <IpIcon />{{ ipInfo || '未知' }}
+          <div class="flex items-center text-white-800 text-md lg:justify-start justify-center">
+            <IpIcon class="mx-2" />{{ ipInfo || '未知' }}
           </div>
         </div>
       </div>

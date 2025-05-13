@@ -3,10 +3,13 @@ import { useUserInfoStore } from "@/store"
 import Msg from "@/utils/showMsg"
 import { ref } from "vue"
 
+const userStor = useUserInfoStore()
 const useAdminHooks = () => {
   const getAdminInfo = async () => {
     try {
-      return await getAdminInfoApi()
+      const userInfo = await getAdminInfoApi()
+      userStor.setUserInfo(userInfo)
+      return userInfo
     } catch (error) {
       Msg.error('获取用户信息失败')
       throw new Error("获取用户信息失败")

@@ -21,7 +21,7 @@ button {
   border-radius: var(--radius-box) !important;
 }
 html{
-  transition: all .5s ease-in-out;
+  transition: all .3s ease-in;
   overflow: hidden;
 }
 /* 主按钮样式 */
@@ -38,6 +38,10 @@ html{
   border-color: var(--color-primary);
 }
 .bg-blur {
+  backdrop-filter: blur(2px);
+}
+.el-overlay{
+  transition: all .3s ease-in;
   backdrop-filter: blur(20px);
 }
 html[data-theme="dark"] {

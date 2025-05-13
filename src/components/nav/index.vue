@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import LineMdMenu from '~icons/line-md/menu'
 import Theme from '@/components/btn/theme/index.vue'
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, useAttrs } from 'vue';
 import { pageData } from '@/events/event'
 
 // 定义响应式变量存储滚动状态
 const isScrolled = ref(false)
 const drawer = ref(false)
-
+const attrs = useAttrs()
 // 监听el scrollbar 事件
 pageData.on('scrollbar', (event: any) => {
   updateScrollState(event.scrollTop, event.scrollHeight)
@@ -30,7 +30,7 @@ const openDrawer = () => {
 </script>
 
 <template>
-  <div class="navbar bg-base-100 overflow-hidden  max-h-[4.1rem] shadow-sm">
+  <div v-bind="attrs" class="navbar fixed z-10 bg-blur bg-base-300/70  overflow-hidden  max-h-[4.1rem] shadow-sm">
     <div class="navbar-start">
       <div>
         <!-- 直接在 div 上绑定 click 事件 -->
