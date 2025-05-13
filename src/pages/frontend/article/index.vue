@@ -54,7 +54,7 @@ onMounted(() => {
   &::after {
     color: var(--color-primary);
     position: absolute;
-    left: 80%;
+    left: 6rem;
     top: 1rem;
     font-weight: 700;
     content: attr(data-language);
