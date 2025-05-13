@@ -41,10 +41,10 @@ html{
   backdrop-filter: blur(20px);
 }
 html[data-theme="dark"] {
-   filter: grayscale(100%) brightness(0.5); /* 将图片转为灰度并降低亮度 */
-  --tw-brightness: brightness(50%);
-  filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
+   filter: grayscale(12%) brightness(0.5); /* 将图片转为灰度并降低亮度 */
 }
+
+
 
 /* light 白 */
 @plugin "daisyui/theme" {
