@@ -21,7 +21,7 @@ const useArticleHook = () => {
       const res = await getArticleByIdApi(id)
       article.value = res
       extractAndClean(res.content || '')
-      pageData.emit('data', res)
+      pageData.emit('articleData', res)
     } catch (e) {
       console.error('获取文章失败:', e)
     }

@@ -34,7 +34,6 @@ const handleScroll = (event: any) => {
   <Nav></Nav>
 
   <el-scrollbar ref="scrollbarRef" @scroll="handleScroll" height="100vh">
-    <!-- 视差滚动效果 -->
     <HomeHeader v-if="!pageHeaderIsShow"></HomeHeader>
     <pageHeader class="mt-20" v-if="pageHeaderIsShow"></pageHeader>
 
@@ -56,6 +55,7 @@ const handleScroll = (event: any) => {
         </slot>
       </div>
     </section>
+    <!-- 视差滚动效果 -->
     <div class="bg"></div>
     <Footer></Footer>
   </el-scrollbar>

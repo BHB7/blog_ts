@@ -10,7 +10,7 @@ import formatDate from '@/utils/formatDate'
 
 const article = ref<ArticleTypeVo | null>(null)
 const ipInfo = ref()
-pageData.on('data', async (data: ArticleTypeVo) => {
+pageData.on('articleData', async (data: ArticleTypeVo) => {
   // console.log('收到文章信息', data)
   article.value = data
   const ipInfoData = await getIpAddress(article.value.ip)
@@ -21,7 +21,7 @@ pageData.on('data', async (data: ArticleTypeVo) => {
 </script>
 
 <template>
-  <section class="card rounded-b-none group w-full max-h-86 overflow-hidden">
+  <section class="card  rounded-b-none group w-full max-h-86 overflow-hidden">
     <div class="avatar w-full lg:h-96 h-50 relative overflow-hidden">
       <div class="p-4 z-1 container lg:px-28 absolute inset-0">
         <div class="lg:space-y-5 space-y-3 lg:text-xl">

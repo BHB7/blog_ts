@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { Component } from 'vue'
+import { computed } from 'vue'
+import type { Component, PropType } from 'vue'
 
 export interface ListMenu {
   icon: Component
@@ -8,24 +9,30 @@ export interface ListMenu {
 }
 
 const props = withDefaults(defineProps<{
-  isDrawer?: boolean
-  list?: ListMenu[]
+  modelValue: boolean
+  list: ListMenu[]
 }>(), {
-  list: () => [],
-  isDrawer: false
+  modelValue: false,
+  list: () => []
 })
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: boolean): void
+}>()
+
 </script>
 
 <template>
-  <ul :class="[
-    'menu gap-y-2 text-md h-full',
-    isDrawer ? 'p-4 bg-base-200 min-h-full' : 'p-2 bg-base-200'
-  ]">
-    <li v-for="(item, index) in props.list" :key="index">
-      <RouterLink :to="item.path" class="w-full justify-baseline">
-        <component :is="item.icon" class="mr-1" />
-        {{ item.name }}
-      </RouterLink>
-    </li>
-  </ul>
+  <el-drawer direction="ltr" :model-value="props.modelValue" @update:model-value="emit('update:modelValue', $event)"
+    title="I am the title" :with-header="false">
+    <span>Hi there!</span>
+    <ul class="w-full menu ">
+      <li v-for="(item, index) in list" :key="index" class="">
+        <RouterLink :to="item.path" class="w-full justify-baseline flex items-center">
+          <component :is="item.icon" class="mr-1" />
+          {{ item.name }}
+        </RouterLink>
+      </li>
+    </ul>
+  </el-drawer>
 </template>

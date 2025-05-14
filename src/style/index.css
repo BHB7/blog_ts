@@ -38,7 +38,7 @@ html{
   border-color: var(--color-primary);
 }
 .bg-blur {
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(25px);
 }
 .el-overlay{
   transition: all .3s ease-in;
