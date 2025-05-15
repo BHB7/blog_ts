@@ -56,14 +56,14 @@ const handleScroll = (event: any) => {
       </div>
     </section>
     <!-- 视差滚动效果 -->
-    <div class="bg"></div>
+    <div class="main-bg"></div>
     <Footer></Footer>
   </el-scrollbar>
 </template>
 
 
 <style scoped lang="scss">
-.bg {
+.main-bg {
   top: 0;
   left: 0;
   z-index: -10;

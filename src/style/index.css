@@ -17,9 +17,38 @@ body,
 .el-dialog,
 input,
 textarea,
-button {
+button,
+.el-menu-item,
+.el-sub-menu__title {
   border-radius: var(--radius-box) !important;
 }
+.el-drawer__body {
+  background-color: var(--color-base-300);
+  padding: 0px !important;
+}
+.el-dropdown-menu {
+  padding: 0 1rem !important;
+  background: var(--color-base-300) !important;
+}
+
+.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
+  background-color: transparent!important;
+  color: var(--color-base-content) !important;
+}
+
+.el-menu {
+  --el-menu-hover-bg-color:var(--color-primary-content);
+  --el-menu-hover-color: var(--color-neutral-950) !important;
+  --el-menu-text-color: var(--color-base-content);
+  --el-menu-bg-color: var(--color-base-300);
+  .is-active{
+    color: var(--color-accent-content) !important;
+  }
+  li:hover{
+    color: var(--color-primary) !important;
+  }
+}
+
 html{
   transition: all .3s ease-in;
   overflow: hidden;
@@ -30,13 +59,6 @@ html{
   border-color: var(--color-primary) !important;
 }
 
-/* 悬浮/点击效果可选覆盖 */
-.el-button--primary:hover,
-.el-button--primary:focus {
-  background-color: var(--color-primary);
-  opacity: 0.9;
-  border-color: var(--color-primary);
-}
 .bg-blur {
   backdrop-filter: blur(25px);
 }
@@ -45,7 +67,11 @@ html{
   backdrop-filter: blur(20px);
 }
 html[data-theme="dark"] {
-   filter: grayscale(12%) brightness(0.5); /* 将图片转为灰度并降低亮度 */
+  .main-bg,
+  img{
+    transition: all .3s ease-in;
+    filter: grayscale(12%) brightness(0.5); /* 将图片转为灰度并降低亮度 */
+  }
 }
 
 

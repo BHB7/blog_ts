@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import LineMdMenu from '~icons/line-md/menu'
+import LineMdFileDocument from '~icons/line-md/file-document'
+import LineMdAccountSmall from '~icons/line-md/account-small'
 import Theme from '@/components/btn/theme/index.vue'
 import { onMounted, onUnmounted, ref, useAttrs } from 'vue'
 import { pageData } from '@/events/event'
 import type { ArticleTypeVo } from '@/apis'
 import { useUserInfoStore } from '@/store'
 import sidebarMenu from '../menu/sidebarMenu.vue'
+import Menu from '@/components/menu/index.vue'
 // 定义响应式变量存储滚动状态
 const isScrolled = ref(false)
 const drawer = ref(false)
@@ -35,19 +38,41 @@ const updateScrollState = (scrollTop: number, scrollHeight: number) => {
 }
 
 const openDrawer = () => {
-  console.log('Drawer toggle triggered');
+  console.log('Drawer toggle triggered')
   drawer.value = !drawer.value
 }
 
 const menuList = [
-  { icon: LineMdMenu, path: '/', name: '文章' },
-  { icon: LineMdMenu, path: '/admin/articles', name: '我的' },
-  { icon: LineMdMenu, path: '/login', name: '关于' },
+  {
+    name: '文章',
+    icon: LineMdFileDocument,
+    children: [
+      { name: '分类', path: 'article/categorys' },
+      { name: '标签', path: 'article/tags' }
+    ]
+  }, {
+    name: '我的',
+    icon: LineMdAccountSmall,
+    children: [
+      { name: '相册', path: 'account/photos' },
+      { name: '音乐', path: 'account/links' }
+    ]
+  },
+  {
+    name: '本站',
+    icon: LineMdAccountSmall,
+    children: [
+      { name: '留言', path: 'local/guestbook' },
+      { name: '友链', path: 'local/links' }
+    ]
+  },
+
 ]
+
 </script>
 
 <template>
-  <div v-bind="attrs" class="navbar fixed z-10 bg-blur bg-base-300/70  overflow-hidden  max-h-[4.1rem] shadow-sm">
+  <div v-bind="attrs" class="navbar fixed z-10 bg-blur bg-base-300/70 max-h-[4.1rem] shadow-sm">
     <div class="navbar-start">
       <div>
         <!-- 直接在 div 上绑定 click 事件 -->
@@ -56,30 +81,50 @@ const menuList = [
         </div>
       </div>
     </div>
-    <div class="navbar-center text-xl flex flex-col items-center ">
-      <div :class="{ 'dw': isScrolled, 'up': !isScrolled }" class="h-[4rem]">
-        <div class=" h-full flex items-center">
-          <span class="lg:hidden text-center w-full">{{ userInfoStore.userInfo.user.name }}</span>
-          <ul class="menu menu-horizontal space-x-4 px-1 lg:flex hidden">
-            <li><a>文章</a></li>
-            <li><a>我的</a></li>
-            <li><a>本站</a></li>
-          </ul>
+    <div class="navbar-center text-xl flex justify-center">
+      <!-- 隐藏滚动内容 -->
+      <div class="overflow-hidden flex flex-col items-center  justify-center">
+        <div :class="{ 'dw': isScrolled, 'up': !isScrolled }" class="h-[4rem]">
+          <div class="h-full flex items-center">
+            <span class="lg:hidden text-center w-full">{{ userInfoStore.userInfo.user.name }}</span>
+          </div>
+          <div class=" h-full font-bold flex justify-center items-center">{{ article?.title ||
+            userInfoStore.userInfo.user.name }}
+          </div>
         </div>
-        <div class=" h-full font-bold flex justify-center items-center">{{ article?.title ||
-          userInfoStore.userInfo.user.name }}
+      </div>
+      <!-- 菜单 -->
+      <div class="h-full absolute space-x-2 hidden lg:flex items-center justify-center"
+        :class="{ 'dw': isScrolled, 'up': !isScrolled }">
+        <div v-for="(item) in menuList">
+          <el-dropdown placement="bottom">
+            <a class="cursor-pointer font-bold px-4 py-2"> {{ item.name }} </a>
+            <template v-if="item.children" #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item v-for="(sub, index) in item.children">{{ sub.name }}</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </div>
       </div>
     </div>
     <div class="navbar-end">
-      <Theme></Theme>
+      <Theme class=" hidden lg:flex"></Theme>
     </div>
   </div>
-  <sidebarMenu :list="menuList" v-model="drawer"></sidebarMenu>
+  <sidebarMenu v-model="drawer">
+    <template #body>
+      <Menu :list="menuList"></Menu>
+    </template>
+  </sidebarMenu>
 
 </template>
 
 <style scoped lang="scss">
+a {
+  font-size: 1.2rem;
+}
+
 .up {
   transition: all .3s ease-in-out;
   transform: translateY(0);
