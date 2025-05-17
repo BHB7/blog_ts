@@ -35,6 +35,7 @@ let messageHandler: ((event: MessageEvent<PopupMessageData>) => void) | null = n
 function createMessageHandler(popup: Window, router: Router) {
   return function handlePopupMessage(event: MessageEvent<PopupMessageData>) {
     const allowedOrigin = 'https://vocucc.cn';
+    console.log(event);
 
     if (event.origin !== allowedOrigin) {
       console.warn('非法来源:', event.origin);
