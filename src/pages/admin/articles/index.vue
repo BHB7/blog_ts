@@ -96,7 +96,8 @@ init()
         <div
           class="relative lg:w-50 h-38 min-w-40 border-2 border-accent-content w-full lg:rounded-l-xl overflow-hidden rounded-t-box">
           <img class="object-cover  w-full h-full" :src="article.cover" alt="封面" />
-          <div :class="{ 'to-error': article.state === '010' ? true : false, 'to-success': article.state === '000' }"
+          <div
+            :class="{ 'to-error/70': article.state === '010' ? true : false, 'to-success/70': article.state === '000' }"
             class="absolute bottom-0 from-primary h-10 w-full bg-linear-20  text-white text-center text-md font-light">
             {{ article.state === '010' ? '未审核' : article.state === '100' ? '草稿' : '已发布' }}
           </div>

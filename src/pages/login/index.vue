@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, reactive, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import Theme from '@/components/btn/theme/index.vue'
-import { loginApi, sendCodeApi, regApi, type LoginType } from '@/apis/index'
+import { loginApi, sendCodeApi, regApi, type LoginType, type UserVo } from '@/apis/index'
 import Msg from '@/utils/showMsg'
 import { useTokenStore, useUserInfoStore } from '@/store'
-import { useRouter } from 'vue-router'
+import { useRouter, type Router } from 'vue-router'
 import * as yup from 'yup'
 import LineMdGithubLoop from '~icons/line-md/github-loop';
 import { Form, Field, ErrorMessage, type YupSchema } from 'vee-validate'
@@ -12,14 +12,103 @@ import type { ObjectResponse } from '@/type/response'
 
 const router = useRouter()
 const tokenStore = useTokenStore()
-const userInfo = useUserInfoStore()
+const userInfoStore = useUserInfoStore()
 
-// 切换登录和注册状态
+interface GitHubUser {
+  login: string;
+  id: number;
+}
+
+interface PopupMessageData {
+  type: 'GITHUB_LOGIN_SUCCESS';
+  payload: {
+    token: string;
+    user: UserVo;
+  };
+}
+
+// ====== GitHub 登录相关变量 ======
+let popup: Window | null = null
+let messageHandler: ((event: MessageEvent<PopupMessageData>) => void) | null = null
+
+// ====== 创建消息处理器工厂函数 ======
+function createMessageHandler(popup: Window, router: Router) {
+  return function handlePopupMessage(event: MessageEvent<PopupMessageData>) {
+    const allowedOrigin = 'https://vocucc.cn';
+
+    if (event.origin !== allowedOrigin) {
+      console.warn('非法来源:', event.origin);
+      return;
+    }
+
+    if (event.data.type === 'GITHUB_LOGIN_SUCCESS') {
+      const { token, user } = event.data.payload;
+
+      if (popup && !popup.closed) popup.close();
+
+      window.removeEventListener('message', handlePopupMessage);
+
+      localStorage.setItem('token', token);
+      alert(`欢迎回来，${user.name}！`);
+
+      const tokenStore = useTokenStore();
+      const userInfoStore = useUserInfoStore();
+      tokenStore.setToken(token);
+      userInfoStore.setUserInfo(user);
+
+      router.push('/');
+    }
+  };
+}
+
+// ====== 打开 GitHub 登录弹窗 ======
+function openGitHubLoginPopup() {
+  const width = 500;
+  const height = 600;
+  const left = window.innerWidth / 2 - width / 2;
+  const top = window.innerHeight / 2 - height / 2;
+
+  const authUrl = 'https://api.vocucd.cn/api/github/login';
+
+  popup = window.open(
+    authUrl,
+    'GitHubLogin',
+    `width=${width},height=${height},left=${left},top=${top},popup=yes`
+  );
+
+  if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+    alert('弹窗被浏览器拦截，请允许弹窗');
+    return;
+  }
+
+  // 创建并保存消息处理器
+  messageHandler = createMessageHandler(popup, router)
+
+  // 添加监听器
+  window.addEventListener('message', messageHandler);
+}
+
+// ====== 组件生命周期管理监听器 ======
+onMounted(() => {
+  // 这里不需要做任何事，因为我们只在点击时添加监听器
+})
+
+onUnmounted(() => {
+  // 当组件卸载时移除监听器
+  if (messageHandler) {
+    window.removeEventListener('message', messageHandler)
+  }
+  if (popup && !popup.closed) {
+    popup.close()
+  }
+})
+
+// ====== 其他业务逻辑保持不变 ======
 const isLogin = ref(true)
 const isSend = ref(false)
 const count = ref(60 * 5)
 const timer = ref(0)
-// 定义 FieldData 接口
+
 interface FieldData {
   name?: string
   password?: string
@@ -30,12 +119,10 @@ interface FieldData {
   [key: string]: any
 }
 
-// 定义 Data 类型
 type Data = {
   [key: string]: FieldData
 };
 
-// 创建响应式对象
 const formData = reactive<Data>({
   login: {
     name: '',
@@ -61,7 +148,6 @@ const formData = reactive<Data>({
   },
 })
 
-
 const sendMail = async () => {
   if (!formData.register.email) return Msg.warning('请输入邮箱地址')
   const { message } = await sendCodeApi(formData.register.email || '')
@@ -75,23 +161,19 @@ const sendMail = async () => {
     }
     count.value--
   }, 1000)
-
 }
+
 const onSubmit = async (values: any) => {
   const { name, password, code, email } = values
   if (isLogin.value) {
-    // 登录逻辑
     const userData: any = await loginApi(name || '', password || '')
     Msg.success(userData.message)
     tokenStore.setToken(userData.data.token || '')
-    userInfo.setUserInfo(userData.data.user)
+    userInfoStore.setUserInfo(userData.data.user)
     router.go(-1)
   } else {
-    // 注册逻辑
     const { message } = await regApi({ name, password, code, email })
     Msg.success(message)
-
-    // 清空注册表单
     formData.register = {
       name: '',
       password: '',
@@ -99,15 +181,12 @@ const onSubmit = async (values: any) => {
       email: '',
       confirmP: '',
     }
-
-    // 切换到登录状态
   }
   isLogin.value = true
 }
 
-
 const goGithubLogin = () => {
-  window.location.href = 'https://api.vocucd.cn/api/github/login'
+  openGitHubLoginPopup()
 }
 </script>
 
