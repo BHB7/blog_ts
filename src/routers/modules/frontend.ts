@@ -13,8 +13,14 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'article',
-        component: () => import('@/pages/frontend/article/index.vue')
+        component: () => import('@/pages/frontend/article/index.vue'),
+
+      },
+      {
+        path: 'article/tags',
+        component: () => import('@/pages/frontend/article/tags/index.vue')
       }
+
     ]
   },
   {

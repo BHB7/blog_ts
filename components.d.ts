@@ -19,6 +19,7 @@ declare module 'vue' {
     Copyright: typeof import('./src/components/article/copyright.vue')['default']
     Directory: typeof import('./src/components/menu/directory.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']

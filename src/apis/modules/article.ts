@@ -7,7 +7,7 @@ import router from '@/routers'
 //   password: string
 // }
 // 接口定义
-interface Article {
+export interface Article {
   title: string;
   content: string;
   desc: string;
@@ -15,6 +15,7 @@ interface Article {
   state: string;
 }
 export interface ArticleDo {
+  id?: string | number;
   title?: string;
   content?: string;
   desc?: string;
@@ -25,7 +26,7 @@ export interface ArticleDo {
 }
 
 export interface ArticleTypeVo extends Article {
-  id?: number | string;
+  id: number | string;
   view?: number | string;
   updatedAt: Date | string;
   createdAt: Date | string;
@@ -87,5 +88,16 @@ export const delArticleApi = async (aid: string | number): Promise<boolean> => {
     return response.data
   } catch (error) {
     throw new Error("删除文章失败了")
+  }
+}
+// 更新文章
+export const changeArticleApi = async (articleInfo: { aid: number | string, state: string }) => {
+  try {
+    const response = await http.put('/article/update', {
+      ...articleInfo
+    })
+    return response.data
+  } catch (error) {
+    throw new Error("更新失败")
   }
 }

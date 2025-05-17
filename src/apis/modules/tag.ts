@@ -23,7 +23,7 @@ export interface TagResVo {
 
 export const getTagApi = async (tag?: Partial<Tag>): Promise<Array<Tag>> => {
   try {
-    const response = await http.get('/tag', {
+    const response = await http.get('/tag/list', {
       params: {
         tid: tag?.tid,
         name: tag?.name,

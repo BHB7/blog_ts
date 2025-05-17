@@ -4,7 +4,7 @@ import type { EChartsOption } from 'echarts'
 import { reactive, ref } from 'vue'
 import { getTagApi, type Tag } from '@/apis/index'
 
-const useHomeHook = () => {
+const useAdminHomeHook = () => {
   const tagList = ref<Array<Tag>>()
   const overallList = ref<Array<AdminHomeTotal>>()
   const isLoading = ref(true)
@@ -161,4 +161,4 @@ const useHomeHook = () => {
   }
 }
 
-export default useHomeHook
+export default useAdminHomeHook

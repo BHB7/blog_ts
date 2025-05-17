@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import curve from '@/components/chart/index.vue';
-import { useRouter } from 'vue-router';
-import useHomeHook from './hooks/useHomeHook';
+import curve from '@/components/chart/index.vue'
+import { useRouter } from 'vue-router'
+import useAdminHomeHook from './hooks/useAdminHomeHook'
 
 
-const { isLoading, overallList, getOverallList, option, optionPie } = useHomeHook()
+const { isLoading, overallList, getOverallList, option, optionPie } = useAdminHomeHook()
 const router = useRouter()
 getOverallList()
 </script>

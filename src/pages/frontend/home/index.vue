@@ -13,7 +13,7 @@ const isLoading = ref(true)
 async function init() {
   isLoading.value = true
   try {
-    const res = await getArticlesApi({ state: '010' })
+    const res = await getArticlesApi({ state: '000' })
     pageList.value = res.list
   } catch (error) {
     console.error('获取文章失败:', error)

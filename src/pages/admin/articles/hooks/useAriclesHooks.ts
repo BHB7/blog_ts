@@ -1,5 +1,11 @@
 import { ref } from "vue"
-import { getTagApi, createTagApi, type Tag, getArticlesApi, type ArticleTypeVo, type ArticleDo, delArticleApi } from '@/apis/index'
+import {
+  getTagApi,
+  createTagApi,
+  delArticleApi,
+  changeArticleApi,
+  type Tag, getArticlesApi, type ArticleTypeVo, type ArticleDo,
+} from '@/apis/index'
 import Msg from "@/utils/showMsg"
 import modalService from "@/utils/showModal"
 const useArticleHook = () => {
@@ -42,6 +48,19 @@ const useArticleHook = () => {
     getTagList()
   }
 
+  // 更新状态 审核文章
+  const changeArticleState = async (aid: string | number, state: string) => {
+    try {
+      const response = await changeArticleApi({ aid, state })
+      console.log(response);
+      Msg.success('更新成功')
+      await getArticleList()
+    } catch (error) {
+      Msg.error("更新失败")
+    }
+
+  }
+
 
   // 删除文章
   const delArticle = async (aid: string | number) => {
@@ -70,7 +89,8 @@ const useArticleHook = () => {
     articleList,
     delArticle,
     btnState,
-    articleParams
+    articleParams,
+    changeArticleState
   }
 }
 

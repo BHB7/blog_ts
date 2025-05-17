@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import LineMdPlus from '~icons/line-md/plus'
 import LineMdCogFilled from '~icons/line-md/cog-filled'
+import LineMdMinus from '~icons/line-md/minus';
 import ViewIcon from '~icons/hugeicons/view'
 import LikeIcon from '~icons/stash/thumb-up-light'
 import LineMdChat from '~icons/line-md/chat'
@@ -10,7 +11,6 @@ import LineMdTelegram from '~icons/line-md/telegram'
 import useArticleHook from './hooks/useAriclesHooks'
 import type { Tag } from '@/apis'
 import { ref } from 'vue'
-
 const {
   tagList,
   getTagList,
@@ -18,6 +18,7 @@ const {
   articleList,
   getArticleList,
   delArticle,
+  changeArticleState,
   btnState,
   articleParams
 } = useArticleHook()
@@ -40,6 +41,11 @@ const clickDel = async (aid: string | number) => {
 // 创建标签处理事件
 const clickHanelTag = (tag: Tag) => {
   createTag(tag)
+}
+
+
+const clickChangeArticleState = (aid: number | string, state: string) => {
+  changeArticleState(aid, state)
 }
 const init = () => {
   getTagList()
@@ -90,9 +96,9 @@ init()
         <div
           class="relative lg:w-50 h-38 min-w-40 border-2 border-accent-content w-full lg:rounded-l-xl overflow-hidden rounded-t-box">
           <img class="object-cover  w-full h-full" :src="article.cover" alt="封面" />
-          <div
-            class="absolute bottom-0 h-10 w-full bg-linear-20 from-primary to-error  text-white text-center text-md font-light">
-            未审核
+          <div :class="{ 'to-error': article.state === '010' ? true : false, 'to-success': article.state === '000' }"
+            class="absolute bottom-0 from-primary h-10 w-full bg-linear-20  text-white text-center text-md font-light">
+            {{ article.state === '010' ? '未审核' : article.state === '100' ? '草稿' : '已发布' }}
           </div>
         </div>
         <div class="card-body py-4 px-4 card-border">
@@ -122,15 +128,24 @@ init()
                 <LikeIcon /> 0
               </span>
               <span class="flex items-center gap-1">
-                <LineMdChat /> 43
+                <LineMdChat /> {{ article.view }}
               </span>
             </div>
 
             <!-- 操作按钮 -->
             <div class="ml-auto flex gap-2 text-gray-400">
-              <div class="tooltip" data-tip="发布文章">
-                <button :disabled="btnState" class="btn btn-md btn-ghost hover:text-warning">
+              <div class="tooltip"
+                :data-tip="article.state === '010' ? '发布文章' : article.state === '100' ? '发布' : '撤销文章'">
+                <!-- 发布 -->
+                <button v-if="article.state !== '000'"
+                  @click="clickChangeArticleState(article.id, article.state === '010' ? '000' : '010')"
+                  :disabled="btnState" class="btn btn-md btn-ghost hover:text-warning">
                   <LineMdTelegram />
+                </button>
+                <!-- 撤销文章 不可见  草稿-->
+                <button v-if="article.state === '000'" @click="clickChangeArticleState(article.id, '100')"
+                  :disabled="btnState" class="btn btn-md btn-ghost hover:text-warning">
+                  <LineMdMinus />
                 </button>
               </div>
               <button :disabled="btnState" class="btn btn-md btn-ghost hover:text-info">
