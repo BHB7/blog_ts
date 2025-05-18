@@ -84,7 +84,8 @@ function openGitHubLoginPopup() {
 
   // 创建并保存消息处理器
   messageHandler = createMessageHandler(popup, router)
-
+  const bc = new BroadcastChannel('AlienZHOU');
+  bc.onmessage = messageHandler
   // 添加监听器
   window.addEventListener('message', messageHandler);
 }
