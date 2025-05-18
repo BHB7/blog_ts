@@ -33,6 +33,8 @@ let messageHandler: ((event: MessageEvent<PopupMessageData>) => void) | null = n
 
 // ====== 创建消息处理器工厂函数 ======
 function createMessageHandler(popup: Window, router: Router) {
+  console.log(ev);
+
   return function handlePopupMessage(event: MessageEvent<PopupMessageData>) {
     const allowedOrigin = 'https://api.vocucd.cn';
     console.log(event);
@@ -87,7 +89,10 @@ function openGitHubLoginPopup() {
   const bc = new BroadcastChannel('AlienZHOU');
   bc.onmessage = messageHandler
   // 添加监听器
-  window.addEventListener('message', messageHandler);
+  window.addEventListener('message', (e) => {
+    console.log(e);
+
+  });
 }
 
 // ====== 组件生命周期管理监听器 ======
