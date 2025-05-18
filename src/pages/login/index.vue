@@ -15,15 +15,15 @@ const tokenStore = useTokenStore()
 const userInfoStore = useUserInfoStore()
 
 interface GitHubUser {
-  login: string;
-  id: number;
+  login: string
+  id: number
 }
 
 interface PopupMessageData {
-  type: 'GITHUB_LOGIN_SUCCESS';
+  type: 'GITHUB_LOGIN_SUCCESS'
   payload: {
-    token: string;
-    user: UserVo;
+    token: string
+    user: UserVo
   };
 }
 
@@ -36,63 +36,60 @@ function createMessageHandler(popup: Window, router: Router) {
 
 
   return function handlePopupMessage(event: MessageEvent<PopupMessageData>) {
-    const allowedOrigin = 'https://api.vocucd.cn';
-    console.log(event);
+    const allowedOrigin = 'https://api.vocucd.cn'
+    console.log(event)
 
     if (event.origin !== allowedOrigin) {
-      console.warn('非法来源:', event.origin);
-      return;
+      console.warn('非法来源:', event.origin)
+      return
     }
 
     if (event.data.type === 'GITHUB_LOGIN_SUCCESS') {
-      const { token, user } = event.data.payload;
+      const { token, user } = event.data.payload
 
-      if (popup && !popup.closed) popup.close();
+      if (popup && !popup.closed) popup.close()
 
-      window.removeEventListener('message', handlePopupMessage);
+      window.removeEventListener('message', handlePopupMessage)
 
-      localStorage.setItem('token', token);
-      alert(`欢迎回来，${user.name}！`);
+      localStorage.setItem('token', token)
+      alert(`欢迎回来，${user.name}！`)
 
-      const tokenStore = useTokenStore();
-      const userInfoStore = useUserInfoStore();
-      tokenStore.setToken(token);
-      userInfoStore.setUserInfo(user);
+      const tokenStore = useTokenStore()
+      const userInfoStore = useUserInfoStore()
+      tokenStore.setToken(token)
+      userInfoStore.setUserInfo(user)
 
-      router.push('/');
+      router.push('/')
     }
   };
 }
 
 // ====== 打开 GitHub 登录弹窗 ======
 function openGitHubLoginPopup() {
-  const width = 500;
-  const height = 600;
-  const left = window.innerWidth / 2 - width / 2;
-  const top = window.innerHeight / 2 - height / 2;
+  const width = 500
+  const height = 600
+  const left = window.innerWidth / 2 - width / 2
+  const top = window.innerHeight / 2 - height / 2
 
-  const authUrl = 'https://api.vocucd.cn/api/github/login';
+  const authUrl = 'https://api.vocucd.cn/api/github/login'
 
   popup = window.open(
     authUrl,
     'GitHubLogin',
     `width=${width},height=${height},left=${left},top=${top},popup=yes`
-  );
+  )
 
   if (!popup || popup.closed || typeof popup.closed === 'undefined') {
-    alert('弹窗被浏览器拦截，请允许弹窗');
-    return;
+    alert('弹窗被浏览器拦截，请允许弹窗')
+    return
   }
 
   // 创建并保存消息处理器
   messageHandler = createMessageHandler(popup, router)
-  const bc = new BroadcastChannel('AlienZHOU');
+  const bc = new BroadcastChannel('AlienZHOU')
   bc.onmessage = messageHandler
   // 添加监听器
-  window.addEventListener('message', (e) => {
-    console.log(e);
-
-  });
+  window.addEventListener('message', messageHandler)
 }
 
 // ====== 组件生命周期管理监听器 ======
