@@ -50,9 +50,7 @@ function createMessageHandler(popup: Window, router: Router) {
       if (popup && !popup.closed) popup.close()
 
       window.removeEventListener('message', handlePopupMessage)
-
-      localStorage.setItem('token', token)
-      alert(`欢迎回来，${user.name}！`)
+      Msg.success(`欢迎回来，${user.name}！`)
 
       const tokenStore = useTokenStore()
       const userInfoStore = useUserInfoStore()
