@@ -33,7 +33,7 @@ let messageHandler: ((event: MessageEvent<PopupMessageData>) => void) | null = n
 
 // ====== 创建消息处理器工厂函数 ======
 function createMessageHandler(popup: Window, router: Router) {
-  console.log(ev);
+
 
   return function handlePopupMessage(event: MessageEvent<PopupMessageData>) {
     const allowedOrigin = 'https://api.vocucd.cn';
