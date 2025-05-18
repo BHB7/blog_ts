@@ -34,7 +34,7 @@ let messageHandler: ((event: MessageEvent<PopupMessageData>) => void) | null = n
 // ====== 创建消息处理器工厂函数 ======
 function createMessageHandler(popup: Window, router: Router) {
   return function handlePopupMessage(event: MessageEvent<PopupMessageData>) {
-    const allowedOrigin = 'https://vocucc.cn';
+    const allowedOrigin = 'https://api.vocucd.cn';
     console.log(event);
 
     if (event.origin !== allowedOrigin) {
