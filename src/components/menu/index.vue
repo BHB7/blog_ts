@@ -20,17 +20,18 @@ withDefaults(defineProps<Props>(), {
 <template>
   <el-menu :mode="mode" :collapse="isCollapse" :default-active="$route.fullPath" router class="el-menu-vertical-demo">
     <div v-for="(item, index) in list" :key="index">
-      <el-sub-menu v-if="item.children">
+      <el-sub-menu v-if="item.children" :index="String(index)">
         <template #title>
           <el-icon>
             <Component :is="item.icon"></Component>
           </el-icon>
           <span>{{ item.name }}</span>
         </template>
-        <el-menu-item-group v-for="(sub, index) in item.children" :key="index">
+        <el-menu-item-group v-for="(sub, subIndex) in item.children" :key="subIndex">
           <el-menu-item :index="sub.path">{{ sub.name }}</el-menu-item>
         </el-menu-item-group>
       </el-sub-menu>
+
       <el-menu-item v-else :index="item.path">
         <el-icon>
           <Component :is="item.icon"></Component>

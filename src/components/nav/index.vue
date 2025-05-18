@@ -7,8 +7,8 @@ import { onMounted, onUnmounted, ref, useAttrs } from 'vue'
 import { pageData } from '@/events/event'
 import type { ArticleTypeVo } from '@/apis'
 import { useUserInfoStore } from '@/store'
-import sidebarMenu from '../menu/sidebarMenu.vue'
 import Menu from '@/components/menu/index.vue'
+import sidebarMenu from '@/components/menu/sidebarMenu.vue'
 // 定义响应式变量存储滚动状态
 const isScrolled = ref(false)
 const drawer = ref(false)
