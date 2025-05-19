@@ -40,7 +40,7 @@ const handleScroll = (event: any) => {
     <HomeHeader v-if="homeHeaderIsShow"></HomeHeader>
     <pageHeader class="mt-50" v-if="pageHeaderIsShow"></pageHeader>
     <div v-else class="mt-16"></div>
-    <section class="lg:flex  w-full p-4 bg-base-100/50 lg:px-40 grid grid-cols-1 lg:grid-cols-[80%_20%] gap-4">
+    <section class="lg:flex w-full py-4 bg-base-100/50 lg:px-40 grid grid-cols-1 lg:grid-cols-[80%_20%] gap-4">
       <!-- 左侧内容 -->
       <div class="cont flex-1">
         <div class="flex flex-col items-center space-y-4">
@@ -50,7 +50,7 @@ const handleScroll = (event: any) => {
         </div>
       </div>
       <!-- 右侧菜单 -->
-      <div class="r lg:grid lg:w-1/3 grid grid-cols-1 gap-4 h-full">
+      <div class="r lg:grid lg:w-1/3 grid grid-cols-1 gap-4 h-full hidden">
         <slot name="menus">
           <!-- <Music class="sticky top-20"></Music> -->
           <User></User>

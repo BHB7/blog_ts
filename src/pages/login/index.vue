@@ -14,10 +14,7 @@ const router = useRouter()
 const tokenStore = useTokenStore()
 const userInfoStore = useUserInfoStore()
 
-interface GitHubUser {
-  login: string
-  id: number
-}
+
 
 interface PopupMessageData {
   type: 'GITHUB_LOGIN_SUCCESS'
@@ -51,9 +48,6 @@ function createMessageHandler(popup: Window, router: Router) {
 
       window.removeEventListener('message', handlePopupMessage)
       Msg.success(`欢迎回来，${user.name}！`)
-
-      const tokenStore = useTokenStore()
-      const userInfoStore = useUserInfoStore()
       tokenStore.setToken(token)
       userInfoStore.setUserInfo(user)
 

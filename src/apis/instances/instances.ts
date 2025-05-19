@@ -2,6 +2,8 @@ import axios, { type AxiosRequestConfig } from "axios"
 import { useLoadingBar } from '@/components/hooks/loadingBar'
 import Msg from "@/utils/showMsg"
 import { useTokenStore } from "@/store"
+import modalService from "@/utils/showModal"
+import router from "@/routers"
 
 
 // 创建 Axios 实例
@@ -47,11 +49,15 @@ http.interceptors.response.use(
     const data = response.data
     if (data.code !== 200) {
       Msg.error(data.message, 1000)
-      if (data.code === 401 && window.location.pathname.slice(1, 6) === 'admin') {
-        window.history.pushState(null, '', '/login')
-        window.location.reload()
+      if (data.code === 401) {
+        modalService.show({
+          cont: '当前未登录，请登录后重试',
+          confirm() {
+            router.push('/login')
+          },
+        })
+        return Promise.reject('当前未登录，请登录后重试')
       }
-      return Promise.reject(new Error(data.message))
     }
 
     return data

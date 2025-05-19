@@ -3,12 +3,10 @@ import useLayoutHooks from '@/pages/admin/layout/hooks/useLayoutHooks'
 import { useUserInfoStore } from '@/store'
 import useAdminHooks from '../hooks/useAdminHooks'
 import { onMounted } from 'vue'
-const { getAdminInfo } = useAdminHooks()
-
 const userInfoStore = useUserInfoStore()
 
 onMounted(() => {
-  getAdminInfo()
+
 })
 </script>
 <template>

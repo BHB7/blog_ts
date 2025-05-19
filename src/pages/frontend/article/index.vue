@@ -3,6 +3,7 @@ import { ref, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import Copyright from '@/components/article/copyright.vue'
 import useArticleHook from '@/pages/frontend/article/hooks/useArticle'
+import Comment from '@/components/comment/index.vue'
 import { pageData } from '@/events/event'
 const route = useRoute()
 const aid = ref<number | null>(null)
@@ -46,6 +47,8 @@ onMounted(() => {
     </div>
     <!-- 版权声明 -->
     <Copyright />
+
+    <Comment />
   </div>
 </template>
 

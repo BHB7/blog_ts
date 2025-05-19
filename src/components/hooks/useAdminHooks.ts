@@ -8,7 +8,7 @@ const useAdminHooks = () => {
   const getAdminInfo = async () => {
     try {
       const userInfo = await getAdminInfoApi()
-      userStor.setUserInfo(userInfo)
+      // userStor.setUserInfo(userInfo)
       return userInfo
     } catch (error) {
       Msg.error('获取用户信息失败')
