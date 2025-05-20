@@ -58,6 +58,7 @@ http.interceptors.response.use(
         })
         return Promise.reject('当前未登录，请登录后重试')
       }
+      return Promise.reject(data.message)
     }
 
     return data

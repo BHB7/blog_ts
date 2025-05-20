@@ -5,7 +5,7 @@ export interface CommentDo {
   uid?: string;
   content: string;
   aid: string | number;
-  pid: number | null;
+  pid: number | string | null;
 }
 export interface CommentListDo {
   aid?: string | number;
@@ -54,5 +54,16 @@ export const getCommentsApi = async (params: CommentListDo): Promise<CommentVoLi
     return response.data
   } catch (error) {
     throw new Error("获取评论失败")
+  }
+}
+
+
+// del
+export const delCommentApi = async (cid: number | string) => {
+  try {
+    const response = await http.delete(`/comment/del/${cid}`)
+    return response
+  } catch (error) {
+    throw new Error("删除评论失败")
   }
 }
