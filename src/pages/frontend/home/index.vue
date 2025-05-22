@@ -33,6 +33,6 @@ onMounted(() => {
 
 <template>
 
-  <Article :isLoading="isLoading" :list="pageList" class="mx-auto w-full space-y-5" />
+  <Article :isLoading="isLoading" :list="pageList" class="mx-auto  w-full space-y-5" />
 
 </template>

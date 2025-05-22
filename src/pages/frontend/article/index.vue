@@ -34,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="contRef" class="container mx-auto px-4">
+  <div ref="contRef" class="container mx-auto">
     <div class="card bg-blur bg-base-300/70 card-border bg-base-100 shadow-xl overflow-hidden">
       <div ref="obsRef" class="card-body prose max-w-full">
         <!-- 动态渲染提取后的内容 -->

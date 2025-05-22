@@ -1,4 +1,5 @@
 import { http } from "../instances/instances"
+import type { UserVo } from "./user";
 
 
 export interface CommentDo {
@@ -35,6 +36,7 @@ export interface CommentVo {
   like: number;
   createdAt: Date | string;
   updatedAt: Date | string;
+  user: UserVo;
 }
 export interface CommentVoList {
   totalItems: number;

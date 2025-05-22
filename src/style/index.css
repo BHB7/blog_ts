@@ -10,17 +10,18 @@
 html,
 body,
 .el-button,
-.el-input__inner,
 .el-card,
 .el-tabs__item,
-.el-select-dropdown,
 .el-dialog,
-input,
-textarea,
+
 button,
 .el-menu-item,
 .el-sub-menu__title {
   border-radius: var(--radius-box) !important;
+  .input,
+  textarea{
+    border-radius: 1rem;
+  }
 }
 .el-drawer__body {
   background-color: var(--color-base-300);

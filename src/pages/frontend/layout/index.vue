@@ -42,7 +42,7 @@ const handleScroll = (event: any) => {
     <div v-else class="mt-16"></div>
     <section class="lg:flex w-full py-4 bg-base-100/50 lg:px-40 grid grid-cols-1 lg:grid-cols-[80%_20%] gap-4">
       <!-- 左侧内容 -->
-      <div class="cont flex-1">
+      <div class="cont flex-1 mx-3 lg:mx-0">
         <div class="flex flex-col items-center space-y-4">
           <slot name="cont">
             <RouterView class="lg:max-w-4xl"></RouterView>

@@ -53,6 +53,7 @@ declare module 'vue' {
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
+    EomjiBox: typeof import('./src/components/eomjiBox/index.vue')['default']
     Footer: typeof import('./src/components/footer/index.vue')['default']
     HomeHeader: typeof import('./src/components/header/homeHeader.vue')['default']
     Loading: typeof import('./src/components/loading/index.vue')['default']
