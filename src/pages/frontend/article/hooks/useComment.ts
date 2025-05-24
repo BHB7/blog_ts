@@ -14,32 +14,32 @@ import { addCommentsApi, delCommentApi, getCommentsApi, type CommentDo, type Com
 //   }
 // }
 
-const addComment = async (pid?: number | string) => {
-  try {
-    if (pid) {
-      comment.pid = pid
-    }
-    await addCommentsApi(comment)
-    Msg.success('评论成功')
-    comment.content = ''
-    showCommentFooter.value = false
-    await getComments()
-  } catch (error) {
-    Msg.error('添加评论失败')
-  }
-}
+// const addComment = async (pid?: number | string) => {
+//   try {
+//     if (pid) {
+//       comment.pid = pid
+//     }
+//     await addCommentsApi(comment)
+//     Msg.success('评论成功')
+//     comment.content = ''
+//     showCommentFooter.value = false
+//     await getComments()
+//   } catch (error) {
+//     Msg.error('添加评论失败')
+//   }
+// }
 
-const delComment = async (cid: string | number) => {
-  Modal.show({
-    cont: '删除评论后，评论下所有回复都会被删除，是否继续?',
-    confirm: async () => {
-      try {
-        await delCommentApi(cid)
-        Msg.success('删除评论成功')
-        await getComments()
-      } catch (error: any) {
-        Msg.error(error.message)
-      }
-    },
-  })
-}
+// const delComment = async (cid: string | number) => {
+//   Modal.show({
+//     cont: '删除评论后，评论下所有回复都会被删除，是否继续?',
+//     confirm: async () => {
+//       try {
+//         await delCommentApi(cid)
+//         Msg.success('删除评论成功')
+//         await getComments()
+//       } catch (error: any) {
+//         Msg.error(error.message)
+//       }
+//     },
+//   })
+// }
