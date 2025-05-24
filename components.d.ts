@@ -70,7 +70,9 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SidebarMenu: typeof import('./src/components/menu/sidebarMenu.vue')['default']
     Tabs: typeof import('./src/components/tabs/index.vue')['default']
+    Test: typeof import('./src/components/comment/test.vue')['default']
     Theme: typeof import('./src/components/btn/theme/index.vue')['default']
+    UComment: typeof import('undraw-ui')['UComment']
     User: typeof import('./src/components/user/index.vue')['default']
   }
 }

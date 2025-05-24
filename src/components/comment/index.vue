@@ -12,7 +12,7 @@ import Modal from '@/utils/showModal';
 import Msg from '@/utils/showMsg';
 import { useUserInfoStore } from '@/store';
 import EmojiBox, { type List } from '@/components/eomjiBox/index.vue'
-
+import Test from '@/components/comment/test.vue'
 const editableDiv = ref<HTMLDivElement | null>(null); // 引用输入框
 
 const showCommentFooter = ref(false)
@@ -141,7 +141,7 @@ const updatedComment = () => {
   setTimeout(() => {
     comment.content = editableDiv.value!.innerText
 
-    console.log(renderContent(comment.content));
+    console.log(renderContent(comment.content), 'rder');
 
   }, 0)
 }
@@ -150,6 +150,11 @@ const updatedComment = () => {
 const renderContent = (raw: string): string => {
   // 匹配 [emoji:filename.gif] 的正则表达式
   const emojiRegex = /$emoji:([^\[$]+\.gif)\]/g;
+
+
+
+
+  console.log(RegExp(emojiRegex).test(raw));
 
   return raw.replace(emojiRegex, (_, encodedFilename) => {
     let decodedFilename = encodedFilename;
@@ -163,6 +168,9 @@ const renderContent = (raw: string): string => {
       decodedFilename = decodeURIComponent(decodedFilename);
     } catch { }
 
+    console.log(decodedFilename, 0);
+
+
     const url = `https://vocucd.cn/emoji/${decodedFilename}`;
     return `<img src="${url}" style="max-width:2rem;display:inline-block;" alt="${decodedFilename}" />`;
   });
@@ -171,6 +179,8 @@ const renderContent = (raw: string): string => {
 
 </script>
 <template>
+  <!-- TODO 评论功能待实现 2025/05/24 @7z -->
+  <Test />
   <section class="card bg-blur bg-base-300/70 mt-10">
     <div class="card-body">
       <div class="text flex items-center">

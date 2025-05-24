@@ -9,7 +9,7 @@ import autoprefixer from 'autoprefixer'
 import vueJsx from "@vitejs/plugin-vue-jsx"
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
+import { UndrawUiResolver } from 'undraw-ui/es/resolvers'
 
 // 导入icon 自动插件
 import Icons from 'unplugin-icons/vite'
@@ -28,6 +28,7 @@ export default defineConfig({
     // 自动注册组件
     Components({
       resolvers: [
+        UndrawUiResolver,
         IconsResolver({
           prefix: 'icon', // 图标前缀，默认为 `i`
         }),
@@ -47,3 +48,6 @@ export default defineConfig({
     },
   },
 })
+
+
+
