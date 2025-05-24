@@ -1,18 +1,18 @@
 import { addCommentsApi, delCommentApi, getCommentsApi, type CommentDo, type CommentListDo, type CommentVo, type CommentVoList } from '@/apis/modules/comment'
 
-
-const getComments = async () => {
-  try {
-    const res = await getCommentsApi(commentParams)
-    Object.assign(commentsList, res)
-    newList.splice(0)
-    for (let i = 0; i < commentsList.items.length; i++) {
-      newList.push(commentsList.items[i])
-    }
-  } catch (error) {
-    Msg.error('获取评论失败')
-  }
-}
+// TODO comment HOOKS 待封装
+// const getComments = async () => {
+//   try {
+//     const res = await getCommentsApi(commentParams)
+//     Object.assign(commentsList, res)
+//     newList.splice(0)
+//     for (let i = 0; i < commentsList.items.length; i++) {
+//       newList.push(commentsList.items[i])
+//     }
+//   } catch (error) {
+//     Msg.error('获取评论失败')
+//   }
+// }
 
 const addComment = async (pid?: number | string) => {
   try {
